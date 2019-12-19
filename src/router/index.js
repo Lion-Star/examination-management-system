@@ -50,6 +50,7 @@ export const constantRoutes = [
       }
     ]
   },
+
   {
     path: '/login',
     component: () => import('@/views/login/index'),
@@ -95,6 +96,23 @@ export const constantRoutes = [
       }
     ]
   },
+  // 考试页，自练
+  //
+  //
+  {
+    path: '/exam',
+    component: Layout,
+    children: [
+      {
+        path: 'exams',
+        component: () => import('@/views/example/components/exame'),
+        name: 'Exame',
+        // redirect:"/path*",
+        meta: { title: 'exame', icon: 'documentation', affix: true }
+      }
+    ]
+  },
+
   {
     path: '/guide',
     component: Layout,

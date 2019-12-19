@@ -7,6 +7,7 @@ export default {
       window.localStorage.setItem('x-admin-oauth-code', hash)
       window.close()
     }
+    console.log(123456)
   },
   render: function(h) {
     return h() // avoid warning message
