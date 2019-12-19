@@ -121,7 +121,29 @@ export const constantRoutes = [
         meta: { title: 'profile', icon: 'user', noCache: true }
       }
     ]
-  }
+  },
+  // {
+  //   path: '/exam',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/exam/index'),
+  //       name: 'Exam',
+  //       meta: { title: 'exam', icon: 'education', noCache: true }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/addExam',
+  //   component: () => import('@/views/exam/addExam'),
+  //   hidden: true
+  // },
+  // {
+  //   path: '/ListExam',
+  //   component: () => import('@/views/exam/ListExam'),
+  //   hidden: true
+  // },
 ]
 
 /**
@@ -259,6 +281,31 @@ export const asyncRoutes = [
       }
     ]
   },
+  {
+    path: '/exam',
+    component: Layout,
+    redirect: 'noRedirect',
+    name: '考试管理',
+    meta: {
+      title: '考试管理',
+      icon: 'user'
+    },
+    children: [
+      {
+        path: 'addExam',
+        component: () => import('@/views/exam/addExam'),
+        name: '添加考试',
+        meta: { title: '添加考试', noCache: true }
+      },
+      {
+        path: 'ListExam',
+        component: () => import('@/views/exam/ListExam'),
+        name: '试卷列表',
+        meta: { title: '试卷列表', noCache: true }
+      }
+    ]
+  },
+
 
   {
     path: '/error-log',

@@ -1,5 +1,7 @@
 import Vue from 'vue'
-
+//引入element-ui
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 // 以对象的方式操作cookie
 import Cookies from 'js-cookie'
 
@@ -42,6 +44,8 @@ import * as filters from './filters' // global filters
 // }
 
 // 挂在Element
+//挂在element-ui
+Vue.use(ElementUI)
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium', // set element-ui default size
   i18n: (key, value) => i18n.t(key, value)
