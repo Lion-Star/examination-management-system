@@ -139,6 +139,31 @@ export const constantRoutes = [
         meta: { title: 'profile', icon: 'user', noCache: true }
       }
     ]
+  },
+  {
+    path: '/addUser',
+    component: Layout,
+    // redirect: '/adduser',
+    // hidden: true,
+    meta: { title: 'User', icon: 'user', noCache: true },
+    children: [
+       {
+        path: 'addUser',
+        component: () => import('@/views/user/addUser'),
+        name: 'AddUser',
+        meta: { title: 'addUser', noCache: true }// 添加用户
+      }, {
+        path: '/rolemanagement',
+        component: () => import('@/views/user/rolemanagement'),
+        name: 'Rolemanagement',
+        meta: { title: 'Rolemanagement', noCache: true }// 角色管理
+      }, {
+        path: '/usershow',
+        component: () => import('@/views/user/usershow'),
+        name: 'Usershow',
+        meta: { title: 'usershow', noCache: true }// 用户展示
+      }
+    ]
   }
 ]
 
