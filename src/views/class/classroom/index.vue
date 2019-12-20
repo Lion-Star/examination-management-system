@@ -9,14 +9,12 @@
                     :data="roomList"
                     style="width: 100%;height: 500px;overflow-y: scroll;" >
                     <el-table-column
-                    label="教室名"
-                    width="600%">
+                    label="教室名">
                     <template slot-scope="scope">
                         <span style="margin-left: 10px">{{ scope.row.room_text }}</span>
                     </template>
                     </el-table-column>
-                    <el-table-column label="操作"
-                    width="600%">
+                    <el-table-column label="操作">
                     <template slot-scope="scope">
                         <el-button
                         size="mini"
