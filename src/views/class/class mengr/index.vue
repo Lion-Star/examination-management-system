@@ -22,6 +22,8 @@
             <template>
                 <el-table
                     :data="tableData"
+                    height="530"
+                    :header-cell-style="{background:'#f4f4f4',color:'#555',lineHeight:'20px',fontSize:'14px'}"
                     style="width: 100%;" >
                     <el-table-column
                     label="班级名"
@@ -69,7 +71,7 @@ export default {
         //表单格式验证
         var checkAge = (rule, value, callback) => {
             if (!value) {
-                return callback(new Error('不能为空'));
+                return callback(new Error('请输入教室号'));
             }
             callback();
         };

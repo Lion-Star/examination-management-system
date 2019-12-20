@@ -1,14 +1,34 @@
 <template>
         <el-container>
-                <el-header style="height:40px">Header</el-header>
+                <el-header style="height:40px">
+                        <el-select
+                        v-model="value"
+                        multiple
+                        filterable
+                        remote
+                        reserve-keyword
+                        placeholder="请输入关键词"
+                        :remote-method="remoteMethod"
+                        :loading="loading">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                        </el-select>
+                </el-header>
                 <el-main>
                         <el-table
                         :data="studentList"
+                        height="510"
+                        :header-cell-style="{background:'#f4f4f4',color:'#555',lineHeight:'30px',fontSize:'14px'}"
                         stripe
                         style="width: 100%;">
                                 <el-table-column
+                                label="姓名"
                                 prop="student_name"
-                                label="姓名">
+                                >
                                 </el-table-column>
                                 <el-table-column
                                 prop="student_id"
@@ -86,6 +106,11 @@ export default {
         align-items: center;
 }
 .block{
-        margin-left: 35%;
+        display: flex;
+        flex-direction: row-reverse;
+        padding-right: 20px;
+}
+.el-main{
+        padding: 0 20px;
 }
 </style>

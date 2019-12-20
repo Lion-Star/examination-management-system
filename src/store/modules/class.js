@@ -20,7 +20,6 @@ const mutations={
     //获取全部教室
     getRoom( state , payload ){
         if(payload.code === 1){
-            console.log(payload.data)
             state.roomList = payload.data
         }else{
             alert(payload.msg)
@@ -55,7 +54,6 @@ const actions={
     //获取全部教室
     async getRoom( {commit} , payload){
         let res = await getRoom(payload)
-        console.log(res)
         commit('getRoom',res)
     },
 
