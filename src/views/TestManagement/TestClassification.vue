@@ -19,10 +19,7 @@
                     </template>
                 </el-table-column>
                 <el-table-column label="操作">
-                    <template slot-scope="scope">
-                        <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                        <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                    </template>
+
                 </el-table-column>
             </el-table>
         </div>
@@ -39,7 +36,7 @@ import {
 export default {
     data() {
         return {
-            
+
         }
     },
     computed: {
@@ -50,24 +47,39 @@ export default {
     created() {
         this.getExamType()
     },
+    watch:{
+        ExamTypeList(){
+            this.getExamType()
+        }
+    },
     methods: {
         ...mapActions({
-            getExamType: "TestManagement/getExamType"
-        }),
-        ...mapMutations({
-
+            getExamType: "TestManagement/getExamType",
+            insertQuestionsType: "TestManagement/insertQuestionsType",
         }),
         open3() {
             this.$prompt("请输入类型名称", '创建新类型', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
-            })
-        },
-        handleEdit(index, row) {
-            console.log(index, row);
-        },
-        handleDelete(index, row) {
-            console.log(index, row);
+            }).then(({
+                value
+            }) => {
+                let params ={
+                    text:value,
+                    sort:this.ExamTypeList.length+1
+                }
+                this.insertQuestionsType(params)
+                this.$message({
+                    type: 'success',
+                    message: '添加成功'
+                });
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '添加失败'
+                });
+            });
+
         }
     }
 }
