@@ -1,15 +1,8 @@
 <template>
         <el-container>
-                <el-header style="height:40px">
-                        <el-select
-                        v-model="value"
-                        multiple
-                        filterable
-                        remote
-                        reserve-keyword
-                        placeholder="请输入关键词"
-                        :remote-method="remoteMethod"
-                        :loading="loading">
+                <el-header style="height:40px;display: flex;align-items: center;">
+                        <el-input v-model="studentName" placeholder="请输入学生姓名" size="mini" style="width:120px;fontSize:10px;"></el-input>
+                        <el-select v-model="value" placeholder="请选择" size="mini" style="width:100px;fontSize:10px;marginLeft:15px">
                                 <el-option
                                 v-for="item in options"
                                 :key="item.value"
@@ -17,6 +10,16 @@
                                 :value="item.value">
                                 </el-option>
                         </el-select>
+                        <el-select v-model="value" placeholder="请选择" size="mini" style="width:80px;fontSize:10px;marginLeft:15px">
+                                <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                                </el-option>
+                        </el-select>
+                        <el-button type="primary" disabled style="marginLeft:15px;height:20px;">搜索</el-button>
+                        <el-button type="primary" disabled>重置</el-button>
                 </el-header>
                 <el-main>
                         <el-table
@@ -46,9 +49,8 @@
                                 prop="student_pwd"
                                 label="密码">
                                 </el-table-column>
-                                <el-table-column
-                                prop="删除"
-                                label="操作">
+                                <el-table-column label="操作">
+                                        <a href="#">删除</a>
                                 </el-table-column>
                         </el-table>
                         <div class="block">
@@ -87,11 +89,28 @@ export default {
         },
         data() {
            return {
-                   tableData:[{date: '2016-05-02',name: '王小虎',address: '上海市普陀区金沙江路 1518 弄'}],
+                studentName:'',//输入的学生姓名
                 currentPage1: 5,
                 currentPage2: 5,
                 currentPage3: 5,
-                currentPage4: 4
+                currentPage4: 4,
+                options: [{
+                value: '选项1',
+                label: '黄金糕'
+                }, {
+                value: '选项2',
+                label: '双皮奶'
+                }, {
+                value: '选项3',
+                label: '蚵仔煎'
+                }, {
+                value: '选项4',
+                label: '龙须面'
+                }, {
+                value: '选项5',
+                label: '北京烤鸭'
+                }],
+                value: ''
            }
         },
         created(){
@@ -109,6 +128,7 @@ export default {
         display: flex;
         flex-direction: row-reverse;
         padding-right: 20px;
+        padding-top: 15px;
 }
 .el-main{
         padding: 0 20px;

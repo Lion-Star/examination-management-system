@@ -1,18 +1,31 @@
 <template>
     <el-container>
-        <el-form :model="ruleForm" status-icon label-width="100px" :rules="rules" ref="ruleForm" class="demo-ruleForm" v-show="showForm">
-            <el-form-item label="班级名" prop="className">
-                <el-input type="text" v-model="ruleForm.className"></el-input>
-            </el-form-item>
-            <el-form-item label="课程名" prop="curriculumName">
-                <el-input type="text" v-model="ruleForm.curriculumName"></el-input>
-            </el-form-item>
-            <el-form-item label="教室号" prop="classroom">
-                <el-input v-model="ruleForm.classroom"></el-input>
-            </el-form-item>
+        <el-form status-icon class="demo-ruleForm" v-show="showForm">
+            <p>班级名</p>
             <el-form-item>
-                <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-                <el-button @click="resetForm('ruleForm')">取消</el-button>
+                <el-input type="text" v-model="className"></el-input>
+            </el-form-item>
+            <p>教室号</p>
+            <el-select v-model="curriculumName" placeholder="请选择">
+                <el-option
+                v-for="item in roomList"
+                :key="item.room_text"
+                :label="item.room_text"
+                :value="item.room_text">
+                </el-option>
+            </el-select>
+            <p>课程名</p>
+            <el-select v-model="classroom" placeholder="请选择">
+                <el-option
+                v-for="(val,index) in Subject"
+                :key="index"
+                :label="val.subject_text"
+                :value="val.subject_text">
+                </el-option>
+            </el-select>
+            <el-form-item>
+                <el-button type="primary" @click="submitForm">提交</el-button>
+                <el-button @click="resetForm">取消</el-button>
             </el-form-item>
         </el-form>
         <el-header>
@@ -23,6 +36,7 @@
                 <el-table
                     :data="tableData"
                     height="530"
+                    :gitGrades="gitGradesd"
                     :header-cell-style="{background:'#f4f4f4',color:'#555',lineHeight:'20px',fontSize:'14px'}"
                     style="width: 100%;" >
                     <el-table-column
@@ -51,7 +65,7 @@
                     <template slot-scope="scope">
                         <el-button
                         size="mini"
-                        @click="handleEdit(scope.$index, scope.row)">修改</el-button>
+                        @click="handleEdit(scope.row)">修改</el-button>
                         <el-button
                         size="mini"
                         type="danger"
@@ -68,107 +82,85 @@
 import { mapState , mapActions } from 'vuex'
 export default {
     data() {
-        //表单格式验证
-        var checkAge = (rule, value, callback) => {
-            if (!value) {
-                return callback(new Error('请输入教室号'));
-            }
-            callback();
-        };
-        var validatePass = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('请输入班级名'));
-            } else {
-            if (this.ruleForm.curriculumName !== '') {
-                this.$refs.ruleForm.validateField('curriculumName');
-            }
-                callback();
-            }
-        };
-        var validatePass2 = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('请输入课程名'));
-            }
-            setTimeout(() => {
-                if (isNaN(value)) {
-                     if (this.ruleForm.classroom !== '') {
-                        this.$refs.ruleForm.validateField('classroom');
-                    }
-                    callback();
-                } else {
-                    callback(new Error('不能为数字'));
-                }
-            }, 500);
-                
-        };
         return {
             showForm:false,
-            //绑定数据
-            ruleForm: {
-                className: '',
-                curriculumName: '',
-                classroom: ''
-            },
-            rules: {
-                className: [
-                    { validator: validatePass, trigger: 'blur' }
-                ],
-                curriculumName: [
-                    { validator: validatePass2, trigger: 'blur' }
-                ],
-                classroom: [
-                    { validator: checkAge, trigger: 'blur' }
-                ]
-            }
+            className: '',
+            curriculumName: '',
+            classroom: '',
         }
     },
     computed:{
         ...mapState({
-            tableData:state=>state.class.tableData
-        })
+            tableData:state=>state.class.tableData,//已分班级数据
+            roomList:state=>state.class.roomList,//所有教室
+            Subject:state=>state.class.Subject,//所有课程
+        }),
+        gitGradesd: () => {
+            return {
+                txt: '添加成功'
+            }
+        },
+    },
+    watch:{
+        gitGradesd:{
+           handler(){
+               this.gitGrade()
+           },
+           deep: true
+        }
     },
     methods: {
       ...mapActions({
-            gitGrade:"class/gitGrade",
-            addClass:"class/addClass",
-            gradeDelete:"class/gradeDelete"
+            gitGrade:"class/gitGrade",//已分班级
+            addClass:"class/addClass",//添加
+            gradeDelete:"class/gradeDelete",//删除
+            getRoom:"class/getRoom",//教室
+            getSubject:"class/getSubject",//课程
       }),
-      handleEdit(index, row) {
-            console.log(index, row);
+      //修改
+      handleEdit(row) {
+            console.log(row);
       },
+      //删除
       handleDelete(row) {
-            this.gradeDelete(row.grade_id)
+            this.gradeDelete({grade_id:row.grade_id})
       },
       //表单提交
       submitForm() {
-            this.addClass(this.ruleForm)
-            this.gitGrade()
+            this.addClass({className:this.className,curriculumName: this.curriculumName,classroom:this.classroom})
             this.showForm=false
       },
-      resetForm(formName) {
-            this.$refs[formName].resetFields();
+      resetForm() {
             this.showForm=false
       }
     },
     created(){
              this.gitGrade()
+             this.getRoom()
+             this.getSubject()
     }
 }
 </script>
 
 <style lang="scss" scoped>
+.el-select{
+    width: 400px;
+    height: 36px;
+    line-height: 36px;
+}
 .demo-ruleForm{
     width: 500px;
     position: absolute; 
     left: 50%; 
-    top: 50%;
+    top: 40%;
     transform: translate(-50%, -50%); 
     z-index: 12;
     background: #ffffff;
     border-radius: 3px;
     padding: 40px 40px 0 0;
     transition:.5s;
-    border: 1px solid #ccc;
+    border: 1px solid #000;
+    padding-left: 50px;
 }
 .el-header{
     display: flex;
