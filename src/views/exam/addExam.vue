@@ -10,7 +10,14 @@
           <span>试卷名称:</span>
         </p>
         <p>
-          <el-input v-model="input" placeholder></el-input>
+          <el-select v-model="value" placeholder="请选择" style="width:400px">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
         </p>
       </div>
       <div class="box2-list2">
@@ -29,7 +36,7 @@
           </el-select>
         </p>
       </div>
-         <div class="box2-list3">
+      <div class="box2-list3">
         <p>
           <span>*</span>
           <span>选择考题类型:</span>
@@ -45,10 +52,10 @@
           </el-select>
         </p>
       </div>
-         <div class="box2-list4">
+      <div class="box2-list4">
         <p>
           <span>*</span>
-          <span>试卷名称:</span>
+          <span>设置题量:</span>
         </p>
         <p>
           <el-input v-model="input" placeholder></el-input>
@@ -59,31 +66,50 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
       input: "",
-       options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-        value: ''
-      }
-    }
+      options: [
+        {
+          value: "选项1",
+          label: "黄金糕"
+        },
+        {
+          value: "选项2",
+          label: "双皮奶"
+        },
+        {
+          value: "选项3",
+          label: "蚵仔煎"
+        },
+        {
+          value: "选项4",
+          label: "龙须面"
+        },
+        {
+          value: "选项5",
+          label: "北京烤鸭"
+        }
+      ],
+      value: ""
+    };
+  },
+  computed: {
+    ...mapState({
+      addList: state => state.addExam.addList
+    })
+  },
+  methods: {
+    ...mapActions({
+      getExam: "addExam/getExam"
+    })
+  },
+  created() {
+    // this.getExam({subject_id:})
   }
-  
+};
 </script>
 
 <style lang="scss" scoped>
@@ -123,7 +149,8 @@ export default {
 }
 .box2-list1 p:nth-child(2) {
   padding-top: 10px;
-  width: 30%;
+  width: 120%;
+  z-index: 999999999999;
 }
 .box2-list2 p {
   padding-top: 40px;
@@ -133,7 +160,7 @@ export default {
   color: red;
 
   position: absolute;
-  top: 238px;
+  top: 250px;
   left: 40px;
   font-size: 20px;
 }
@@ -153,7 +180,7 @@ export default {
   color: red;
 
   position: absolute;
-  top: 368px;
+  top: 388px;
   left: 40px;
   font-size: 20px;
 }
@@ -173,7 +200,7 @@ export default {
   color: red;
 
   position: absolute;
-  top: 500px;
+  top: 530px;
   left: 40px;
   font-size: 20px;
 }
@@ -183,6 +210,6 @@ export default {
 }
 .box2-list4 p:nth-child(2) {
   padding-top: 10px;
-  width: 10%;
+  width: 20%;
 }
 </style>

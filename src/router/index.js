@@ -305,6 +305,22 @@ export const asyncRoutes = [
       }
     ]
   },
+  {
+    path: '/read',
+    component: Layout,
+    redirect: '/read/waitClass',
+    alwaysShow: true,
+    name: '阅卷管理',
+    meta: { title: '阅卷管理', icon: 'edit' },
+    children: [
+      {
+        path: 'waitClass',
+        component: () => import('@/views/read/waitClass'),
+        name: '待批班级',
+        meta: { title: '待批班级' }
+      }
+    ]
+  },
 
 
   {
