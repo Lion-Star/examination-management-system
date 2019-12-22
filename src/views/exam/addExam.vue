@@ -28,10 +28,10 @@
         <p>
           <el-select v-model="value" placeholder="请选择">
             <el-option
-              v-for="item in options"
+              v-for="item in addType"
               :key="item.value"
               :label="item.label"
-              :value="item.value"
+              :value="item.exam_name"
             ></el-option>
           </el-select>
         </p>
@@ -39,15 +39,15 @@
       <div class="box2-list3">
         <p>
           <span>*</span>
-          <span>选择考题类型:</span>
+          <span>选择课程:</span>
         </p>
         <p>
           <el-select v-model="value" placeholder="请选择">
             <el-option
-              v-for="item in options"
+              v-for="item in addClass"
               :key="item.value"
               :label="item.label"
-              :value="item.value"
+              :value="item.subject_text"
             ></el-option>
           </el-select>
         </p>
@@ -67,47 +67,32 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import { getType } from '../../api/exam';
 export default {
   data() {
     return {
       input: "",
-      options: [
-        {
-          value: "选项1",
-          label: "黄金糕"
-        },
-        {
-          value: "选项2",
-          label: "双皮奶"
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎"
-        },
-        {
-          value: "选项4",
-          label: "龙须面"
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭"
-        }
-      ],
       value: ""
-    };
+    }
+
   },
   computed: {
     ...mapState({
-      addList: state => state.addExam.addList
+      addList: state => state.addExam.addList,
+      addType:state=>state.addType.addType,
+      addClass:state=>state.addClass.addClass
     })
   },
   methods: {
     ...mapActions({
-      getExam: "addExam/getExam"
+      getExam: "addExam/getExam",
+      getType:"addType/getType",
+      getClass:"addClass/getClass"
     })
   },
   created() {
-    // this.getExam({subject_id:})
+    this.getType(),
+    this.getClass()
   }
 };
 </script>
