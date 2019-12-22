@@ -5,19 +5,19 @@
     </div>
     <el-select v-model="value" placeholder="请选择身份id" class="select">
       <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
+        v-for="item in peopleType"
+        :key="item.identity_id"
+        :label="item.identity_text"
+        :value="item.identity_text"
       />
     </el-select>
     <p>
-      <el-select v-model="data" placeholder="请选择身份id" class="select">
+      <el-select v-model="data" placeholder="请选api接口权限" class="select">
         <el-option
-          v-for="item in datas"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
+          v-for="item in apiTokenList.data"
+          :key="item.api_authority_id"
+          :label="item.api_authority_text"
+          :value="item.api_authority_text"
         />
       </el-select></p>
     <div class="butt">
@@ -30,44 +30,30 @@
 </template>
 
 <script>
+import { mapActions,mapState } from 'vuex'
 export default {
   data() {
     return {
-      options: [{
-        value: '选项1',
-        label: '老师'
-      }, {
-        value: '选项2',
-        label: '学生'
-      }, {
-        value: '选项3',
-        label: '导员'
-      }, {
-        value: '选项4',
-        label: '院长'
-      }, {
-        value: '选项5',
-        label: '主任'
-      }],
       value: '',
-      datas: [{
-        value: '选项1',
-        label: '老师'
-      }, {
-        value: '选项2',
-        label: '学生'
-      }, {
-        value: '选项3',
-        label: '导员'
-      }, {
-        value: '选项4',
-        label: '院长'
-      }, {
-        value: '选项5',
-        label: '主任'
-      }],
       data: ''
     }
+  },
+  computed:{
+    ...mapState({
+      peopleType:state=>state.usermenage.peopleType,
+      apiTokenList:state=>state.usermenage.apiTokenList
+    })
+    
+  },
+  methods:{
+    ...mapActions({
+      getpeopleType:"usermenage/getpeopleType",
+      getApiToken:"usermenage/getApiToken"
+    })
+  },
+  created(){
+    this.getpeopleType(),
+    this.getApiToken()
   }
 }
 </script>

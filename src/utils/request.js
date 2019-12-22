@@ -83,3 +83,9 @@ service.interceptors.response.use(
 )
 
 export default service
+// try{
+//   if(res.code===50008||res.code===50012||res.code===50014){
+//     MessageBox.confirm('You have been logged out,you can cancel to stay on this page,or log in pagain','Confirm logout'),
+    
+//   }
+// }

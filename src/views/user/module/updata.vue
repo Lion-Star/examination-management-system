@@ -1,14 +1,24 @@
 <template>
   <div class="updatas">
+    
+    <el-select v-model="value" placeholder="请选择身份id">
+      <el-option
+         v-for="item in userIDList.data"
+        :key="item.user_id"
+        :label="item.user_name"
+        :value="item.user_name"
+      />
+        
+    </el-select>
     <p><input type="text" placeholder="请输入用户名"></p>
     <p><input type="password" placeholder="请输入密码"></p>
 
-    <el-select v-model="value" placeholder="请选择">
+    <el-select v-model="data" placeholder="请选择身份id">
       <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
+      v-for="item in peopleType"
+        :key="item.identity_id"
+        :label="item.identity_text"
+        :value="item.identity_text"
       />
     </el-select>
     <div class="butt">
@@ -21,27 +31,29 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 export default {
-  data() {
+   data() {
     return {
-      options: [{
-        value: '选项1',
-        label: '老师'
-      }, {
-        value: '选项2',
-        label: '学生'
-      }, {
-        value: '选项3',
-        label: '导员'
-      }, {
-        value: '选项4',
-        label: '院长'
-      }, {
-        value: '选项5',
-        label: '主任'
-      }],
-      value: ''
+      value: '',
+      data:""
     }
+  },
+  computed:{
+    ...mapState({
+      peopleType:state=>state.usermenage.peopleType,
+      userIDList:state=>state.usermenage.userIDList
+    })
+  },
+  methods:{
+    ...mapActions({
+      getpeopleType:"usermenage/getpeopleType",
+      getuserIDList:"usermenage/getuserIDList"
+    })
+  },
+  created(){
+    this.getpeopleType()
+    this.getuserIDList()
   }
 }
 </script>

@@ -10,7 +10,6 @@ const mutations={
 const actions={
     async getuserShow({commit},payload){
         let res=await getuserShow()
-        console.log(res.data)
         commit("setuserShow",res)
     }
 }

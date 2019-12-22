@@ -36,7 +36,7 @@ export default {
 
 }
 .addapi .box p{
-   width:80px;
+   width:110px;
   height:30px;
   line-height: 30px;
   font-size:13px;
