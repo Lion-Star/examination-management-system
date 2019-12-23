@@ -108,39 +108,6 @@ export const constantRoutes = [
       }
     ]
   },
-  // 用户管理
-  {
-    path: '/users',
-    component: Layout,
-    meta: { title: 'User Management', icon: 'user', affix: true }, // 用户管理
-    children: [
-      {
-        path: 'user',
-        component: () => import('@/views/user/subscriber'),
-        name: 'User'
-
-      },
-      {
-        path: '/userpeople',
-        component: () => import('@/views/user/subscriber'),
-        name: 'Userpeople',
-        meta: { title: 'subscriber', affix: true }// 添加用户
-
-      },
-      {
-        path: '/roleManager',
-        component: () => import('@/views/user/roleManager'),
-        name: 'RoleManager',
-        meta: { title: 'Role Manager', affix: true }// 角色管理
-      }, {
-        path: '/usershow',
-        component: () => import('@/views/user/usershow'),
-        name: 'Usershow',
-        meta: { title: 'usershow', affix: true }// 用户展示
-      }
-    ]
-  },
-
   {
     path: '/profile',
     component: Layout,
@@ -152,6 +119,26 @@ export const constantRoutes = [
         component: () => import('@/views/profile/index'),
         name: 'Profile',
         meta: { title: 'profile', icon: 'user', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/addUser',
+    component: Layout,
+    // redirect: '/adduser',
+    // hidden: true,
+    meta: { title: 'User', icon: 'user', noCache: true },
+    children: [
+      {
+        path: 'addUser',
+        component: () => import('@/views/user/addUser'),
+        name: 'AddUser',
+        meta: { title: 'addUser', noCache: true }// 添加用户
+      }, {
+        path: '/usershow',
+        component: () => import('@/views/user/usershow'),
+        name: 'Usershow',
+        meta: { title: 'usershow', noCache: true }// 用户展示
       }
     ]
   }

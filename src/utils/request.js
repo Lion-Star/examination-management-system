@@ -13,7 +13,7 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
   config => {
-    // do something before request is sent
+    // do something before reques    is sent
 
     if (getToken) {
       // let each request carry token
