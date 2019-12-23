@@ -147,16 +147,11 @@ export const constantRoutes = [
     // hidden: true,
     meta: { title: 'User', icon: 'user', noCache: true },
     children: [
-       {
+      {
         path: 'addUser',
         component: () => import('@/views/user/addUser'),
         name: 'AddUser',
         meta: { title: 'addUser', noCache: true }// 添加用户
-      }, {
-        path: '/rolemanagement',
-        component: () => import('@/views/user/rolemanagement'),
-        name: 'Rolemanagement',
-        meta: { title: 'Rolemanagement', noCache: true }// 角色管理
       }, {
         path: '/usershow',
         component: () => import('@/views/user/usershow'),

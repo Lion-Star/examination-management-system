@@ -1,21 +1,22 @@
-import {getuserShow} from "@/api/usershow"
-const state={
-    usershowList:[]
+import { getuserShow } from '@/api/usershow'
+const state = {
+  usershowList: []
 }
-const mutations={
-    setuserShow(state,payload){
-        state.usershowList=payload
-    }
+const mutations = {
+  setuserShow(state, payload) {
+    state.usershowList = payload
+  }
 }
-const actions={
-    async getuserShow({commit},payload){
-        let res=await getuserShow()
-        commit("setuserShow",res)
-    }
+const actions = {
+  async getuserShow({ commit }, payload) {
+    const res = await getuserShow()
+    console.log
+    commit('setuserShow', res)
+  }
 }
 export default {
-    namespaced: true,
-    state,
-    mutations,
-    actions
-  }
+  namespaced: true,
+  state,
+  mutations,
+  actions
+}

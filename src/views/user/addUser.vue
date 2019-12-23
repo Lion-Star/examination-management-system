@@ -1,7 +1,7 @@
 <template>
   <div class="addUser">
     <div class="wrap">
-      <p>添加用户</p>
+      <p class="p">添加用户</p>
     </div>
     <div class="content">
       <div class="addUpdatauser">
@@ -54,8 +54,7 @@ import Addview from './module/addview'
 import Setapi from './module/setapi'
 // 给身份设置视图权限
 import Setview from './module/setview'
-
-import {mapActions} from "vuex"
+import { mapActions } from 'vuex'
 export default {
   components: {
     Add, Updatas, Addapi, Addview, Setapi, Setview
@@ -80,16 +79,11 @@ export default {
       }
     },
     ...mapActions({
-      getuserList:"usermenage/getuserList"
+      getuserList: 'usermenage/getuserList'
     })
   },
-  created(){
-   let obj={
-      user_name:"zhanghaibo1",
-      user_pwd:"Zhanghaibo123!",
-      identity_id:"学生"
-    }
-    this.getuserList(obj)
+  created() {
+
   }
 }
 </script>
@@ -99,15 +93,18 @@ export default {
   width:100%;
   height:100%;
   background:#eee;
+  margin:0;
+  padding: 0;
 }
 .addUser .wrap{
   width:100%;
   height:80px;
   line-height: 80px;
-  margin-left:20px;
+
 }
-.addUser .wrap p{
+.addUser .wrap .p{
   font-size: 25px;
+  margin-left:20px;
 }
 .addUser .content{
     width:100%;
@@ -139,7 +136,6 @@ export default {
   font-size:13px;
   text-align: center;
   background:#fff;
-  
 }
 .addUser .content .addUpdatauser .wrapper{
   margin-left:10px;
@@ -170,7 +166,6 @@ export default {
 }
 .addUser .content .addcarId .wrap{
   margin-left:10px;
-
 }
 .addUser .content .addcarId .wrap input{
   width:85%;

@@ -19,7 +19,6 @@
 
 <script>
 export default {
-
 }
 </script>
 
@@ -49,7 +48,6 @@ export default {
 }
 .addapi .wrap{
   margin-left:10px;
-
 }
 .addapi .wrap input{
   width:85%;

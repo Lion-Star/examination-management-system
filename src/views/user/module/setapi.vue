@@ -5,7 +5,7 @@
     </div>
     <el-select v-model="value" placeholder="请选择身份id" class="select">
       <el-option
-        v-for="item in peopleType"
+        v-for="item in peopleType.data"
         :key="item.identity_id"
         :label="item.identity_text"
         :value="item.identity_text"
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapActions,mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
   data() {
     return {
@@ -38,21 +38,21 @@ export default {
       data: ''
     }
   },
-  computed:{
+  computed: {
     ...mapState({
-      peopleType:state=>state.usermenage.peopleType,
-      apiTokenList:state=>state.usermenage.apiTokenList
+      peopleType: state => state.usermenage.peopleType,
+      apiTokenList: state => state.usermenage.apiTokenList
     })
-    
+
   },
-  methods:{
+  methods: {
     ...mapActions({
-      getpeopleType:"usermenage/getpeopleType",
-      getApiToken:"usermenage/getApiToken"
+      getpeopleType: 'usermenage/getpeopleType',
+      getApiToken: 'usermenage/getApiToken'
     })
   },
-  created(){
-    this.getpeopleType(),
+  created() {
+    this.getpeopleType()
     this.getApiToken()
   }
 }

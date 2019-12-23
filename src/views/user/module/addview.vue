@@ -66,7 +66,6 @@ export default {
 .addview  .box{
   margin-left:10px;
   height:50px;
-
 }
 .addview  .box p{
  width:115px;

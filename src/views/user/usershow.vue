@@ -4,70 +4,70 @@
       <p>用户展示</p>
     </div>
     <div class="tab">
-      <p v-for="(item,index) in list" :key="index" @click="tabclickFn(index)" :class="tabIndex==index?'active':''">{{item}}</p>
+      <p v-for="(item,index) in list" :key="index" :class="tabIndex==index?'active':''" @click="tabclickFn(index)">{{ item }}</p>
     </div>
     <div class="info">
       <p>用户数据</p>
     </div>
-    
+
     <div class="content">
-         <el-table
-      :data="usershowList.data"
-      style="width: 100%">
-      <el-table-column
-        prop="user_name"
-        label="用户名"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="user_pwd"
-        label="密码"
-        min-width="180">
-      </el-table-column>
-      <el-table-column
-        prop="identity_text"
-        label="身份">
-      </el-table-column>
-    </el-table>
-    <el-pagination
-      background
-      layout="prev, pager, next"
-      :total="10">
-    </el-pagination>
+      <el-table
+        :data="usershowList.data"
+        style="width: 100%"
+      >
+        <el-table-column
+          prop="user_name"
+          label="用户名"
+          width="180"
+        />
+        <el-table-column
+          prop="user_pwd"
+          label="密码"
+          min-width="180"
+        />
+        <el-table-column
+          prop="identity_text"
+          label="身份"
+        />
+      </el-table>
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="10"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions,mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
-data() {
-        return {
-          list:["用户数据","身份数据","api接口权限","身份和api接口关系","视图接口权限","身份和视图权限关系"],
-          tabIndex:0
-        }
-      },
-      computed:{
-        ...mapState({
-          usershowList:state=>state.usershow.usershowList
-        })
-      },
-      methods:{
-        ...mapActions({
-          getuserShow:"usershow/getuserShow"
-        }),
-        tabclickFn(index){
-          this.tabIndex=index
-        }
-      },
-      created(){
-        this.getuserShow()
-       
-      }
+  data() {
+    return {
+      list: ['用户数据', '身份数据', 'api接口权限', '身份和api接口关系', '视图接口权限', '身份和视图权限关系'],
+      tabIndex: 0
+    }
+  },
+  computed: {
+    ...mapState({
+      usershowList: state => state.usershow.usershowList
+    })
+  },
+  methods: {
+    ...mapActions({
+      getuserShow: 'usershow/getuserShow'
+    }),
+    tabclickFn(index) {
+      this.tabIndex = index
+    }
+  },
+  created() {
+    this.getuserShow()
+  }
 }
 </script>
 
-<style scoped lang="scss"> 
+<style scoped lang="scss">
 .usershow{
   width:100%;
   height:100%;
@@ -104,7 +104,6 @@ data() {
   height:70px;
   line-height: 70px;
   margin-left:20px;
-
 }
 .usershow .info p{
   font-size: 30px;

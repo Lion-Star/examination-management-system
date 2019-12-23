@@ -5,7 +5,7 @@
     </div>
     <el-select v-model="value" placeholder="请选择身份id" class="select">
       <el-option
-        v-for="item in peopleType"
+        v-for="item in peopleType.data"
         :key="item.identity_id"
         :label="item.identity_text"
         :value="item.identity_text"
@@ -54,17 +54,17 @@ export default {
       data: ''
     }
   },
-  computed:{
-     ...mapState({
-      peopleType:state=>state.usermenage.peopleType,
+  computed: {
+    ...mapState({
+      peopleType: state => state.usermenage.peopleType
     })
   },
-  methods:{
+  methods: {
     ...mapActions({
-       getpeopleType:"usermenage/getpeopleType",
+      getpeopleType: 'usermenage/getpeopleType'
     })
   },
-  created(){
+  created() {
     this.getpeopleType()
   }
 }
