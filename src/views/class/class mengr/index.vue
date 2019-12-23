@@ -3,10 +3,10 @@
         <el-form status-icon class="demo-ruleForm" v-show="showForm">
             <p>班级名</p>
             <el-form-item>
-                <el-input type="text" v-model="className"></el-input>
+                <el-input type="text" v-model="grade_name"></el-input>
             </el-form-item>
             <p>教室号</p>
-            <el-select v-model="curriculumName" placeholder="请选择">
+            <el-select v-model="room_text" placeholder="请选择">
                 <el-option
                 v-for="item in roomList"
                 :key="item.room_text"
@@ -15,7 +15,7 @@
                 </el-option>
             </el-select>
             <p>课程名</p>
-            <el-select v-model="classroom" placeholder="请选择">
+            <el-select v-model="subject_text" placeholder="请选择">
                 <el-option
                 v-for="(val,index) in Subject"
                 :key="index"
@@ -29,51 +29,48 @@
             </el-form-item>
         </el-form>
         <el-header>
-            <el-button type="primary" @click="showForm = true"> + 添加班级</el-button>
+            <el-button type="primary" @click="toForm"> + 添加班级</el-button>
         </el-header>
-        <el-main>
-            <template>
-                <el-table
-                    :data="tableData"
-                    height="530"
-                    :gitGrades="gitGradesd"
-                    :header-cell-style="{background:'#f4f4f4',color:'#555',lineHeight:'20px',fontSize:'14px'}"
-                    style="width: 100%;" >
-                    <el-table-column
-                    label="班级名"
+        <el-main style="display: flex;flex-direction: column;">
+            <el-table
+                :data="tableData"
+                :gitGrades="gitGradesd"
+                :header-cell-style="{background:'#f4f4f4',color:'#555',lineHeight:'20px',fontSize:'14px'}"
+                style="width: 100%;flex:1;" >
+                <el-table-column
+                label="班级名"
+                >
+                <template slot-scope="scope">
+                    <span style="margin-left: 10px">{{ scope.row.grade_name }}</span>
+                </template>
+                </el-table-column>
+                <el-table-column
+                label="课程名"
+                >
+                <template slot-scope="scope">
+                    <span style="margin-left: 10px">{{ scope.row.subject_text }}</span>
+                </template>
+                </el-table-column>
+                <el-table-column
+                label="教室号"
+                >
+                <template slot-scope="scope">
+                    <span style="margin-left: 10px">{{ scope.row.room_text }}</span>
+                </template>
+                </el-table-column>
+                <el-table-column label="操作"
                     >
-                    <template slot-scope="scope">
-                        <span style="margin-left: 10px">{{ scope.row.grade_name }}</span>
-                    </template>
-                    </el-table-column>
-                    <el-table-column
-                    label="课程名"
-                    >
-                    <template slot-scope="scope">
-                        <span style="margin-left: 10px">{{ scope.row.subject_text }}</span>
-                    </template>
-                    </el-table-column>
-                    <el-table-column
-                    label="教室号"
-                   >
-                    <template slot-scope="scope">
-                        <span style="margin-left: 10px">{{ scope.row.room_text }}</span>
-                    </template>
-                    </el-table-column>
-                    <el-table-column label="操作"
-                     >
-                    <template slot-scope="scope">
-                        <el-button
-                        size="mini"
-                        @click="handleEdit(scope.row)">修改</el-button>
-                        <el-button
-                        size="mini"
-                        type="danger"
-                        @click="handleDelete(scope.row)">删除</el-button>
-                    </template>
-                    </el-table-column>
-                </el-table>
-            </template>
+                <template slot-scope="scope">
+                    <el-button
+                    size="mini"
+                    @click="handleEdit(scope.row)">修改</el-button>
+                    <el-button
+                    size="mini"
+                    type="danger"
+                    @click="handleDelete(scope.row)">删除</el-button>
+                </template>
+                </el-table-column>
+            </el-table>
         </el-main>
     </el-container>
 </template>
@@ -83,10 +80,12 @@ import { mapState , mapActions } from 'vuex'
 export default {
     data() {
         return {
+            edit:'',
             showForm:false,
-            className: '',
-            curriculumName: '',
-            classroom: '',
+            grade_name: '',
+            room_text: '',
+            subject_text: '',
+            fromList:{},//修改存
         }
     },
     computed:{
@@ -116,21 +115,60 @@ export default {
             gradeDelete:"class/gradeDelete",//删除
             getRoom:"class/getRoom",//教室
             getSubject:"class/getSubject",//课程
+            gradeUpdate:"class/gradeUpdate",//修改
       }),
+      //表单弹出
+      toForm(){
+          this.showForm = true
+          this.edit = 0
+      },
       //修改
       handleEdit(row) {
-            console.log(row);
+            this.edit = 1
+            this.showForm = true
+            this.grade_name= row.grade_name,
+            this.room_text= row.room_text,
+            this.subject_text= row.subject_text,
+            this.fromList={grade_id:row.grade_id,grade_name:row.grade_name,subject_id:row.subject_id,room_id:row.room_id}
       },
       //删除
       handleDelete(row) {
-            this.gradeDelete({grade_id:row.grade_id})
+          if(confirm('是否删除')){
+              this.gradeDelete({grade_id:row.grade_id})
+          }else{
+              alert('取消成功')
+          }
+          this.gitGrade()
       },
       //表单提交
       submitForm() {
-            this.addClass({className:this.className,curriculumName: this.curriculumName,classroom:this.classroom})
-            this.showForm=false
+            if(this.edit===0){
+                if(confirm('是否添加')){
+                    this.addClass({grade_name:this.grade_name,room_text: this.room_text,subject_text:this.subject_text})
+                    this.grade_name= ''
+                    this.room_text= ''
+                    this.subject_text= ''
+                    this.showForm=false
+                }else{
+                    alert('取消成功')
+                }
+            }else{
+                if(confirm('是否更改')){
+                    this.gradeUpdate(this.fromList)
+                    this.grade_name= ''
+                    this.room_text= ''
+                    this.subject_text= ''
+                    this.showForm=false
+                }else{
+                    alert('取消成功')
+                }
+            }
+            this.gitGrade()
       },
       resetForm() {
+            this.grade_name= '',
+            this.room_text= '',
+            this.subject_text= '',
             this.showForm=false
       }
     },

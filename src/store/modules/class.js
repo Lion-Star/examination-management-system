@@ -1,11 +1,14 @@
-import { gitGrade , getRoom , addClass , gradeDelete , getStudent ,getSubject } from '@/api/class/index'
-
+import { gitGrade , getRoom , addClass , gradeDelete , getStudent ,getSubject , studentDelete ,addRoom ,deleteRoom ,gradeUpdate} from '@/api/class/index'
 
 const state={
-    tableData:[],//获取已经分配教室的班级
-    roomList:[],//获取全部教室
-    studentList:[],//获取所有已经分班的学生
-    Subject:[],//获取所有课程
+        tableData:[],//获取已经分配教室的班级
+        roomList:[],//获取全部教室
+        studentList:[],//获取所有已经分班的学生
+        Subject:[],//获取所有课程
+        setStudentList:[],//筛选的学生
+
+        size : 4,//每页几条
+        Current: 1,//默认页
 }
 
 const mutations={
@@ -30,7 +33,9 @@ const mutations={
     //获取所有已经分班的学生
     getStudent( state , payload ){
         if(payload.code === 1){
-            state.studentList=payload.data
+            state.studentList = payload.data
+            console.log(state.studentList)
+            toCurrent(payload.data)
         }else{
             alert(payload.msg)
         }
@@ -39,7 +44,54 @@ const mutations={
     //获取所有课程
     getSubject( state , payload){
         state.Subject=payload.data
+    },
+
+    //根据教室搜索学生
+    setStudent(state , payload){
+        let list = state.studentList.filter(item=>{
+            if(item.room_text === payload){
+                return item
+            }
+        })
+        toCurrent(list)
+    },
+
+    //根据班级搜索学生
+    setGradeValued(state , payload){
+        let list = state.studentList.filter(item=>{
+            if(item.grade_name === payload){
+                return item
+            }
+        })
+        toCurrent(list)
+    },
+
+    //姓名搜索
+    setSearched(state,payload){
+        if (!Array.isArray(state.studentList) && payload !== '') return
+
+            state.setStudentList = state.studentList.filter(item=>{
+                 if (item.student_name.indexOf(payload)!== -1) return item
+            })
+
+    },
+
+    //每页几条
+    handleSize(state,payload){
+        state.size=payload
+        toCurrent(state.studentList)
+    },
+
+    //当前页
+    handleCurrent(state,payload){
+        state.Current=payload
+        toCurrent(state.studentList)
     }
+}
+
+//分页筛选
+function toCurrent(data){
+    state.setStudentList = data.slice( (state.Current-1) *state.size , state.size * state.Current)
 }
 
 const actions={
@@ -51,10 +103,23 @@ const actions={
 
     //添加班级接口
     async addClass( {commit} , payload){
-        console.log(payload)
-        let { className , curriculumName , classroom } = payload
-        let res = await addClass({grade_name:className , subject_id:curriculumName , room_id:classroom})
+        let { grade_name , room_id , subject_id } = payload
+        let res = await addClass({grade_name:grade_name , subject_id:subject_id , room_id:room_id})
         alert(res.msg)
+    },
+
+      //删除班级接口
+      async gradeDelete( {commit} , payload ){
+        let res = await gradeDelete(payload)
+        alert(res.msg)
+    },
+
+     //更新班级信息接口
+     async gradeUpdate( {commit} , payload){
+         let {grade_id,grade_name,subject_id,room_id} = payload
+
+        let res = await gradeUpdate({grade_id:grade_id,grade_name:grade_name,subject_id:subject_id,room_id:room_id})
+        console.log(res)
     },
 
     //获取全部教室
@@ -63,12 +128,16 @@ const actions={
         commit('getRoom',res)
     },
 
-    //删除班级接口
-    async gradeDelete( {commit} , payload ){
-        console.log(payload)
-        let {grade_id}=payload
-        let res = await gradeDelete(grade_id)
-        console.log(res)
+    //添加教室
+    async addRoom( {commit} , payload){
+        let res = await addRoom(payload)
+        alert(res.msg)
+    },
+
+    //删除教室接口
+    async deleteRoom( {commit} , payload ){
+        let res = await deleteRoom(payload)
+        alert(res.msg)
     },
 
     //获取所有已经分班的学生的接口
@@ -77,17 +146,20 @@ const actions={
         commit( 'getStudent' , res)
     },
 
+    //删除学生接口
+    async studentDelete( {commit} , payload){
+        let res = await studentDelete(payload)
+        console.log(res)
+    },
+
     //获取所有的课程
     async getSubject( {commit} , payload){
         let res = await getSubject(payload)
         commit('getSubject',res)
     },
 
-    //更新班级信息接口
-    async gradeUpdate( {commit} , payload){
-        let res = await gradeUpdate(payload)
-        console.log(res)
-    }
+   
+
 }
 
 export default {
