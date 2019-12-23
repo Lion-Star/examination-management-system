@@ -61,12 +61,12 @@ import MarkdownEditor from '@/components/MarkdownEditor'
 export default {
     data() {
         return {
-            content: '',
-            answer: '',
-            title: '',
-            Evalue: '',
-            Cvalue: '',
-            Qvalue: '',
+            content: this.$route.query.questions_stem,
+            answer: this.$route.query.questions_answer,
+            title: this.$route.query.title,
+            Evalue: this.$route.query.exam_name,
+            Cvalue: this.$route.query.subject_text,
+            Qvalue: this.$route.query.questions_type_text,
             EID: "", //考试类型ID
             CID: "", //课程类型ID
             QID: "" //题目类型ID
@@ -92,12 +92,11 @@ export default {
     methods: {
         ...mapActions({
             getClassList: "TestManagement/getClassList",
-            AddQuestions: "TestManagement/AddQuestions",
+            updateQuestions: "TestManagement/updateQuestions",
             getAllText: "TestManagement/getAllText",
             getExamList: "TestManagement/getExamList",
             getExamType: "TestManagement/getExamType",
             getUserInfo: "userinfo/getUserInfo"
-
         }),
         examType(item) {
             this.EID = item.exam_id
@@ -109,35 +108,26 @@ export default {
             this.QID = item.questions_type_text
         },
         submit() {
-            this.$confirm('你确定要添加这道试题吗?', '提示', {
+            this.$confirm('你确定要修改这道试题吗?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'info',
                 center: true
             }).then(() => {
                 let params = {
-                    questions_type_id: this.QID,
-                    questions_stem: this.content,
-                    subject_id: this.CID,
-                    exam_id: this.EID,
-                    user_id: this.UserInfo.user_id,
-                    questions_answer: this.answer,
+                    questions_id: this.$route.query.questions_id,
                     title: this.title,
+                    questions_stem: this.content,
+                    questions_answer: this.answer,
+                    subject_id: this.CID,
+                    questions_type_id: this.QID,
+                    exam_id: this.EID,
                 }
-                this.AddQuestions(params) //添加试题
+                this.updateQuestions(params) //添加试题
                 this.$message({
                     type: 'success',
                     message: '添加成功!'
                 });
-                this.content = '';
-                this.answer = '';
-                this.title = '';
-                this.Evalue = '';
-                this.Cvalue = '';
-                this.Qvalue = '';
-                this.EID = "";
-                this.CID = "";
-                this.QID = "";
             }).catch(() => {
                 this.$message({
                     type: 'info',

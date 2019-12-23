@@ -3,9 +3,9 @@
     <h2>查看试题</h2>
     <div class="search-modules">
         <div class="classid">
-            <b>课程类型:</b>
-            <div ref="check" class="noselect">
-                <span @click="clickAll()" :class="{active:allShow}">all</span>
+            <b>课程类型：</b>
+            <div class="noselect">
+                <span @click="clickAll" :class="{active:allShow}">All</span>
                 <span v-for="(item,index) in ClassList" :key="index" :class="{active:item.show}" @click="changecur(item)">{{item.subject_text}}</span>
             </div>
         </div>
@@ -13,8 +13,8 @@
             <div>
                 <p>
                     请选择考试类型：
-                    <el-select v-model="value" clearable placeholder="请选择">
-                        <el-option v-for="item in ExamList" :key="item.questions_type_text" :value="item.subject_text"></el-option>
+                    <el-select v-model="Evalue" clearable placeholder="请选择" @change="examType">
+                        <el-option v-for="(item,index) in ExamList" :key="index" :label="item.exam_name" :value="item"></el-option>
                     </el-select>
                 </p>
             </div>
@@ -22,25 +22,25 @@
             <div>
                 <p>
                     请选择题目类型：
-                    <el-select v-model="value1" clearable placeholder="请选择">
-                        <el-option v-for="item in ExamTypeList" :key="item.value" :value="item.questions_type_text"></el-option>
+                    <el-select v-model="Qvalue" clearable placeholder="请选择" @change="QuestionType">
+                        <el-option v-for="(item,index) in ExamTypeList" :key="index" :label="item.questions_type_text" :value="item"></el-option>
                     </el-select>
                 </p>
             </div>
 
             <div>
-                <el-button type="primary" icon="el-icon-search">查询</el-button>
+                <el-button type="primary" icon="el-icon-search" @click="search">查询</el-button>
             </div>
         </div>
     </div>
     <div class="allTest">
-        <el-table :data="AllTextList" style="width: 100%" :header-cell-style="{display:'none'}">
-            <el-table-column label="类型ID">
+        <el-table :data="AllTextList" style="width: 100%" :header-cell-style="{display:'none'}" @row-click.self="detail">
+            <el-table-column>
                 <template slot-scope="scope" style="padding-left: 100px">
-                    <p>{{ scope.row.title}}</p>
+                    <p>{{scope.row.title}}</p>
                     <p>
                         <el-tag>{{ scope.row.questions_type_text}}</el-tag>
-                        <el-tag type="info">{{ scope.row.subject_text}}</el-tag>
+                        <el-tag type="info">{{scope.row.subject_text}}</el-tag>
                         <el-tag type="warning">{{scope.row.exam_name}}</el-tag>
                     </p>
                     <p>
@@ -48,7 +48,7 @@
                     </p>
                 </template>
             </el-table-column>
-            <el-table-column label="操作" width="100">
+            <el-table-column width="100">
                 <template slot-scope="scope">
                     <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                 </template>
@@ -69,9 +69,12 @@ export default {
     data() {
         return {
             cur: 0,
-            value: "", //考试类型
-            value1: "", //题目类型
-            allShow: false
+            Evalue: "", //考试类型
+            Qvalue: "", //题目类型
+            allShow: false, //全选
+            subject_id: "", //课程id
+            EID: "",
+            QID: ""
         };
     },
     computed: {
@@ -93,11 +96,13 @@ export default {
             getAllText: "TestManagement/getAllText",
             getClassList: "TestManagement/getClassList",
             getExamList: "TestManagement/getExamList",
-            getExamType: "TestManagement/getExamType"
+            getExamType: "TestManagement/getExamType",
+            searchQuestion: "TestManagement/searchQuestion"
         }),
         handleEdit(index, row) {
             console.log(index, row);
         },
+        //单选
         changecur(item) {
             this.ClassList.forEach((it, index) => {
                 if (it == item) {
@@ -107,16 +112,55 @@ export default {
                     } else {
                         item.show = !item.show;
                     }
+                    this.subject_id = item.subject_id;
                 } else {
-                    it.show = false
+                    it.show = false;
                 }
-            })
+            });
         },
+        //全选
         clickAll() {
-            this.allShow = !this.allShow
+            this.allShow = !this.allShow;
             this.ClassList.forEach(item => {
-                item.show = this.allShow
-            })
+                item.show = this.allShow;
+            });
+        },
+        //选择考试类型
+        examType(item) {
+            this.EID = item.exam_id;
+            this.Evalue = item.exam_name;
+        },
+        //选择题目类型
+        QuestionType(item) {
+            this.QID = item.questions_type_id;
+            this.Qvalue = item.questions_type_text;
+        },
+        search() {
+            let params = {
+                questions_type_id: this.QID,
+                subject_id: this.subject_id,
+                exam_id: this.EID
+            };
+            if (
+                Object.values(params).some(item => {
+                    return item != "";
+                })
+            ) {
+                this.searchQuestion(params);
+            }
+        },
+        detail(row) {
+            this.$router.push({
+                path: "/TestManagement/Detail",
+                query: row
+            });
+        },
+        handleEdit(a, b) {
+            console.log(a, b);
+            this.$router.push({
+                path: "/TestManagement/EditItem",
+                query: b
+            });
         }
     }
 };
@@ -154,7 +198,7 @@ h2 {
     padding: 20px;
     margin: 0px 0px 10px;
     border-radius: 10px;
-    padding-left: 6%;
+    padding-left: 2%;
 
     span {
         line-height: 40px;
@@ -166,13 +210,17 @@ h2 {
 
 .test-select {
     display: flex;
-    margin-top: 30px;
 
     >div {
         padding-right: 50px;
 
+        p {
+            display: flex;
+            line-height: 68px;
+        }
+
         button {
-            margin-top: 15px;
+            margin-top: 32px;
         }
     }
 }
@@ -181,9 +229,10 @@ h2 {
     display: flex;
 
     b {
-        margin-top: 5px;
+        margin-top: 12px;
         padding-right: 10px;
-        min-width: 80px;
+        min-width: 90px;
+        font-weight: normal;
     }
 }
 
@@ -197,7 +246,6 @@ span {
 }
 
 .noselect {
-
     -webkit-touch-callout: none;
     /* iOS Safari */
 
@@ -217,6 +265,9 @@ span {
     /* Non-prefixed version, currently
 
 not supported by any browser */
+}
 
+.el-table {
+    padding: 0 15px;
 }
 </style>

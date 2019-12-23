@@ -21,10 +21,13 @@ html {
     box-sizing: border-box;
 }
 
+.app-main {
+    background: #f0f2f5;
+}
+
 #app {
     height: 100%;
 }
-
 
 *,
 *:before,
@@ -185,4 +188,5 @@ aside {
 
 .app-main {
     background: #f0f2f5;
+    overflow: scroll;
 }

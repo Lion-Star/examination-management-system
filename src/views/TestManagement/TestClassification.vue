@@ -5,7 +5,7 @@
         <el-button type="primary" @click="open3">+ 添加类型 </el-button>
         <div class="tableList">
             <el-table :data="ExamTypeList" style="width: 100%" :header-cell-style="{background:'#f4f4f4',color:'#555',lineHeight:'30px',fontSize:'14px'}">
-                <el-table-column label="类型ID" width="460">
+                <el-table-column label="类型ID" width="660">
                     <template slot-scope="scope">
                         <i class="el-icon-star-off"></i>
                         <span style="margin-left: 10px">{{ scope.row.questions_type_id }}</span>
@@ -19,7 +19,6 @@
                     </template>
                 </el-table-column>
                 <el-table-column label="操作">
-
                 </el-table-column>
             </el-table>
         </div>
@@ -34,11 +33,6 @@ import {
     mapActions
 } from 'vuex'
 export default {
-    data() {
-        return {
-
-        }
-    },
     computed: {
         ...mapState({
             ExamTypeList: state => state.TestManagement.ExamTypeList
@@ -46,11 +40,6 @@ export default {
     },
     created() {
         this.getExamType()
-    },
-    watch:{
-        ExamTypeList(){
-            this.getExamType()
-        }
     },
     methods: {
         ...mapActions({
@@ -64,22 +53,22 @@ export default {
             }).then(({
                 value
             }) => {
-                let params ={
-                    text:value,
-                    sort:this.ExamTypeList.length+1
+                let params = {
+                    text: value,
+                    sort: this.ExamTypeList.length + 1
                 }
                 this.insertQuestionsType(params)
                 this.$message({
                     type: 'success',
                     message: '添加成功'
                 });
+                this.getExamType()
             }).catch(() => {
                 this.$message({
                     type: 'info',
                     message: '添加失败'
                 });
             });
-
         }
     }
 }

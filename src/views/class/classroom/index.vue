@@ -1,22 +1,22 @@
 <template>
     <el-container>
-        <el-header>
+        <el-header style="height:45px;">
             <el-button type="primary"> + 添加教室</el-button>
         </el-header>
         <el-main>
             <template>
                 <el-table
                     :data="roomList"
-                    style="width: 100%;height: 500px;overflow-y: scroll;" >
+                    style="width: 100%;" 
+                    height="530"
+                    :header-cell-style="{background:'#f4f4f4',color:'#555',lineHeight:'20px',fontSize:'14px'}">
                     <el-table-column
-                    label="教室名"
-                    width="600%">
+                    label="教室名">
                     <template slot-scope="scope">
                         <span style="margin-left: 10px">{{ scope.row.room_text }}</span>
                     </template>
                     </el-table-column>
-                    <el-table-column label="操作"
-                    width="600%">
+                    <el-table-column label="操作">
                     <template slot-scope="scope">
                         <el-button
                         size="mini"
