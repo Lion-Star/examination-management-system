@@ -116,7 +116,8 @@ export const constantRoutes = [{
     meta: { title: '学生管理' }
   }
   ]
-}, {
+},
+{
   path: '/exam',
   component: Layout,
   redirect: 'noRedirect',
@@ -137,6 +138,34 @@ export const constantRoutes = [{
       component: () => import('@/views/exam/ListExam'),
       name: '试卷列表',
       meta: { title: '试卷列表', noCache: true }
+    },
+    {
+      path: 'createExam',
+      component: () => import('@/views/exam/createExam'),
+      name: '创建试卷',
+      meta: { title: '创建试卷', noCache: true }
+    },
+    {
+      path: 'detail',
+      component: () => import('@/views/exam/detail'),
+      name: '详情',
+      meta: { title: '详情', noCache: true }
+    }
+  ]
+},
+{
+  path: '/read',
+  component: Layout,
+  redirect: '/read/waitClass',
+  alwaysShow: true,
+  name: '阅卷管理',
+  meta: { title: '阅卷管理', icon: 'edit' },
+  children: [
+    {
+      path: 'waitClass',
+      component: () => import('@/views/read/waitClass'),
+      name: '待批班级',
+      meta: { title: '待批班级' }
     }
   ]
 },
