@@ -5,12 +5,12 @@
         <div class="box1-list1">
           <p>考试类型:</p>
           <p>
-            <el-select v-model="value" placeholder="请选择">
+            <el-select v-model="Type" placeholder="请选择">
               <el-option
-                v-for="item in options"
+                v-for="item in addType"
                 :key="item.value"
                 :label="item.label"
-                :value="item.value"
+                :value="item.exam_name"
               ></el-option>
             </el-select>
           </p>
@@ -18,12 +18,12 @@
         <div class="box1-list2">
           <p>课程:</p>
           <p>
-            <el-select v-model="value" placeholder="请选择">
+            <el-select v-model="Class" placeholder="请选择">
               <el-option
-                v-for="item in options"
+                v-for="item in addClass"
                 :key="item.value"
                 :label="item.label"
-                :value="item.value"
+                :value="item.subject_text"
               ></el-option>
             </el-select>
           </p>
@@ -85,21 +85,29 @@ export default {
   },
   data() {
     return {
+      Type:"",
+      Class:""
       // tableData4: []
     };
   },
   computed: {
     ...mapState({
-      List: state => state.examList.List
+      List: state => state.examList.List,
+       addType: state => state.addType.addType,
+        addClass: state => state.addClass.addClass
     })
   },
   methods: {
     ...mapActions({
-      getList: "examList/getList"
+      getList: "examList/getList",
+       getType: "addType/getType",
+       getClass: "addClass/getClass"
     })
   },
   created() {
-    this.getList();
+    this.getList(),
+    this.getType(),
+    this.getClass();
   }
 };
 </script>

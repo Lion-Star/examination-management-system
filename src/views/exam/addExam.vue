@@ -10,14 +10,7 @@
           <span>试卷名称:</span>
         </p>
         <p>
-          <el-select v-model="value" placeholder="请选择" style="width:400px">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
-          </el-select>
+          <el-input v-model="input" placeholder style="width:400px"></el-input>
         </p>
       </div>
       <div class="box2-list2">
@@ -26,7 +19,7 @@
           <span>选择考题类型:</span>
         </p>
         <p>
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-if="addType" v-model="type" placeholder="请选择">
             <el-option
               v-for="item in addType"
               :key="item.value"
@@ -42,7 +35,7 @@
           <span>选择课程:</span>
         </p>
         <p>
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-model="classify" placeholder="请选择">
             <el-option
               v-for="item in addClass"
               :key="item.value"
@@ -58,41 +51,68 @@
           <span>设置题量:</span>
         </p>
         <p>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="input" placeholder style="width:150px"></el-input>
         </p>
       </div>
+      <div class="last">
+        <p>
+          <span>考试时间</span>
+        </p>
+        <div class="box2-list5">
+          <div class="block">
+            <el-date-picker v-model="value1" type="date" placeholder="选择日期"></el-date-picker>
+          </div>
+          <el-time-select
+            v-model="value2"
+            :picker-options="{
+    start: '08:30',
+    step: '00:15',
+    end: '18:30'
+  }"
+            placeholder="选择时间"
+          ></el-time-select>
+        </div>
+      </div>
+      <p class="btn"><button>创建考试</button></p>
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
-import { getType } from '../../api/exam';
+import { getType } from "../../api/exam";
 export default {
   data() {
     return {
       input: "",
-      value: ""
-    }
-
+      name: "",
+      type: "",
+      classify: "",
+      pickerOptions1: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        }
+      },
+      value1: "",
+      value2:""
+    };
   },
   computed: {
     ...mapState({
       addList: state => state.addExam.addList,
-      addType:state=>state.addType.addType,
-      addClass:state=>state.addClass.addClass
+      addType: state => state.addType.addType,
+      addClass: state => state.addClass.addClass
     })
   },
   methods: {
     ...mapActions({
       getExam: "addExam/getExam",
-      getType:"addType/getType",
-      getClass:"addClass/getClass"
+      getType: "addType/getType",
+      getClass: "addClass/getClass"
     })
   },
   created() {
-    this.getType(),
-    this.getClass()
+    this.getType(), this.getClass();
   }
 };
 </script>
@@ -101,7 +121,7 @@ export default {
 .box {
   width: 100%;
 
-  height: calc(100vh - 84px);
+  height: calc(100vh - 40px);
 }
 .box1 p {
   margin: 20px;
@@ -196,5 +216,27 @@ export default {
 .box2-list4 p:nth-child(2) {
   padding-top: 10px;
   width: 20%;
+}
+.box2-list5{
+  display: flex;
+ padding-left: 20px;
+}
+.block{
+  margin-right: 30px;
+}
+.last p span{
+  margin-left: 25px;
+}
+.btn{
+  margin-left: 20px;
+}
+.btn button{
+  width: 130px;
+  background: skyblue;
+  color: #fff;
+  border: none;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
 }
 </style>
