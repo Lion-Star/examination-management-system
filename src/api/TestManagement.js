@@ -49,3 +49,12 @@ export function insertQuestionsType(data) {
         params: data
     })
 }
+
+//按条件查询试题
+export function searchQuestion(data) {
+    return request({
+        url: '/exam/questions/condition',
+        method: 'get',
+        params: data
+    })
+}

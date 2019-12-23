@@ -1,26 +1,31 @@
 <template>
-<div class="TestClassification">
-    <h2>试题分类</h2>
-    <div class="classifyTest">
-        <el-button type="primary" @click="open3">+ 添加类型 </el-button>
-        <div class="tableList">
-            <el-table :data="ExamTypeList" style="width: 100%" :header-cell-style="{background:'#f4f4f4',color:'#555',lineHeight:'30px',fontSize:'14px'}">
-                <el-table-column label="类型ID" width="460">
-                    <template slot-scope="scope">
-                        <i class="el-icon-star-off"></i>
-                        <span style="margin-left: 10px">{{ scope.row.questions_type_id }}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column label="类型名称" width="380">
-                    <template slot-scope="scope">
-                        <div slot="reference" class="name-wrapper">
-                            <el-tag size="medium">{{ scope.row.questions_type_text }}</el-tag>
-                        </div>
-                    </template>
-                </el-table-column>
-                <el-table-column label="操作">
-                </el-table-column>
-            </el-table>
+<div class="Detail">
+    <h2>试题详情</h2>
+    <div class="d-box">
+        <div class="question">
+            <div class="author">
+                <span>出题人：{{item.user_name}}</span>
+            </div>
+            <h3>题目信息</h3>
+            <div class="tag">
+                <p>
+                    <el-tag>{{ item.questions_type_text}}</el-tag>
+                    <el-tag type="info">{{ item.subject_text}}</el-tag>
+                    <el-tag type="warning">{{item.exam_name}}</el-tag>
+                </p>
+            </div>
+            <h4>{{item.title}}</h4>
+            <div class="content">
+                <pre>
+              <p>{{item.questions_stem}}</p>
+          </pre>
+            </div>
+        </div>
+        <div class="answer">
+          <h3>答案信息：</h3>
+          <pre>
+           <p>{{item.questions_answer}}</p>
+          </pre>
         </div>
     </div>
 </div>
@@ -33,6 +38,11 @@ import {
     mapActions
 } from 'vuex'
 export default {
+    data() {
+        return {
+            item: this.$route.query
+        }
+    },
     computed: {
         ...mapState({
             ExamTypeList: state => state.TestManagement.ExamTypeList
@@ -75,7 +85,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.TestClassification {
+.Detail {
     height: 100%;
     padding: 0px 24px 24px;
     box-sizing: border-box;
@@ -94,8 +104,8 @@ h2 {
     margin-inline-end: 0px;
 }
 
-.classifyTest {
-    width: 100%;
+.question {
+    width: 70%;
     background: rgb(255, 255, 255);
     padding: 24px;
     margin: 0px 0px 20px;
@@ -103,7 +113,48 @@ h2 {
     min-height: calc(100vh - 20vh - 20px);
 }
 
+.answer {
+    width: 28%;
+    min-height: calc(100vh - 20vh - 20px);
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px;
+    margin: 0px 0px 20px;
+}
+
 .tableList {
     margin-top: 30px;
+}
+
+.author {
+    margin-bottom: 20px;
+
+    span {
+        color: #555;
+    }
+}
+
+h3 {
+    font-weight: 500;
+    font-size: 1.17em;
+}
+
+h4 {
+    font-weight: 500;
+    font-size: 1em;
+}
+
+.tag {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.content {
+    font-size: 14px;
+}
+
+.d-box{
+  display: flex;
+  justify-content: space-between;
 }
 </style>

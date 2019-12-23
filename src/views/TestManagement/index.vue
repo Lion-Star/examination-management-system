@@ -73,15 +73,13 @@ export default {
         }
     },
     async created() {
-        await this.getAllText();
+        this.getUserInfo();
         await this.getClassList()
         await this.getExamList();
         await this.getExamType();
-        this.getUserInfo();
     },
     computed: {
         ...mapState({
-            AllTextList: state => state.TestManagement.AllTextList,
             ClassList: state => state.TestManagement.ClassList,
             ExamTypeList: state => state.TestManagement.ExamTypeList,
             ExamList: state => state.TestManagement.ExamList,
@@ -126,20 +124,20 @@ export default {
                     questions_answer: this.answer,
                     title: this.title,
                 }
-                this.AddQuestions(params)
+                this.AddQuestions(params) //添加试题
                 this.$message({
                     type: 'success',
                     message: '添加成功!'
                 });
-                this.content = ''
-                this.answer = ''
-                this.title = ''
-                this.Evalue = ''
-                this.Cvalue = ''
-                this.Qvalue = ''
-                this.EID = ""
-                this.CID = ""
-                this.QID = ""
+                this.content = '';
+                this.answer = '';
+                this.title = '';
+                this.Evalue = '';
+                this.Cvalue = '';
+                this.Qvalue = '';
+                this.EID = "";
+                this.CID = "";
+                this.QID = "";
             }).catch(() => {
                 this.$message({
                     type: 'info',

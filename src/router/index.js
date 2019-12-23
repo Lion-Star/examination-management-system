@@ -82,6 +82,14 @@ export const constantRoutes = [{
                     import ('@/views/TestManagement/CheckItem'),
                 name: 'CheckItem',
                 meta: { title: '查看试题' },
+            },
+            {
+                path: 'Detail',
+                hidden: true,
+                component: () =>
+                    import ('@/views/TestManagement/Detail'),
+                name: 'Detail',
+                meta: { title: '查看详情' },
             }
         ]
     },

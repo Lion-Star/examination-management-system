@@ -1,6 +1,6 @@
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
-import { getExamType, getAllText, getExamList, getClassList, AddQuestions, insertQuestionsType } from "@/api/TestManagement"
+import { getExamType, getAllText, getExamList, getClassList, AddQuestions, insertQuestionsType, searchQuestion } from "@/api/TestManagement"
 
 const state = {
     ExamTypeList: [], //分类考试列表
@@ -31,36 +31,35 @@ const actions = {
         commit('setAllText', res.data);
     },
     //所有题目类型
-    async getExamType({ commit, state }, payload) {
+    async getExamType({ commit }, ) {
         let res = await getExamType()
         commit('setExamTypeList', res.data)
-        console.log(res.data);
-
     },
     //所有课程
-    async getClassList({ commit, state }) {
+    async getClassList({ commit }) {
         let res = await getClassList()
         res.data.forEach((item) => {
             item.show = false
         })
         commit('setClassList', res.data)
-
     },
     //所有考试类型
-    async getExamList({ commit, state }) {
+    async getExamList({ commit }) {
         let res = await getExamList()
         commit('setExamList', res.data)
     },
     //添加试题
-    async AddQuestions({ commit, state }, payload) {
-        let res = await AddQuestions(payload)
+    async AddQuestions({}, payload) {
+        await AddQuestions(payload)
     },
     //添加试题类型
-    async insertQuestionsType({ commit, state }, payload) {
-        console.log(payload);
-
-        let res = await insertQuestionsType(payload)
-        console.log(res);
+    async insertQuestionsType({}, payload) {
+        await insertQuestionsType(payload)
+    },
+    //查询试题
+    async searchQuestion({ commit, state }, payload) {
+        let res = await searchQuestion(payload)
+        commit('setAllText', res.data)
     },
 
 }
