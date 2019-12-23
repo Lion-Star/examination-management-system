@@ -6,12 +6,12 @@
                 <el-input type="text" v-model="roomValue"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="submitForm">提交</el-button>
+                <el-button type="primary" @click="submitForm">添加</el-button>
                 <el-button @click="resetForm">取消</el-button>
             </el-form-item>
         </el-form>
         <el-header style="height:45px;">
-            <el-button type="primary"> + 添加教室</el-button>
+            <el-button type="primary" @click="toForm"> + 添加教室</el-button>
         </el-header>
         <el-main style="display: flex;flex-direction: column;">
             <el-table
@@ -29,7 +29,7 @@
                     <el-button
                     size="mini"
                     type="danger"
-                    @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                    @click="handleDelete(scope.row)">删除</el-button>
                 </template>
                 </el-table-column>
             </el-table>
@@ -53,18 +53,28 @@ export default {
     },
     methods: {
       ...mapActions({
-          getRoom:"class/getRoom"
+          getRoom:"class/getRoom",
+          addRoom:"class/addRoom",
+          deleteRoom:"class/deleteRoom"
       }),
-      handleDelete(index, row) {
-        console.log(index, row);
+      handleDelete(row) {
+          if(confirm('是否删除')){
+              this.deleteRoom({room_id:row.room_id})
+          }else{
+              alert('取消成功')
+          }  
       },
       //表单提交
       submitForm() {
-            this.addClass({className:this.roomValue})
+            this.addRoom({room_text:this.roomValue})
             this.showForm=false
       },
       resetForm() {
             this.showForm=false
+            this.roomValue=""
+      },
+      toForm(){
+            this.showForm=true
       }
     },
     created(){

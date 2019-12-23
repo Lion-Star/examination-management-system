@@ -48,9 +48,9 @@
         <el-table-column prop="student_id" label="学号"></el-table-column>
         <el-table-column prop="grade_name" label="班级"></el-table-column>
         <el-table-column prop="room_text" label="教室"></el-table-column>
-        <el-table-column prop="student_pwd" label="密码" width="160"></el-table-column>
+        <el-table-column prop="student_pwd" label="密码" width="170"></el-table-column>
         <el-table-column label="操作">
-          <a href="#">删除</a>
+            <span @click="setDelete()">删除</span>
         </el-table-column>
       </el-table>
       <div class="block">
@@ -91,6 +91,7 @@ export default {
     ...mapActions({
       getStudent: "class/getStudent",
       gitGrade: "class/gitGrade",
+      studentDelete:"class/studentDelete"
     }),
 
     ...mapMutations({
@@ -100,6 +101,11 @@ export default {
       handleSize:"class/handleSize",//每页几条
       handleCurrent:"class/handleCurrent",//当前页
     }),
+
+    //删除
+    setDelete(){
+        // this.studentDelete(student_id) 
+    },
 
     //每页几条
     handleSizeChange(val) {

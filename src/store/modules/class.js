@@ -1,4 +1,4 @@
-import { gitGrade , getRoom , addClass , gradeDelete , getStudent ,getSubject , studentDelete} from '@/api/class/index'
+import { gitGrade , getRoom , addClass , gradeDelete , getStudent ,getSubject , studentDelete ,addRoom ,deleteRoom ,gradeUpdate} from '@/api/class/index'
 
 const state={
         tableData:[],//获取已经分配教室的班级
@@ -34,6 +34,7 @@ const mutations={
     getStudent( state , payload ){
         if(payload.code === 1){
             state.studentList = payload.data
+            console.log(state.studentList)
             toCurrent(payload.data)
         }else{
             alert(payload.msg)
@@ -102,10 +103,23 @@ const actions={
 
     //添加班级接口
     async addClass( {commit} , payload){
-        console.log(payload)
-        let { className , curriculumName , classroom } = payload
-        let res = await addClass({grade_name:className , subject_id:curriculumName , room_id:classroom})
+        let { grade_name , room_id , subject_id } = payload
+        let res = await addClass({grade_name:grade_name , subject_id:subject_id , room_id:room_id})
         alert(res.msg)
+    },
+
+      //删除班级接口
+      async gradeDelete( {commit} , payload ){
+        let res = await gradeDelete(payload)
+        alert(res.msg)
+    },
+
+     //更新班级信息接口
+     async gradeUpdate( {commit} , payload){
+         let {grade_id,grade_name,subject_id,room_id} = payload
+
+        let res = await gradeUpdate({grade_id:grade_id,grade_name:grade_name,subject_id:subject_id,room_id:room_id})
+        console.log(res)
     },
 
     //获取全部教室
@@ -114,12 +128,16 @@ const actions={
         commit('getRoom',res)
     },
 
-    //删除班级接口
-    async gradeDelete( {commit} , payload ){
-        console.log(payload)
-        let {grade_id}=payload
-        let res = await gradeDelete(grade_id)
-        console.log(res)
+    //添加教室
+    async addRoom( {commit} , payload){
+        let res = await addRoom(payload)
+        alert(res.msg)
+    },
+
+    //删除教室接口
+    async deleteRoom( {commit} , payload ){
+        let res = await deleteRoom(payload)
+        alert(res.msg)
     },
 
     //获取所有已经分班的学生的接口
@@ -140,11 +158,7 @@ const actions={
         commit('getSubject',res)
     },
 
-    //更新班级信息接口
-    async gradeUpdate( {commit} , payload){
-        let res = await gradeUpdate(payload)
-        console.log(res)
-    }
+   
 
 }
 
