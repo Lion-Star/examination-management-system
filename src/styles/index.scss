@@ -26,6 +26,7 @@ html {
   height: 100%;
 }
 
+
 *,
 *:before,
 *:after {
@@ -189,3 +190,7 @@ aside {
 .multiselect--active {
   z-index: 1000 !important;
 }
+.app-main {
+  background: #f0f2f5;
+}
+
