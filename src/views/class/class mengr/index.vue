@@ -31,49 +31,46 @@
         <el-header>
             <el-button type="primary" @click="showForm = true"> + 添加班级</el-button>
         </el-header>
-        <el-main>
-            <template>
-                <el-table
-                    :data="tableData"
-                    height="530"
-                    :gitGrades="gitGradesd"
-                    :header-cell-style="{background:'#f4f4f4',color:'#555',lineHeight:'20px',fontSize:'14px'}"
-                    style="width: 100%;" >
-                    <el-table-column
-                    label="班级名"
+        <el-main style="display: flex;flex-direction: column;">
+            <el-table
+                :data="tableData"
+                :gitGrades="gitGradesd"
+                :header-cell-style="{background:'#f4f4f4',color:'#555',lineHeight:'20px',fontSize:'14px'}"
+                style="width: 100%;flex:1;" >
+                <el-table-column
+                label="班级名"
+                >
+                <template slot-scope="scope">
+                    <span style="margin-left: 10px">{{ scope.row.grade_name }}</span>
+                </template>
+                </el-table-column>
+                <el-table-column
+                label="课程名"
+                >
+                <template slot-scope="scope">
+                    <span style="margin-left: 10px">{{ scope.row.subject_text }}</span>
+                </template>
+                </el-table-column>
+                <el-table-column
+                label="教室号"
+                >
+                <template slot-scope="scope">
+                    <span style="margin-left: 10px">{{ scope.row.room_text }}</span>
+                </template>
+                </el-table-column>
+                <el-table-column label="操作"
                     >
-                    <template slot-scope="scope">
-                        <span style="margin-left: 10px">{{ scope.row.grade_name }}</span>
-                    </template>
-                    </el-table-column>
-                    <el-table-column
-                    label="课程名"
-                    >
-                    <template slot-scope="scope">
-                        <span style="margin-left: 10px">{{ scope.row.subject_text }}</span>
-                    </template>
-                    </el-table-column>
-                    <el-table-column
-                    label="教室号"
-                   >
-                    <template slot-scope="scope">
-                        <span style="margin-left: 10px">{{ scope.row.room_text }}</span>
-                    </template>
-                    </el-table-column>
-                    <el-table-column label="操作"
-                     >
-                    <template slot-scope="scope">
-                        <el-button
-                        size="mini"
-                        @click="handleEdit(scope.row)">修改</el-button>
-                        <el-button
-                        size="mini"
-                        type="danger"
-                        @click="handleDelete(scope.row)">删除</el-button>
-                    </template>
-                    </el-table-column>
-                </el-table>
-            </template>
+                <template slot-scope="scope">
+                    <el-button
+                    size="mini"
+                    @click="handleEdit(scope.row)">修改</el-button>
+                    <el-button
+                    size="mini"
+                    type="danger"
+                    @click="handleDelete(scope.row)">删除</el-button>
+                </template>
+                </el-table-column>
+            </el-table>
         </el-main>
     </el-container>
 </template>

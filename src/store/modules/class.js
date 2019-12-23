@@ -1,11 +1,14 @@
-import { gitGrade , getRoom , addClass , gradeDelete , getStudent ,getSubject } from '@/api/class/index'
-
+import { gitGrade , getRoom , addClass , gradeDelete , getStudent ,getSubject , studentDelete} from '@/api/class/index'
 
 const state={
-    tableData:[],//获取已经分配教室的班级
-    roomList:[],//获取全部教室
-    studentList:[],//获取所有已经分班的学生
-    Subject:[],//获取所有课程
+        tableData:[],//获取已经分配教室的班级
+        roomList:[],//获取全部教室
+        studentList:[],//获取所有已经分班的学生
+        Subject:[],//获取所有课程
+        setStudentList:[],//筛选的学生
+
+        size : 4,//每页几条
+        Current: 1,//默认页
 }
 
 const mutations={
@@ -30,7 +33,8 @@ const mutations={
     //获取所有已经分班的学生
     getStudent( state , payload ){
         if(payload.code === 1){
-            state.studentList=payload.data
+            state.studentList = payload.data
+            toCurrent(payload.data)
         }else{
             alert(payload.msg)
         }
@@ -39,7 +43,54 @@ const mutations={
     //获取所有课程
     getSubject( state , payload){
         state.Subject=payload.data
+    },
+
+    //根据教室搜索学生
+    setStudent(state , payload){
+        let list = state.studentList.filter(item=>{
+            if(item.room_text === payload){
+                return item
+            }
+        })
+        toCurrent(list)
+    },
+
+    //根据班级搜索学生
+    setGradeValued(state , payload){
+        let list = state.studentList.filter(item=>{
+            if(item.grade_name === payload){
+                return item
+            }
+        })
+        toCurrent(list)
+    },
+
+    //姓名搜索
+    setSearched(state,payload){
+        if (!Array.isArray(state.studentList) && payload !== '') return
+
+            state.setStudentList = state.studentList.filter(item=>{
+                 if (item.student_name.indexOf(payload)!== -1) return item
+            })
+
+    },
+
+    //每页几条
+    handleSize(state,payload){
+        state.size=payload
+        toCurrent(state.studentList)
+    },
+
+    //当前页
+    handleCurrent(state,payload){
+        state.Current=payload
+        toCurrent(state.studentList)
     }
+}
+
+//分页筛选
+function toCurrent(data){
+    state.setStudentList = data.slice( (state.Current-1) *state.size , state.size * state.Current)
 }
 
 const actions={
@@ -77,6 +128,12 @@ const actions={
         commit( 'getStudent' , res)
     },
 
+    //删除学生接口
+    async studentDelete( {commit} , payload){
+        let res = await studentDelete(payload)
+        console.log(res)
+    },
+
     //获取所有的课程
     async getSubject( {commit} , payload){
         let res = await getSubject(payload)
@@ -88,6 +145,7 @@ const actions={
         let res = await gradeUpdate(payload)
         console.log(res)
     }
+
 }
 
 export default {

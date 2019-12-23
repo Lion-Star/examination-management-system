@@ -52,6 +52,14 @@ export function getStudent(data) {
   }) 
 }
 
+//删除学生接口
+export function studentDelete(id) {
+  return request({
+    url: `/manger/student/:id=>student_id`,
+    method: 'delete'
+  })
+}
+
 //获取所有的课程
 export function getSubject(data) {
   return request({
