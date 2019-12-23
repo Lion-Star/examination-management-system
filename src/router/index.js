@@ -302,6 +302,18 @@ export const asyncRoutes = [
         component: () => import('@/views/exam/ListExam'),
         name: '试卷列表',
         meta: { title: '试卷列表', noCache: true }
+      },
+      {
+        path: 'createExam',
+        component: () => import('@/views/exam/createExam'),
+        name: '创建试卷',
+        meta: { title: '创建试卷', noCache: true }
+      },
+      {
+        path: 'detail',
+        component: () => import('@/views/exam/detail'),
+        name: '详情',
+        meta: { title: '详情', noCache: true }
       }
     ]
   },

@@ -10,7 +10,7 @@
           <span>试卷名称:</span>
         </p>
         <p>
-          <el-input v-model="input" placeholder style="width:400px"></el-input>
+          <el-input v-model="name" placeholder style="width:400px"></el-input>
         </p>
       </div>
       <div class="box2-list2">
@@ -51,7 +51,7 @@
           <span>设置题量:</span>
         </p>
         <p>
-          <el-input v-model="input" placeholder style="width:150px"></el-input>
+         <el-input-number v-model="num8" controls-position="right" @change="handleChange" :min="1" :max="10" style="width:120px"></el-input-number>
         </p>
       </div>
       <div class="last">
@@ -60,20 +60,20 @@
         </p>
         <div class="box2-list5">
           <div class="block">
-            <el-date-picker v-model="value1" type="date" placeholder="选择日期"></el-date-picker>
-          </div>
-          <el-time-select
-            v-model="value2"
-            :picker-options="{
-    start: '08:30',
-    step: '00:15',
-    end: '18:30'
-  }"
-            placeholder="选择时间"
-          ></el-time-select>
+    
+    <el-date-picker
+      v-model="value9"
+      type="daterange"
+      start-placeholder="开始日期"
+      end-placeholder="结束日期"
+      default-value="2010-10-01">
+    </el-date-picker>
+  </div>
         </div>
       </div>
-      <p class="btn"><button>创建考试</button></p>
+      <p class="btn">
+        <button @click="create()">创建考试</button>
+      </p>
     </div>
   </div>
 </template>
@@ -84,23 +84,30 @@ import { getType } from "../../api/exam";
 export default {
   data() {
     return {
-      input: "",
+      // input: "",
+
       name: "",
+      size: "",
       type: "",
       classify: "",
+      num8: 1,
       pickerOptions1: {
         disabledDate(time) {
           return time.getTime() > Date.now();
         }
       },
       value1: "",
-      value2:""
+      value2: "",
+      value9:""
     };
   },
   computed: {
     ...mapState({
+      //获取考试列表
       addList: state => state.addExam.addList,
+      //获取考试类型
       addType: state => state.addType.addType,
+      //获取课程
       addClass: state => state.addClass.addClass
     })
   },
@@ -109,7 +116,13 @@ export default {
       getExam: "addExam/getExam",
       getType: "addType/getType",
       getClass: "addClass/getClass"
-    })
+    }),
+     handleChange(value) {
+        console.log(value);
+      },
+      create(){
+        this.$router.push('./createExam')
+      }
   },
   created() {
     this.getType(), this.getClass();
@@ -217,20 +230,20 @@ export default {
   padding-top: 10px;
   width: 20%;
 }
-.box2-list5{
+.box2-list5 {
   display: flex;
- padding-left: 20px;
+  padding-left: 20px;
 }
-.block{
+.block {
   margin-right: 30px;
 }
-.last p span{
+.last p span {
   margin-left: 25px;
 }
-.btn{
+.btn {
   margin-left: 20px;
 }
-.btn button{
+.btn button {
   width: 130px;
   background: skyblue;
   color: #fff;

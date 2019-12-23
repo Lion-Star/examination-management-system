@@ -30,7 +30,7 @@
         </div>
         <div class="box1-list3">
           <p>
-            <el-button type="primary" style="width:120px" icon="search">查询</el-button>
+            <el-button type="primary" style="width:120px" icon="search" class="search">查询</el-button>
           </p>
         </div>
       </div>
@@ -60,11 +60,11 @@
             <el-table-column prop="end_time" label="结束时间" width="230"></el-table-column>
 
             <el-table-column label="操作" width="120">
-              <template slot-scope="scope">
+              <template>
                 <el-button
-                  @click.native.prevent="deleteRow(scope.$index, tableData4)"
+                  @click="message"
                   type="text"
-                  size="small"
+                  size="small" 
                 >详情</el-button>
               </template>
             </el-table-column>
@@ -78,11 +78,6 @@
 <script>
 import { mapActions, mapState } from "vuex";
 export default {
-  methods: {
-    deleteRow(index, rows) {
-      rows.splice(index, 1);
-    }
-  },
   data() {
     return {
       Type:"",
@@ -102,7 +97,10 @@ export default {
       getList: "examList/getList",
        getType: "addType/getType",
        getClass: "addClass/getClass"
-    })
+    }),
+   message(){
+     this.$router.push('./detail')
+   }
   },
   created() {
     this.getList(),
