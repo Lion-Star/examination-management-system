@@ -1,6 +1,6 @@
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
-import { getExamType, getAllText, getExamList, getClassList, AddQuestions, insertQuestionsType, searchQuestion } from "@/api/TestManagement"
+import { getExamType, getAllText, getExamList, getClassList, AddQuestions, insertQuestionsType, searchQuestion, updateQuestions } from "@/api/TestManagement"
 
 const state = {
     ExamTypeList: [], //分类考试列表
@@ -61,7 +61,10 @@ const actions = {
         let res = await searchQuestion(payload)
         commit('setAllText', res.data)
     },
-
+    //更新试题
+    async updateQuestions({}, payload) {
+        await updateQuestions(payload)
+    }
 }
 
 

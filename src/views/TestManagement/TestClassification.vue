@@ -5,7 +5,7 @@
         <el-button type="primary" @click="open3">+ 添加类型 </el-button>
         <div class="tableList">
             <el-table :data="ExamTypeList" style="width: 100%" :header-cell-style="{background:'#f4f4f4',color:'#555',lineHeight:'30px',fontSize:'14px'}">
-                <el-table-column label="类型ID" width="460">
+                <el-table-column label="类型ID" width="660">
                     <template slot-scope="scope">
                         <i class="el-icon-star-off"></i>
                         <span style="margin-left: 10px">{{ scope.row.questions_type_id }}</span>

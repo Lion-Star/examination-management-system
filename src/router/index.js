@@ -67,21 +67,29 @@ export const constantRoutes = [{
                 component: () =>
                     import ('@/views/TestManagement/index'),
                 name: 'AddItem',
-                meta: { title: '添加试题' },
+                meta: { title: '添加试题' }
+            },
+            {
+                path: 'EditItem',
+                hidden: true,
+                component: () =>
+                    import ('@/views/TestManagement/EditItem'),
+                name: 'EditItem',
+                meta: { title: '修改试题' }
             },
             {
                 path: 'TestClassification',
                 component: () =>
                     import ('@/views/TestManagement/TestClassification'),
                 name: 'TestClassification',
-                meta: { title: '试题分类' },
+                meta: { title: '试题分类' }
             },
             {
                 path: 'CheckItem',
                 component: () =>
                     import ('@/views/TestManagement/CheckItem'),
                 name: 'CheckItem',
-                meta: { title: '查看试题' },
+                meta: { title: '查看试题' }
             },
             {
                 path: 'Detail',
@@ -89,8 +97,9 @@ export const constantRoutes = [{
                 component: () =>
                     import ('@/views/TestManagement/Detail'),
                 name: 'Detail',
-                meta: { title: '查看详情' },
-            }
+                meta: { title: '查看详情' }
+            },
+
         ]
     },
     {

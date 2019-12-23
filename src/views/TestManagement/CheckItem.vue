@@ -5,7 +5,7 @@
         <div class="classid">
             <b>课程类型：</b>
             <div class="noselect">
-                <span @click="clickAll()" :class="{active:allShow}">All</span>
+                <span @click="clickAll" :class="{active:allShow}">All</span>
                 <span v-for="(item,index) in ClassList" :key="index" :class="{active:item.show}" @click="changecur(item)">{{item.subject_text}}</span>
             </div>
         </div>
@@ -34,7 +34,7 @@
         </div>
     </div>
     <div class="allTest">
-        <el-table :data="AllTextList" style="width: 100%" :header-cell-style="{display:'none'}" @row-click="detail">
+        <el-table :data="AllTextList" style="width: 100%" :header-cell-style="{display:'none'}" @row-click.self="detail">
             <el-table-column>
                 <template slot-scope="scope" style="padding-left: 100px">
                     <p>{{scope.row.title}}</p>
@@ -97,7 +97,7 @@ export default {
             getClassList: "TestManagement/getClassList",
             getExamList: "TestManagement/getExamList",
             getExamType: "TestManagement/getExamType",
-            searchQuestion: "TestManagement/searchQuestion",
+            searchQuestion: "TestManagement/searchQuestion"
         }),
         handleEdit(index, row) {
             console.log(index, row);
@@ -112,47 +112,55 @@ export default {
                     } else {
                         item.show = !item.show;
                     }
-                    this.subject_id = item.subject_id
+                    this.subject_id = item.subject_id;
                 } else {
-                    it.show = false
+                    it.show = false;
                 }
-            })
+            });
         },
         //全选
         clickAll() {
-            this.allShow = !this.allShow
+            this.allShow = !this.allShow;
             this.ClassList.forEach(item => {
-                item.show = this.allShow
-            })
+                item.show = this.allShow;
+            });
         },
         //选择考试类型
         examType(item) {
-            this.EID = item.exam_id
-            this.Evalue = item.exam_name
+            this.EID = item.exam_id;
+            this.Evalue = item.exam_name;
         },
         //选择题目类型
         QuestionType(item) {
-            this.QID = item.questions_type_id
-            this.Qvalue = item.questions_type_text
+            this.QID = item.questions_type_id;
+            this.Qvalue = item.questions_type_text;
         },
         search() {
             let params = {
                 questions_type_id: this.QID,
                 subject_id: this.subject_id,
-                exam_id: this.EID,
-            }
-            if (Object.values(params).some(item => {
-                    return item != ""
-                })) {
-                this.searchQuestion(params)
+                exam_id: this.EID
+            };
+            if (
+                Object.values(params).some(item => {
+                    return item != "";
+                })
+            ) {
+                this.searchQuestion(params);
             }
         },
         detail(row) {
-            console.log(row);
             this.$router.push({
                 path: "/TestManagement/Detail",
                 query: row
-            })
+            });
+        },
+        handleEdit(a, b) {
+            console.log(a, b);
+            this.$router.push({
+                path: "/TestManagement/EditItem",
+                query: b
+            });
         }
     }
 };
@@ -238,7 +246,6 @@ span {
 }
 
 .noselect {
-
     -webkit-touch-callout: none;
     /* iOS Safari */
 
@@ -258,7 +265,6 @@ span {
     /* Non-prefixed version, currently
 
 not supported by any browser */
-
 }
 
 .el-table {

@@ -58,3 +58,12 @@ export function searchQuestion(data) {
         params: data
     })
 }
+
+//更新试题
+export function updateQuestions(data) {
+    return request({
+        url: '/exam/questions/update',
+        method: 'put',
+        params: data
+    })
+}
