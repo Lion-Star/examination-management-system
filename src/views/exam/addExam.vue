@@ -10,7 +10,7 @@
           <span>试卷名称:</span>
         </p>
         <p>
-          <el-input v-model="input" placeholder></el-input>
+          <el-input v-model="name" placeholder style="width:400px"></el-input>
         </p>
       </div>
       <div class="box2-list2">
@@ -19,78 +19,122 @@
           <span>选择考题类型:</span>
         </p>
         <p>
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-if="addType" v-model="type" placeholder="请选择">
             <el-option
-              v-for="item in options"
+              v-for="item in addType"
               :key="item.value"
               :label="item.label"
-              :value="item.value"
+              :value="item.exam_name"
             ></el-option>
           </el-select>
         </p>
       </div>
-         <div class="box2-list3">
+      <div class="box2-list3">
         <p>
           <span>*</span>
-          <span>选择考题类型:</span>
+          <span>选择课程:</span>
         </p>
         <p>
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-model="classify" placeholder="请选择">
             <el-option
-              v-for="item in options"
+              v-for="item in addClass"
               :key="item.value"
               :label="item.label"
-              :value="item.value"
+              :value="item.subject_text"
             ></el-option>
           </el-select>
         </p>
       </div>
-         <div class="box2-list4">
+      <div class="box2-list4">
         <p>
           <span>*</span>
-          <span>试卷名称:</span>
+          <span>设置题量:</span>
         </p>
         <p>
-          <el-input v-model="input" placeholder></el-input>
+         <el-input-number v-model="num8" controls-position="right" @change="handleChange" :min="1" :max="10" style="width:120px"></el-input-number>
         </p>
       </div>
+      <div class="last">
+        <p>
+          <span>考试时间</span>
+        </p>
+        <div class="box2-list5">
+          <div class="block">
+    
+    <el-date-picker
+      v-model="value9"
+      type="daterange"
+      start-placeholder="开始日期"
+      end-placeholder="结束日期"
+      default-value="2010-10-01">
+    </el-date-picker>
+  </div>
+        </div>
+      </div>
+      <p class="btn">
+        <button @click="create()">创建考试</button>
+      </p>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+import { getType } from "../../api/exam";
 export default {
   data() {
     return {
-      input: "",
-       options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-        value: ''
+      // input: "",
+
+      name: "",
+      size: "",
+      type: "",
+      classify: "",
+      num8: 1,
+      pickerOptions1: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        }
+      },
+      value1: "",
+      value2: "",
+      value9:""
+    };
+  },
+  computed: {
+    ...mapState({
+      //获取考试列表
+      addList: state => state.addExam.addList,
+      //获取考试类型
+      addType: state => state.addType.addType,
+      //获取课程
+      addClass: state => state.addClass.addClass
+    })
+  },
+  methods: {
+    ...mapActions({
+      getExam: "addExam/getExam",
+      getType: "addType/getType",
+      getClass: "addClass/getClass"
+    }),
+     handleChange(value) {
+        console.log(value);
+      },
+      create(){
+        this.$router.push('./createExam')
       }
-    }
+  },
+  created() {
+    this.getType(), this.getClass();
   }
-  
+};
 </script>
 
 <style lang="scss" scoped>
 .box {
   width: 100%;
 
-  height: calc(100vh - 84px);
+  height: calc(100vh - 40px);
 }
 .box1 p {
   margin: 20px;
@@ -123,7 +167,8 @@ export default {
 }
 .box2-list1 p:nth-child(2) {
   padding-top: 10px;
-  width: 30%;
+  width: 120%;
+  z-index: 999999999999;
 }
 .box2-list2 p {
   padding-top: 40px;
@@ -133,7 +178,7 @@ export default {
   color: red;
 
   position: absolute;
-  top: 238px;
+  top: 250px;
   left: 40px;
   font-size: 20px;
 }
@@ -153,7 +198,7 @@ export default {
   color: red;
 
   position: absolute;
-  top: 368px;
+  top: 388px;
   left: 40px;
   font-size: 20px;
 }
@@ -173,7 +218,7 @@ export default {
   color: red;
 
   position: absolute;
-  top: 500px;
+  top: 530px;
   left: 40px;
   font-size: 20px;
 }
@@ -183,6 +228,28 @@ export default {
 }
 .box2-list4 p:nth-child(2) {
   padding-top: 10px;
-  width: 10%;
+  width: 20%;
+}
+.box2-list5 {
+  display: flex;
+  padding-left: 20px;
+}
+.block {
+  margin-right: 30px;
+}
+.last p span {
+  margin-left: 25px;
+}
+.btn {
+  margin-left: 20px;
+}
+.btn button {
+  width: 130px;
+  background: skyblue;
+  color: #fff;
+  border: none;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
 }
 </style>
