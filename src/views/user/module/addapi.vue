@@ -4,21 +4,70 @@
       <p>添加api接口权限</p>
     </div>
     <div class="wrap">
-      <p><input type="text" placeholder="请输入api接口权限名称"></p>
-      <p><input type="text" placeholder="请输入api接口权限url"></p>
-      <p><input type="text" placeholder="请输入api接口权限方法"></p>
+      <p><input type="text" placeholder="请输入api接口权限名称" v-model="apiName" @change="apiNameFn"></p>
+      <p><input type="text" placeholder="请输入api接口权限url" v-model="apiUrl" @change="apiUrlFn"></p>
+      <p><input type="text" placeholder="请输入api接口权限方法" v-model="apiMeans" @change="apiMeansFn"></p>
     </div>
     <div class="butt">
       <el-row>
-        <el-button type="primary" class="sure">确定</el-button>
-        <el-button type="info" class="newkong">重置</el-button>
+        <el-button type="primary" class="sure" @click="sureClickFun">确定</el-button>
+        <el-button type="info" class="newkong" @click="newClickFun">重置</el-button>
       </el-row>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
+  data(){
+    return{
+      apiName:'',
+      apiUrl:'',
+      apiMeans:''
+    }
+  },
+  computed:{
+    ...mapState({
+      addapiList:state=>state.usermenage.addapiList
+    })
+  },
+  methods:{
+    ...mapActions({
+      getAddApiLists:"usermenage/getAddApiLists"
+    }),
+    //名称
+    apiNameFn(e){
+      this.apiName=e.target.value
+    },
+    //url
+    apiUrlFn(e){
+      this.apiUrl=e.target.value
+    },
+    //权限方法
+    apiMeansFn(e){
+      this.apiMeans=e.target.value
+    },
+    //确定
+    sureClickFun(){
+      let obj={
+        api_authority_text:this.apiName,
+        api_authority_url:this.apiUrl,
+        api_authority_method:this.apiMeans
+      }
+      this.getAddApiLists(obj)
+      this.apiName='',
+      this.apiUrl='',
+      this.apiMeans=''
+    },
+    // 重置
+    newClickFun(){
+       this.apiName='',
+      this.apiUrl='',
+      this.apiMeans=''
+    }
+  }
+
 }
 </script>
 

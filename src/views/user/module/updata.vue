@@ -15,7 +15,7 @@
     <!-- 身份下拉框 -->
     <el-select v-model="data" placeholder="请选择身份id">
       <el-option
-        v-for="item in peopleType.data"
+        v-for="item in peopleType"
         :key="item.identity_id"
         :label="item.identity_text"
         :value="item.identity_id"
@@ -45,7 +45,7 @@ export default {
   },
   computed: {
     ...mapState({
-      peopleType: state => state.usermenage.peopleType,
+      peopleType: state => state.usermenage.peopleType.data,
       updataList: state => state.updatauser.updataList,
       userIDList: state => state.usermenage.userIDList.data,
       userInfoList: state => state.updatauser.userInfoList

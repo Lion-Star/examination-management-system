@@ -5,7 +5,7 @@
     <!-- 身份下拉框 -->
     <el-select v-model="value" placeholder="请选择身份id">
       <el-option
-        v-for="item in peopleType.data"
+        v-for="item in peopleType"
         :key="item.identity_id"
         :label="item.identity_text"
         :value="item.identity_id"
@@ -28,15 +28,17 @@ export default {
   data() {
     return {
       value: '',
-
       username: '',
       password: ''
     }
   },
   computed: {
     ...mapState({
-      peopleType: state => state.usermenage.peopleType
+      peopleType: state => state.usermenage.peopleType.data
     })
+  },
+  async created() {
+    await this.getpeopleType()
   },
   methods: {
     ...mapActions({
@@ -79,9 +81,6 @@ export default {
       this.username = '',
       this.password = ''
     }
-  },
-  created() {
-    this.getpeopleType()
   }
 }
 </script>

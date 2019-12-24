@@ -21,12 +21,12 @@
           <p>添加身份</p>
         </div>
         <div class="wrap">
-          <input type="text" placeholder="请输入身份名称">
+          <input type="text" placeholder="请输入身份名称" v-model="userID">
         </div>
         <div class="butt">
           <el-row>
-            <el-button type="primary" class="sure">确定</el-button>
-            <el-button type="info" class="newkong">重置</el-button>
+            <el-button type="primary" class="sure" @click="sureClickFn">确定</el-button>
+            <el-button type="info" class="newkong" @click="newClickFn">重置</el-button>
           </el-row>
         </div>
       </div>
@@ -54,7 +54,7 @@ import Addview from './module/addview'
 import Setapi from './module/setapi'
 // 给身份设置视图权限
 import Setview from './module/setview'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
   components: {
     Add, Updatas, Addapi, Addview, Setapi, Setview
@@ -64,8 +64,14 @@ export default {
       list: ['添加用户', '更新用户'],
       addShow: true,
       addUpdataIndex: 0,
-      updataShow: false
+      updataShow: false,
+      userID:""
     }
+  },
+  computed:{
+    ...mapState({
+      adduserID:state=>state.usermenage.adduserID
+    })
   },
   methods: {
     addupdataFn(index) {
@@ -79,11 +85,16 @@ export default {
       }
     },
     ...mapActions({
-      getuserList: 'usermenage/getuserList'
-    })
-  },
-  created() {
-
+      getuserList: 'usermenage/getuserList',
+      getadduserID: 'usermenage/getadduserID'
+    }),
+    sureClickFn(){
+      this.getadduserID({identity_text:this.userID})
+      this.userID=""
+    },
+    newClickFn(){
+      this.userID=""
+    }
   }
 }
 </script>
