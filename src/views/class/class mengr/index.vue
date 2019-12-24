@@ -11,7 +11,7 @@
                 v-for="item in roomList"
                 :key="item.room_text"
                 :label="item.room_text"
-                :value="item.room_text">
+                :value="item.room_id">
                 </el-option>
             </el-select>
             <p>课程名</p>
@@ -20,10 +20,10 @@
                 v-for="(val,index) in Subject"
                 :key="index"
                 :label="val.subject_text"
-                :value="val.subject_text">
+                :value="val.subject_id">
                 </el-option>
             </el-select>
-            <el-form-item>
+            <el-form-item style="paddingTop:20px;">
                 <el-button type="primary" @click="submitForm">提交</el-button>
                 <el-button @click="resetForm">取消</el-button>
             </el-form-item>
@@ -85,7 +85,7 @@ export default {
             grade_name: '',
             room_text: '',
             subject_text: '',
-            fromList:{},//修改存
+            grade_id:'',
         }
     },
     computed:{
@@ -127,9 +127,9 @@ export default {
             this.edit = 1
             this.showForm = true
             this.grade_name= row.grade_name,
-            this.room_text= row.room_text,
-            this.subject_text= row.subject_text,
-            this.fromList={grade_id:row.grade_id,grade_name:row.grade_name,subject_id:row.subject_id,room_id:row.room_id}
+            this.room_text= row.room_id,
+            this.subject_text= row.subject_id,
+            this.grade_id=row.grade_id
       },
       //删除
       handleDelete(row) {
@@ -143,8 +143,8 @@ export default {
       //表单提交
       submitForm() {
             if(this.edit===0){
-                if(confirm('是否添加')){
-                    this.addClass({grade_name:this.grade_name,room_text: this.room_text,subject_text:this.subject_text})
+                if(confirm('是否添加')){ 
+                    this.addClass({grade_name:this.grade_name,room_id: this.room_text,subject_id:this.subject_text})
                     this.grade_name= ''
                     this.room_text= ''
                     this.subject_text= ''
@@ -154,7 +154,7 @@ export default {
                 }
             }else{
                 if(confirm('是否更改')){
-                    this.gradeUpdate(this.fromList)
+                    this.gradeUpdate({grade_id:this.grade_id,grade_name:this.grade_name,room_id: this.room_text,subject_id:this.subject_text})
                     this.grade_name= ''
                     this.room_text= ''
                     this.subject_text= ''
