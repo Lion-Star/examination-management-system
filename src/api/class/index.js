@@ -27,7 +27,7 @@ export function gradeDelete(data) {
 //更新班级信息接口
 export function gradeUpdate(data) {
   return request({
-      url: `/manger/grade/update`,
+      url: '/manger/grade/update',
       method: 'put',
       data
     })
@@ -69,7 +69,7 @@ export function getStudent(data) {
 //删除学生接口
 export function studentDelete(data) {
   let {student_id}=data
-  return request.delete('/manger/student/delete', { data: {student_id} })
+  return request.delete(`/manger/student/:id=>${student_id}`)
 }
 
 //获取所有的课程

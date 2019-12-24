@@ -42,15 +42,42 @@
       <el-table
         :data="setStudentList"
         :header-cell-style="{background:'#f4f4f4',color:'#555',lineHeight:'30px',fontSize:'14px'}"
-        style="width: 100%;"
-      >
-        <el-table-column label="姓名" prop="student_name"></el-table-column>
-        <el-table-column prop="student_id" label="学号"></el-table-column>
-        <el-table-column prop="grade_name" label="班级"></el-table-column>
-        <el-table-column prop="room_text" label="教室"></el-table-column>
-        <el-table-column prop="student_pwd" label="密码" width="170"></el-table-column>
+        style="width: 100%">
+        <el-table-column
+            label="姓名"
+            >
+            <template slot-scope="scope">
+                <span style="margin-left: 10px">{{ scope.row.student_name }}</span>
+            </template>
+        </el-table-column>
+        <el-table-column
+            label="学号"
+            >
+            <template slot-scope="scope">
+                <span style="margin-left: 10px">{{ scope.row.student_id }}</span>
+            </template>
+        </el-table-column>
+        <el-table-column
+            label="班级"
+            >
+            <template slot-scope="scope">
+                <span style="margin-left: 10px">{{ scope.row.grade_name }}</span>
+            </template>
+        </el-table-column>
+        <el-table-column
+            label="密码"
+            >
+            <template slot-scope="scope">
+                <span style="margin-left: 10px">{{ scope.row.student_pwd }}</span>
+            </template>
+        </el-table-column>
         <el-table-column label="操作">
-            <span @click="setDelete()">删除</span>
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              type="danger"
+              @click="handleDelete(scope.row)">删除</el-button>
+          </template>
         </el-table-column>
       </el-table>
       <div class="block">
@@ -103,8 +130,8 @@ export default {
     }),
 
     //删除
-    setDelete(){
-        // this.studentDelete(student_id) 
+    handleDelete(row){
+      this.studentDelete({student_id:row.student_id}) 
     },
 
     //每页几条

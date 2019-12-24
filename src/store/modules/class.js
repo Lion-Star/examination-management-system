@@ -34,7 +34,6 @@ const mutations={
     getStudent( state , payload ){
         if(payload.code === 1){
             state.studentList = payload.data
-            console.log(state.studentList)
             toCurrent(payload.data)
         }else{
             alert(payload.msg)
@@ -116,10 +115,9 @@ const actions={
 
      //更新班级信息接口
      async gradeUpdate( {commit} , payload){
-         let {grade_id,grade_name,subject_id,room_id} = payload
-
-        let res = await gradeUpdate({grade_id:grade_id,grade_name:grade_name,subject_id:subject_id,room_id:room_id})
-        console.log(res)
+        let {grade_id,grade_name,subject_id,room_id} = payload
+        let res = await gradeUpdate({grade_id:grade_id , grade_name:grade_name , subject_id:subject_id , room_id:room_id})
+        alert(res.msg)
     },
 
     //获取全部教室
