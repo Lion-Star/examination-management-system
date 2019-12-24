@@ -5,7 +5,7 @@
         <div class="classid">
             <b>课程类型：</b>
             <div class="noselect">
-                <span @click="clickAll" :class="{active:allShow}">All</span>
+                <span @click="clickAll" :class="{active:allShow}">All</span>+
                 <span v-for="(item,index) in ClassList" :key="index" :class="{active:item.show}" @click="changecur(item)">{{item.subject_text}}</span>
             </div>
         </div>
