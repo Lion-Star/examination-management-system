@@ -147,7 +147,7 @@ const actions={
     //删除学生接口
     async studentDelete( {commit} , payload){
         let res = await studentDelete(payload)
-        console.log(res)
+        alert(res.msg)
     },
 
     //获取所有的课程
