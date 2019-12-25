@@ -135,10 +135,11 @@ export default {
       handleDelete(row) {
           if(confirm('是否删除')){
               this.gradeDelete({grade_id:row.grade_id})
+              this.gitGrade()
           }else{
               alert('取消成功')
           }
-          this.gitGrade()
+          
       },
       //表单提交
       submitForm() {

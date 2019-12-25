@@ -131,7 +131,13 @@ export default {
 
     //删除
     handleDelete(row){
-      this.studentDelete({student_id:row.student_id}) 
+      if(confirm('是否删除这个学生数据')){
+        this.studentDelete({student_id:row.student_id}) 
+        this.getStudent();
+      }else{
+        alert("取消成功")
+      }
+      
     },
 
     //每页几条

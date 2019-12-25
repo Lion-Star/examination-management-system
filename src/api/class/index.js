@@ -69,7 +69,7 @@ export function getStudent(data) {
 //删除学生接口
 export function studentDelete(data) {
   let {student_id}=data
-  return request.delete(`/manger/student/:id=>${student_id}`)
+  return request.delete(`/manger/student/${student_id}`)
 }
 
 //获取所有的课程
