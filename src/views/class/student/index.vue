@@ -1,5 +1,6 @@
 <template>
   <el-container style="height:100%;">
+    <!-- 上面搜索功能 -->
     <el-header style="height:10%;display: flex;align-items: center;">
       <el-input
         v-model="studentName"
@@ -39,6 +40,7 @@
       <el-button type="primary" style="marginLeft:15px;height:25px;lineHeight:5px;fontSize:10px" @click="setReset">重置</el-button>
     </el-header>
     <el-main>
+      <!-- 学生渲染 -->
       <el-table
         :data="setStudentList"
         :header-cell-style="{background:'#f4f4f4',color:'#555',lineHeight:'30px',fontSize:'14px'}"
@@ -80,6 +82,7 @@
           </template>
         </el-table-column>
       </el-table>
+      <!-- 分页 -->
       <div class="block">
         <el-pagination
           @size-change="handleSizeChange"
@@ -100,9 +103,9 @@ import { mapState, mapActions, mapMutations } from "vuex";
 export default {
   computed: {
     ...mapState({
-      setStudentList: state => state.class.setStudentList,
-      tableData: state => state.class.tableData,
-      studentList: state => state.class.studentList,
+      setStudentList: state => state.class.setStudentList,//学生数据
+      tableData: state => state.class.tableData,//搜索用的班级、教室
+      studentList: state => state.class.studentList,//初始学生数据
     })
   },
   data() {
@@ -118,7 +121,7 @@ export default {
     ...mapActions({
       getStudent: "class/getStudent",
       gitGrade: "class/gitGrade",
-      studentDelete:"class/studentDelete"
+      studentDelete:"class/studentDelete",//调用删除
     }),
 
     ...mapMutations({
@@ -129,7 +132,7 @@ export default {
       handleCurrent:"class/handleCurrent",//当前页
     }),
 
-    //删除
+    //删除学生
     handleDelete(row){
       if(confirm('是否删除这个学生数据')){
         this.studentDelete({student_id:row.student_id}) 

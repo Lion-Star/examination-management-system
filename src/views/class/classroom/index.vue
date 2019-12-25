@@ -1,5 +1,6 @@
 <template>
     <el-container>
+        <!-- 表单添加 -->
         <el-form status-icon class="demo-ruleForm" v-show="showForm">
             <p>教室号</p>
             <el-form-item>
@@ -14,6 +15,7 @@
             <el-button type="primary" @click="toForm"> + 添加教室</el-button>
         </el-header>
         <el-main style="display: flex;flex-direction: column;">
+            <!-- 教室渲染 -->
             <el-table
                 :data="roomList"
                 style="width: 100%;flex:1;" 
@@ -57,6 +59,7 @@ export default {
           addRoom:"class/addRoom",
           deleteRoom:"class/deleteRoom"
       }),
+    //   删除教室
       handleDelete(row) {
           if(confirm('是否删除')){
               this.deleteRoom({room_id:row.room_id})
@@ -64,7 +67,7 @@ export default {
               alert('取消成功')
           }  
       },
-      //表单提交
+      //表单功能
       submitForm() {
             this.addRoom({room_text:this.roomValue})
             this.showForm=false

@@ -1,5 +1,6 @@
 <template>
     <el-container>
+        <!-- 表单添加  -->
         <el-form status-icon class="demo-ruleForm" v-show="showForm">
             <p>班级名</p>
             <el-form-item>
@@ -32,6 +33,7 @@
             <el-button type="primary" @click="toForm"> + 添加班级</el-button>
         </el-header>
         <el-main style="display: flex;flex-direction: column;">
+            <!-- 班级渲染 -->
             <el-table
                 :data="tableData"
                 :gitGrades="gitGradesd"
