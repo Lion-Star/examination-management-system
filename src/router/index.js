@@ -154,4 +154,4 @@ export function resetRouter() {
     router.matcher = newRouter.matcher // reset router
 }
 
-export default routers
+export default router
