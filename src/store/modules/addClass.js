@@ -12,7 +12,7 @@ const actions={
      
 
       let res=await getClass(payload);
-      console.log('res...',res)
+    //   console.log('res...',res)
       commit('setClass',res.data)
   }
 }

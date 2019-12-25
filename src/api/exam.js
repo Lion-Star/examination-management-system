@@ -1,9 +1,9 @@
 import request from '@/utils/request'
-export function getExam(subject_id,exam_id,title,start_time,end_time) {
+export function getExam(mata) {
     return request({
       url: '/exam/exam/',// 假地址 自行替换
       method: 'post',
-      params:{subject_id,exam_id,title,number,start_time,end_time}
+      data:mata
     })
   }
   //选择考试类型
@@ -20,3 +20,10 @@ export function getExam(subject_id,exam_id,title,start_time,end_time) {
       method:'get'
     })
   }
+  // export function getAll(){
+  //   return request({
+  //     url:'/exam/questions/new',
+  //     method:'get'
+
+  //   })
+  // }

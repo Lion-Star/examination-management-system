@@ -53,6 +53,7 @@ export const constantRoutes = [{
         }]
     },
     {
+<<<<<<< HEAD
         path: '/TestManagement',
         component: Layout,
         name: 'TestManagement',
@@ -173,6 +174,29 @@ export const constantRoutes = [{
             }
         ]
     },
+=======
+      path: 'createExam',
+      component: () => import('@/views/exam/createExam'),
+      name: '',
+      meta: { title: '', noCache: true }
+    },
+    {
+      path: 'detail',
+      component: () => import('@/views/exam/detail'),
+      name: '',
+      meta: { title: '', noCache: true }
+    }
+  ]
+},
+{
+  path: '/read',
+  component: Layout,
+  redirect: '/read/waitClass',
+  alwaysShow: true,
+  name: '阅卷管理',
+  meta: { title: '阅卷管理', icon: 'edit' },
+  children: [
+>>>>>>> wq
     {
         path: '/read',
         component: Layout,

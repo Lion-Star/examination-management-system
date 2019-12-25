@@ -10,7 +10,7 @@
           <span>试卷名称:</span>
         </p>
         <p>
-          <el-input v-model="name" placeholder style="width:400px"></el-input>
+          <el-input v-model="subject_id" placeholder style="width:400px"></el-input>
         </p>
       </div>
       <div class="box2-list2">
@@ -19,7 +19,7 @@
           <span>选择考题类型:</span>
         </p>
         <p>
-          <el-select v-if="addType" v-model="type" placeholder="请选择">
+          <el-select v-if="addType" v-model="exam_id" placeholder="请选择">
             <el-option
               v-for="item in addType"
               :key="item.value"
@@ -35,7 +35,7 @@
           <span>选择课程:</span>
         </p>
         <p>
-          <el-select v-model="classify" placeholder="请选择">
+          <el-select v-model="title" placeholder="请选择">
             <el-option
               v-for="item in addClass"
               :key="item.value"
@@ -51,7 +51,7 @@
           <span>设置题量:</span>
         </p>
         <p>
-         <el-input-number v-model="num8" controls-position="right" @change="handleChange" :min="1" :max="10" style="width:120px"></el-input-number>
+         <el-input-number v-model="number" controls-position="right" @change="handleChange" :min="1" :max="10" style="width:120px"></el-input-number>
         </p>
       </div>
       <div class="last">
@@ -62,20 +62,32 @@
           <div class="block">
     
     <el-date-picker
-      v-model="value9"
-      type="daterange"
-      start-placeholder="开始日期"
-      end-placeholder="结束日期"
-      default-value="2010-10-01">
+      v-model="start_time"
+      type="date"
+      placeholder="开始日期"
+      value-format="timestamp"
+      >
     </el-date-picker>
   </div>
+  <div class="block">
+    
+    <el-date-picker
+      v-model="end_time"
+      type="date"
+      placeholder="结束日期"
+      value-format="timestamp"
+      >
+    </el-date-picker>
+  </div>
+  </div>
         </div>
-      </div>
-      <p class="btn">
+        <p class="btn">
         <button @click="create()">创建考试</button>
       </p>
+      </div>
+      
     </div>
-  </div>
+  
 </template>
 
 <script>
@@ -84,21 +96,12 @@ import { getType } from "../../api/exam";
 export default {
   data() {
     return {
-      // input: "",
-
-      name: "",
-      size: "",
-      type: "",
-      classify: "",
-      num8: 1,
-      pickerOptions1: {
-        disabledDate(time) {
-          return time.getTime() > Date.now();
-        }
-      },
-      value1: "",
-      value2: "",
-      value9:""
+      subject_id:"",
+      exam_id:"",
+      title:"",
+      number:"",
+      start_time:"",
+      end_time:""
     };
   },
   computed: {
@@ -121,7 +124,20 @@ export default {
         console.log(value);
       },
       create(){
-        this.$router.push('./createExam')
+        let content={
+          subject_id:this.subject_id,
+          exam_id:this.exam_id,
+          title:this.title,
+          number:this.number,
+          start_time:this.start_time,
+          end_time:this.end_time
+        }
+        // console.log(content)
+        this.getExam(content)
+       if(this.subject_id!=""&&this.exam_id!=""&&this.title!=""&&this.number!=""&&this.start_time!=""&&this.end_time!=""){
+         this.$router.push('./createExam')
+       }
+        // console.log(111)
       }
   },
   created() {
