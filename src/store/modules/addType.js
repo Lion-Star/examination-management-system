@@ -12,7 +12,7 @@ const actions={
      
 
       let res=await getType(payload);
-      console.log('res...',res)
+    //   console.log('res...',res)
       commit('setType',res.data)
   }
 }
