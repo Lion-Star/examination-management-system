@@ -1,32 +1,31 @@
 import Layout from '@/layout'
 
 const usershowRouter = {
-  path: '/charts',
+  path: '/usershow',
   component: Layout,
-  redirect: 'noRedirect',
-  name: 'Charts',
+  // redirect: 'noRedirect',
+   name: 'Usershow',
   meta: {
-    title: 'charts',
-    icon: 'chart'
+    title: 'usershow',
   },
   children: [
     {
-      path: 'keyboard',
-      component: () => import('@/views/charts/keyboard'),
-      name: 'KeyboardChart',
-      meta: { title: 'keyboardChart', noCache: true }
+      path: 'usershow/userdata',
+      component: () => import('@/views/user/module/usershow/userdata'),
+      name: 'Userdata',
+      meta: { title: 'userdata', noCache: true }
     },
     {
-      path: 'line',
-      component: () => import('@/views/charts/line'),
-      name: 'LineChart',
-      meta: { title: 'lineChart', noCache: true }
+      path: 'usershow/careddata',
+      component: () => import('@/views/user/module/usershow/careddata'),
+      name: 'Careddata',
+      meta: { title: 'careddata', noCache: true }
     },
     {
-      path: 'mix-chart',
-      component: () => import('@/views/charts/mix-chart'),
-      name: 'MixChart',
-      meta: { title: 'mixChart', noCache: true }
+      path: 'usershow/apiToken',
+      component: () => import('@/views/user/module/usershow/apiToken'),
+      name: 'ApiToken',
+      meta: { title: 'apiToken', noCache: true }
     }
   ]
 }
