@@ -2,8 +2,10 @@ import { getuserShow,getcaredData,getapiTokenList,
   getcaredAndApiToken,getViewTokenKou,getcaredAndView} from '@/api/usershow'
 
 const state = {
-  usershowList: [],//用户身份
-  caredData:[],//身份数据
+  usershowList: [],//yuan用户身份
+  usershowListed: [],//用户身份
+  caredData:[],//yuan身份数据
+  caredDataed:[],//身份数据
   apiTokenList:[],//原api接口权限
   apiTokenListed:[],//api接口权限
   caredAndApiToken:[],//yuan身份和api权限关系
@@ -21,10 +23,12 @@ const mutations = {
   //用户身份
   setuserShow(state, payload) {
     state.usershowList = payload
+    usershuju(payload)
   },
   //身份数据
   setcaredData(state,payload){
     state.caredData=payload
+    shenfen(payload)
   },
   //api接口权限
   setapiTokenList(state,payload){
@@ -53,6 +57,8 @@ const mutations = {
       caredAndApi(state.caredAndApiToken)
       viewToken(state.viewTokenKou)
       caredAndviewapi(state.caredAndView)
+      usershuju(state.usershowList)
+      shenfen(state.caredData)
   },
 
   handleSize(state,payload){
@@ -61,9 +67,16 @@ const mutations = {
       caredAndApi(state.caredAndApiToken)
       viewToken(state.viewTokenKou)
       caredAndviewapi(state.caredAndView)
+      usershuju(state.usershowList)
+      shenfen(state.caredData)
   }
 }
-
+function usershuju(data){
+  state.usershowListed = data.slice( (state.Current-1) *state.size , state.size * state.Current)
+}
+function shenfen(data){
+  state.caredDataed = data.slice( (state.Current-1) *state.size , state.size * state.Current)
+}
 function handle(data){
   state.apiTokenListed = data.slice( (state.Current-1) *state.size , state.size * state.Current)
 }
@@ -76,6 +89,7 @@ function viewToken(data){
 function caredAndviewapi(data){
   state.caredAndViewed = data.slice( (state.Current-1) *state.size , state.size * state.Current)
 }
+
 
 const actions = {
   //用户身份

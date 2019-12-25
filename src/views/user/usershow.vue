@@ -10,7 +10,7 @@
   <p>用户展示</p>
 </div>
           <el-table
-        :data="usershowList"
+        :data="usershowListed"
         style="width: 100%"
       >
         <el-table-column
@@ -29,14 +29,14 @@
         />
         
       </el-table>
-     <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page.sync="currentPage1"
-      :page-size="10"
-      layout="total, prev, pager, next"
-      :total="10">
-    </el-pagination>
+           <el-pagination
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :current-page.sync="currentPage1"
+              :page-size="10"
+              layout="total, prev, pager, next"
+              :total="usershowList.length">
+            </el-pagination>
 
         </el-tab-pane>
         <el-tab-pane label="身份数据" name="second" style="width:100%;">
@@ -44,7 +44,7 @@
   <p>身份数据</p>
 </div>
           <el-table
-          :data="caredData"
+          :data="caredDataed"
           style="width: 100%"
         >
           <el-table-column
@@ -53,7 +53,14 @@
             min-width="180"
           />
       </el-table>
-
+            <el-pagination
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :current-page.sync="currentPage1"
+              :page-size="10"
+              layout="total, prev, pager, next"
+              :total="caredData.length">
+            </el-pagination>
         </el-tab-pane>
         <el-tab-pane label="api接口权限" name="third">
 <div class="info">
@@ -205,7 +212,9 @@ data() {
     computed: {
     ...mapState({
         usershowList: state => state.usershow.usershowList,//用户数据
-        caredData:state=>state.usershow.caredData,//身份数据
+        usershowListed: state => state.usershow.usershowListed,//用户数据
+        caredData:state=>state.usershow.caredData,//yuan身份数据
+        caredDataed:state=>state.usershow.caredDataed,//身份数据
         apiTokenList:state=>state.usershow.apiTokenList,//api接口权限
         apiTokenListed:state=>state.usershow.apiTokenListed,//截取api接口权限
         caredAndApiToken:state=>state.usershow.caredAndApiToken,//原身份和api接口关系
