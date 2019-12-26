@@ -140,16 +140,14 @@ export const constantRoutes = [{
       meta: { title: '试卷列表', noCache: true }
     },
     {
-      path: 'createExam',
+      path: '/exam/createExam',
       component: () => import('@/views/exam/createExam'),
-      name: '',
-      meta: { title: '', noCache: true }
+     
     },
     {
-      path: 'detail',
+      path: '/exam/detail',
       component: () => import('@/views/exam/detail'),
-      name: '',
-      meta: { title: '', noCache: true }
+     
     }
   ]
 },
