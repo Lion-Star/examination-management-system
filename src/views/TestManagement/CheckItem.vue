@@ -167,6 +167,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .TestClassification {
     height: 100%;
     padding: 0px 24px 24px;
