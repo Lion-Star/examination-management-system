@@ -10,7 +10,7 @@
           <span>试卷名称:</span>
         </p>
         <p>
-          <el-input v-model="subject_id" placeholder style="width:400px"></el-input>
+          <el-input v-model="title" placeholder style="width:400px"></el-input>
         </p>
       </div>
       <div class="box2-list2">
@@ -23,8 +23,8 @@
             <el-option
               v-for="item in addType"
               :key="item.value"
-              :label="item.label"
-              :value="item.exam_name"
+              :label="item.exam_name"
+              :value="item.exam_id"
             ></el-option>
           </el-select>
         </p>
@@ -35,12 +35,12 @@
           <span>选择课程:</span>
         </p>
         <p>
-          <el-select v-model="title" placeholder="请选择">
+          <el-select v-model="subject_id" placeholder="请选择">
             <el-option
               v-for="item in addClass"
               :key="item.value"
-              :label="item.label"
-              :value="item.subject_text"
+              :label="item.subject_text"
+              :value="item.subject_id"
             ></el-option>
           </el-select>
         </p>
@@ -51,7 +51,7 @@
           <span>设置题量:</span>
         </p>
         <p>
-         <el-input-number v-model="number" controls-position="right" @change="handleChange" :min="1" :max="10" style="width:120px"></el-input-number>
+         <el-input-number v-model="number" controls-position="right" @change="handleChange" :min="3" :max="10" style="width:120px"></el-input-number>
         </p>
       </div>
       <div class="last">

@@ -53,7 +53,6 @@ export const constantRoutes = [{
         }]
     },
     {
-<<<<<<< HEAD
         path: '/TestManagement',
         component: Layout,
         name: 'TestManagement',
@@ -136,6 +135,7 @@ export const constantRoutes = [{
         ]
     },
     {
+
         path: '/exam',
         component: Layout,
         redirect: 'noRedirect',
@@ -159,59 +159,16 @@ export const constantRoutes = [{
                 meta: { title: '试卷列表', noCache: true }
             },
             {
-                path: 'createExam',
-                component: () =>
-                    import ('@/views/exam/createExam'),
-                name: '创建试卷',
-                meta: { title: '创建试卷', noCache: true }
+                path: '/exam/createExam',
+                component: () => import('@/views/exam/createExam'),
             },
-            {
-                path: 'detail',
-                component: () =>
-                    import ('@/views/exam/detail'),
-                name: '详情',
-                meta: { title: '详情', noCache: true }
-            }
+                {
+                  path: '/exam/detail',
+                  component: () => import('@/views/exam/detail'),
+                 
+                }
         ]
-    },
-=======
-      path: 'createExam',
-      component: () => import('@/views/exam/createExam'),
-      name: '',
-      meta: { title: '', noCache: true }
-    },
-    {
-      path: 'detail',
-      component: () => import('@/views/exam/detail'),
-      name: '',
-      meta: { title: '', noCache: true }
     }
-  ]
-},
-{
-  path: '/read',
-  component: Layout,
-  redirect: '/read/waitClass',
-  alwaysShow: true,
-  name: '阅卷管理',
-  meta: { title: '阅卷管理', icon: 'edit' },
-  children: [
->>>>>>> wq
-    {
-        path: '/read',
-        component: Layout,
-        redirect: '/read/waitClass',
-        alwaysShow: true,
-        name: '阅卷管理',
-        meta: { title: '阅卷管理', icon: 'edit' },
-        children: [{
-            path: 'waitClass',
-            component: () =>
-                import ('@/views/read/waitClass'),
-            name: '待批班级',
-            meta: { title: '待批班级' }
-        }]
-    },
 ]
 
 export const asyncRoutes = [
