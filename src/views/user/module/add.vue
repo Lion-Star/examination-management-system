@@ -53,6 +53,9 @@ export default {
         identity_id: this.value
       }
       this.getuserList(obj)
+      this.value='',
+      this.username='',
+      this.password=''
     },
     // 密码
     passwordFn(e) {
