@@ -88,7 +88,7 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="currentPage1"
-          :page-sizes="[4, 6, 8, 10]"
+          :page-sizes="[4, 6, 8, 9]"
           :page-size="4"
           layout="total, sizes, prev, pager, next, jumper"
           :total="studentList.length"

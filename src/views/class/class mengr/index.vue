@@ -176,9 +176,9 @@ export default {
       }
     },
     created(){
-             this.gitGrade()
-             this.getRoom()
-             this.getSubject()
+        this.gitGrade()
+        this.getRoom()
+        this.getSubject()
     }
 }
 </script>

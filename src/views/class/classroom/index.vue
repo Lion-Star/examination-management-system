@@ -1,42 +1,45 @@
 <template>
-    <el-container>
+    <div class="warp">
+        <el-container>
         <!-- 表单添加 -->
-        <el-form status-icon class="demo-ruleForm" v-show="showForm">
-            <p>教室号</p>
-            <el-form-item>
-                <el-input type="text" v-model="roomValue"></el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="submitForm">添加</el-button>
-                <el-button @click="resetForm">取消</el-button>
-            </el-form-item>
-        </el-form>
-        <el-header style="height:45px;">
-            <el-button type="primary" @click="toForm"> + 添加教室</el-button>
-        </el-header>
-        <el-main style="display: flex;flex-direction: column;">
-            <!-- 教室渲染 -->
-            <el-table
-                :data="roomList"
-                style="width: 100%;flex:1;" 
-                :header-cell-style="{background:'#f4f4f4',color:'#555',lineHeight:'20px',fontSize:'14px'}">
-                <el-table-column
-                label="教室名">
-                <template slot-scope="scope">
-                    <span style="margin-left: 10px">{{ scope.row.room_text }}</span>
-                </template>
-                </el-table-column>
-                <el-table-column label="操作">
-                <template slot-scope="scope">
-                    <el-button
-                    size="mini"
-                    type="danger"
-                    @click="handleDelete(scope.row)">删除</el-button>
-                </template>
-                </el-table-column>
-            </el-table>
-        </el-main>
-    </el-container>
+            <el-form status-icon class="demo-ruleForm" v-show="showForm">
+                <p>教室号</p>
+                <el-form-item>
+                    <el-input type="text" v-model="roomValue"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="submitForm">添加</el-button>
+                    <el-button @click="resetForm">取消</el-button>
+                </el-form-item>
+            </el-form>
+            <el-header style="height:45px;">
+                <el-button type="primary" @click="toForm"> + 添加教室</el-button>
+            </el-header>
+            <el-main style="height:100%;display: flex;flex-direction: column;">
+                <!-- 教室渲染 -->
+                <el-table
+                    :data="roomList"
+                    style="width: 100%;flex:1;overflow-y: auto;" 
+                    :header-cell-style="{background:'#f4f4f4',color:'#555',lineHeight:'20px',fontSize:'14px'}">
+                    <el-table-column
+                    label="教室名">
+                    <template slot-scope="scope">
+                        <span style="margin-left: 10px">{{ scope.row.room_text }}</span>
+                    </template>
+                    </el-table-column>
+                    <el-table-column label="操作">
+                    <template slot-scope="scope">
+                        <el-button
+                        size="mini"
+                        type="danger"
+                        @click="handleDelete(scope.row)">删除</el-button>
+                    </template>
+                    </el-table-column>
+                </el-table>
+            </el-main>
+        </el-container>
+    </div>
+    
 </template>
 
 <script>
@@ -87,6 +90,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.warp{
+    width: 100%;
+    height: 100%;
+}
 .demo-ruleForm{
     width: 500px;
     position: absolute; 
