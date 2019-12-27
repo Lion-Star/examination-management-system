@@ -29,7 +29,7 @@
         />
         
       </el-table>
-           <el-pagination
+           <el-pagination class="fenye"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page.sync="currentPage1"
@@ -53,7 +53,7 @@
             min-width="180"
           />
       </el-table>
-            <el-pagination
+            <el-pagination class="fenye"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page.sync="currentPage1"
@@ -85,7 +85,7 @@
                 label="api权限方法"
               />
             </el-table>
-            <el-pagination
+            <el-pagination class="fenye"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page.sync="currentPage1"
@@ -123,7 +123,7 @@
                 label="api权限方法"
               />
             </el-table>
-             <el-pagination
+             <el-pagination class="fenye"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page.sync="currentPage1"
@@ -151,7 +151,7 @@
                 min-width="180"
               />
             </el-table>
-             <el-pagination
+             <el-pagination class="fenye"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page.sync="currentPage1"
@@ -184,7 +184,7 @@
                 min-width="200"
               />
             </el-table>
-            <el-pagination
+            <el-pagination class="fenye"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
               :current-page.sync="currentPage1"
@@ -293,5 +293,9 @@ data() {
 }
 .usershow .content{
   margin-left:20px;
+}
+.usershow .fenye{
+  margin-right:20px;
+  float: right;
 }
 </style>
