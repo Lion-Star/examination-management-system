@@ -3,6 +3,7 @@
     <div class="box" v-for="(item,index) in addDetail.questions" :key="index">
       <p>{{item.title}}</p>
       <p>{{item.questions_stem}}</p>
+      <p>王琪</p>
     </div>
   </div>
 </template>
