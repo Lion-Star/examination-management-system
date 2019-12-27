@@ -107,19 +107,19 @@ export const constantRoutes = [{
         component: Layout,
         // redirect: '/adduser',
         // hidden: true,
-        meta: { title: 'User', icon: 'user', noCache: true },
+        meta: { title: '用户管理', icon: 'user', noCache: true },
         children: [{
             path: 'addUser',
             component: () =>
                 import ('@/views/user/addUser'),
             name: 'AddUser',
-            meta: { title: 'addUser', noCache: true } // 添加用户
+            meta: { title: '添加用户', noCache: true } // 添加用户
         }, {
             path: '/usershow',
             component: () =>
                 import ('@/views/user/usershow'),
             name: 'Usershow',
-            meta: { title: 'usershow', noCache: true } // 用户展示
+            meta: { title: '用户展示', noCache: true } // 用户展示
         }]
     },
     {
@@ -199,9 +199,9 @@ export const asyncRoutes = [
 ]
 
 const createRouter = () => new Router({
-
     scrollBehavior: () => ({ y: 0 }),
     routes: constantRoutes
+
 })
 
 const router = createRouter()
