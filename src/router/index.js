@@ -39,18 +39,6 @@ export const constantRoutes = [{
         component: () =>
             import ('@/views/error-page/401'),
         hidden: true
-    },
-    {
-        path: '/',
-        component: Layout,
-        redirect: '/dashboard',
-        children: [{
-            path: 'dashboard',
-            component: () =>
-                import ('@/views/dashboard/index'),
-            name: 'Dashboard',
-            meta: { title: 'dashboard', icon: 'dashboard', affix: true }
-        }]
     }
 ]
 
@@ -59,8 +47,7 @@ export const asyncRoutes = [
     { path: '*', redirect: '/404', hidden: true }
 ]
 
-export const authorityRoutes = [,
-    {
+export const authorityRoutes = [{
         path: '/TestManagement',
         component: Layout,
         name: 'TestManagement',
@@ -83,7 +70,7 @@ export const authorityRoutes = [,
                 component: () =>
                     import ('@/views/TestManagement/EditItem'),
                 name: 'EditItem',
-                meta: { title: '修改试题' }
+                meta: { title: '修改试题', view_id: 'main-addQuestions' }
             },
             {
                 path: 'TestClassification',
@@ -97,7 +84,7 @@ export const authorityRoutes = [,
                 component: () =>
                     import ('@/views/TestManagement/CheckItem'),
                 name: 'CheckItem',
-                meta: { title: '查看试题', view_id: 'main-watchQuestions123131312' }
+                meta: { title: '查看试题', view_id: 'main-watchQuestions' }
             },
             {
                 path: 'Detail',
@@ -105,7 +92,7 @@ export const authorityRoutes = [,
                 component: () =>
                     import ('@/views/TestManagement/Detail'),
                 name: 'Detail',
-                meta: { title: '查看详情' }
+                meta: { title: '查看详情', view_id: 'main-addQuestions' }
             },
 
         ]
@@ -188,11 +175,15 @@ export const authorityRoutes = [,
                 path: '/exam/createExam',
                 component: () =>
                     import ('@/views/exam/createExam'),
+                meta: { title: '创建试卷', view_id: "main-examList" }
+
             },
             {
                 path: '/exam/detail',
                 component: () =>
                     import ('@/views/exam/detail'),
+                meta: { title: '试卷详情', view_id: "main-examList" }
+
             }
         ]
     }

@@ -1,5 +1,6 @@
 import router from './router'
 import store from './store'
+import { Message } from 'element-ui'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
@@ -24,8 +25,7 @@ router.beforeEach(async(to, from, next) => {
             NProgress.done()
         } else {
 
-            let hasViewAuthority = store.state.user.viewAuthority && store.state.user.viewAuthoritylength > 0
-
+            let hasViewAuthority = store.state.user.viewAuthority && store.state.user.viewAuthority.length > 0
             if (hasViewAuthority) {
                 next()
             } else {
