@@ -3,7 +3,7 @@
     <div class="box">
       <p>添加试图接口权限</p>
     </div>
-    <el-select v-model="value" placeholder="请选择身份id" class="select">
+    <el-select v-model="value" placeholder="请选择身份id" class="select" @change="caredIdFun">
       <el-option
         v-for="item in peopleType"
         :key="item.identity_id"
@@ -12,18 +12,18 @@
       />
     </el-select>
     <p>
-      <el-select v-model="data" placeholder="请选视图权限id" class="select">
+      <el-select v-model="data" placeholder="请选视图权限id" class="select" @change="viewIdFun">
         <el-option
-          v-for="item in datas"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
+          v-for="item in addViewList"
+           :key="item.view_authority_id"
+            :label="item.view_authority_text"
+            :value="item.view_authority_id"
         />
       </el-select></p>
     <div class="butt">
       <el-row>
-        <el-button type="primary" class="sure">确定</el-button>
-        <el-button type="info" class="newkong">重置</el-button>
+        <el-button type="primary" class="sure" @click="sureClickFun">确定</el-button>
+        <el-button type="info" class="newkong" @click="newClickFun">重置</el-button>
       </el-row>
     </div>
   </div>
@@ -35,37 +35,43 @@ export default {
   data() {
     return {
       value: '',
-      datas: [{
-        value: '选项1',
-        label: '老师'
-      }, {
-        value: '选项2',
-        label: '学生'
-      }, {
-        value: '选项3',
-        label: '导员'
-      }, {
-        value: '选项4',
-        label: '院长'
-      }, {
-        value: '选项5',
-        label: '主任'
-      }],
-      data: ''
+      data: '',
+      caredId:"",
+      viewId:""
     }
   },
-  computed:{
-     ...mapState({
-      peopleType:state=>state.usermenage.peopleType,
+  computed: {
+    ...mapState({
+      peopleType: state => state.usermenage.peopleType.data,
+      addViewList:state=>state.usermenage.addViewList,
+      AddViewTokenKou:state=>state.usermenage.AddViewTokenKou
     })
   },
-  methods:{
+  methods: {
     ...mapActions({
-       getpeopleType:"usermenage/getpeopleType",
-    })
+      getpeopleType: 'usermenage/getpeopleType',
+      getAddViewList:"usermenage/getAddViewList",
+      getAddViewTokenKou:"usermenage/getAddViewTokenKou"
+    }),
+    caredIdFun(item){
+      this.caredId=item
+    },
+    viewIdFun(item){
+      this.viewId=item
+    },
+    //确定
+    sureClickFun(){
+      this.getAddViewTokenKou({identity_id:this.caredId,view_authority_id:this.viewId})
+    },
+    //重置
+    newClickFun(){
+        this.value= '',
+        this.data=''
+    }
   },
-  created(){
+  created() {
     this.getpeopleType()
+    this.getAddViewList()
   }
 }
 </script>

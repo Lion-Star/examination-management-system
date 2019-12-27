@@ -1,20 +1,21 @@
 <template>
   <div class="add">
-    <p><input type="text" placeholder="请输入用户名" v-model="username" @change="userChangeFn"></p>
-    <p><input type="password" placeholder="请输入密码" v-model="password" @change="passwordFn"></p>
-
+    <p><input v-model="username" type="text" placeholder="请输入用户名" @change="userChangeFn"></p>
+    <p><input v-model="password" type="password" placeholder="请输入密码" @change="passwordFn"></p>
+    <!-- 身份下拉框 -->
     <el-select v-model="value" placeholder="请选择身份id">
       <el-option
         v-for="item in peopleType"
         :key="item.identity_id"
         :label="item.identity_text"
-        :value="item.identity_text"
+        :value="item.identity_id"
       />
     </el-select>
+    <!-- 确定、重置按钮 -->
     <div class="butt">
       <el-row>
-        <el-button type="primary" class="sure" @click="sureClickFn">确定</el-button>
-        <el-button type="info" class="newkong">重置</el-button>
+         <el-button :plain="true" @click="open2" class="sure">确定</el-button>
+        <el-button type="info" class="newkong" @click="newvalueFn">重置</el-button>
       </el-row>
     </div>
   </div>
@@ -27,45 +28,68 @@ export default {
   data() {
     return {
       value: '',
-      username:"",
-      password:""
+      username: '',
+      password: ''
     }
   },
-  computed:{
+  computed: {
     ...mapState({
-      peopleType:state=>state.usermenage.peopleType
+      peopleType: state => state.usermenage.peopleType.data
     })
   },
-  methods:{
-    ...mapActions({
-      getpeopleType:"usermenage/getpeopleType"
-    }),
-    sureClickFn(){
-
-    },
-    passwordFn(e){
-      let dat=/^[A-za-z0-9]{6,18}$/
-      let yut=dat.test(e.target.value)
-     if(yut){
-       alert("密码格式正确")
-     }else{
-        alert("密码格式不正确")
-        console.log(e.target.value)
-     }
-    },
-    userChangeFn(e){
-    //   let user=/^[a-z]$/
-    //   let usernam=user.test(e.target.value)
-    //    if(usernam){
-    //     alert("用户名格式正确")
-    //     }else{
-    //      alert("用户名格式不正确")
-    //      console.log(e.target.value)
-    //  }
-    }
+  async created() {
+    await this.getpeopleType()
   },
-  created(){
-   this.getpeopleType() 
+  methods: {
+    ...mapActions({
+      getpeopleType: 'usermenage/getpeopleType',
+      getuserList: 'usermenage/getuserList'
+    }),
+    // 确定
+    open2() {
+      const obj = {
+        user_name: this.username,
+        user_pwd: this.password,
+        identity_id: this.value
+      }
+      this.getuserList(obj)
+      this.value='',
+      this.username='',
+      this.password=''
+        this.$message({
+          showClose: true,
+          message: '添加成功',
+          type: 'success'
+        });
+      },
+
+    // 密码
+    passwordFn(e) {
+      const dat = /^[A-za-z0-9]{6,18}!$/
+      const yut = dat.test(e.target.value)
+      if (yut) {
+        this.password = e.target.value
+      } else {
+        alert('密码格式不正确')
+      }
+    },
+    // 用户名
+    userChangeFn(e) {
+      const user = /[a-z0-9]$/
+      const usernam = user.test(e.target.value)
+
+      if (usernam) {
+        this.username = e.target.value
+      } else {
+        alert('用户名格式不正确')
+      }
+    },
+    // 重置
+    newvalueFn() {
+      this.value = '',
+      this.username = '',
+      this.password = ''
+    }
   }
 }
 </script>
@@ -85,5 +109,7 @@ export default {
 }
 .add .butt .sure{
     width:100px;
+     background:rgb(0, 140, 255);
+    color:#fff;
 }
 </style>

@@ -1,30 +1,31 @@
 <template>
   <div class="updatas">
-    
+    <!-- 用户名下拉框 -->
     <el-select v-model="value" placeholder="请选择身份id">
       <el-option
-         v-for="item in userIDList.data"
+        v-for="item in userIDList"
         :key="item.user_id"
         :label="item.user_name"
-        :value="item.user_name"
+        :value="item.user_id"
       />
-        
-    </el-select>
-    <p><input type="text" placeholder="请输入用户名"></p>
-    <p><input type="password" placeholder="请输入密码"></p>
 
+    </el-select>
+    <p><input v-model="username" type="text" placeholder="请输入用户名"></p>
+    <p><input v-model="password" type="password" placeholder="请输入密码"></p>
+    <!-- 身份下拉框 -->
     <el-select v-model="data" placeholder="请选择身份id">
       <el-option
-      v-for="item in peopleType"
+        v-for="item in peopleType"
         :key="item.identity_id"
         :label="item.identity_text"
-        :value="item.identity_text"
+        :value="item.identity_id"
       />
     </el-select>
+    <!-- 确定、重置按钮 -->
     <div class="butt">
       <el-row>
-        <el-button type="primary" class="sure">确定</el-button>
-        <el-button type="info" class="newkong">重置</el-button>
+        <el-button type="primary" class="sure" @click="sureclickFn">确定</el-button>
+        <el-button type="info" class="newkong" @click="newclickFn">重置</el-button>
       </el-row>
     </div>
   </div>
@@ -33,26 +34,52 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 export default {
-   data() {
+
+  data() {
     return {
       value: '',
-      data:""
+      data: '',
+      username: '',
+      password: ''
     }
   },
-  computed:{
+  computed: {
     ...mapState({
-      peopleType:state=>state.usermenage.peopleType,
-      userIDList:state=>state.usermenage.userIDList
+      peopleType: state => state.usermenage.peopleType.data,
+      updataList: state => state.updatauser.updataList,
+      userIDList: state => state.usermenage.userIDList.data,
+      userInfoList: state => state.updatauser.userInfoList
     })
   },
-  methods:{
+  methods: {
     ...mapActions({
-      getpeopleType:"usermenage/getpeopleType",
-      getuserIDList:"usermenage/getuserIDList"
-    })
+      getpeopleType: 'usermenage/getpeopleType',
+      getupdataList: 'updatauser/getupdataList',
+      getuserIDList: 'usermenage/getuserIDList',
+      getuserInfoList: 'updatauser/getuserInfoList'
+    }),
+    // 重置
+    newclickFn() {
+      this.value = '',
+      this.data = '',
+      this.username = '',
+      this.password = '',
+      this.userInfoList.avatar = ''
+    },
+    // 确定
+    sureclickFn() {
+      const obj = {
+        user_id: this.value,
+        user_name: this.username,
+        user_pwd: this.password,
+        identity_id: this.data,
+        avatar: this.userInfoList.avatar
+      }
+      this.getupdataList(obj)
+    }
   },
-  created(){
-    this.getpeopleType()
+  created() {
+    this.getuserInfoList()
     this.getuserIDList()
   }
 }

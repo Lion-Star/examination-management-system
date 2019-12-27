@@ -1,7 +1,7 @@
 <template>
   <div class="addUser">
     <div class="wrap">
-      <p>添加用户</p>
+      <p class="p">添加用户</p>
     </div>
     <div class="content">
       <div class="addUpdatauser">
@@ -21,12 +21,12 @@
           <p>添加身份</p>
         </div>
         <div class="wrap">
-          <input type="text" placeholder="请输入身份名称">
+          <input type="text" placeholder="请输入身份名称" v-model="userID">
         </div>
         <div class="butt">
           <el-row>
-            <el-button type="primary" class="sure">确定</el-button>
-            <el-button type="info" class="newkong">重置</el-button>
+                <el-button :plain="true" @click="open2" class="sure">确定</el-button>
+            <el-button type="info" class="newkong" @click="newClickFn">重置</el-button>
           </el-row>
         </div>
       </div>
@@ -54,8 +54,7 @@ import Addview from './module/addview'
 import Setapi from './module/setapi'
 // 给身份设置视图权限
 import Setview from './module/setview'
-
-import {mapActions} from "vuex"
+import { mapActions, mapState } from 'vuex'
 export default {
   components: {
     Add, Updatas, Addapi, Addview, Setapi, Setview
@@ -65,8 +64,14 @@ export default {
       list: ['添加用户', '更新用户'],
       addShow: true,
       addUpdataIndex: 0,
-      updataShow: false
+      updataShow: false,
+      userID:""
     }
+  },
+  computed:{
+    ...mapState({
+      adduserID:state=>state.usermenage.adduserID
+    })
   },
   methods: {
     addupdataFn(index) {
@@ -80,16 +85,23 @@ export default {
       }
     },
     ...mapActions({
-      getuserList:"usermenage/getuserList"
-    })
-  },
-  created(){
-   let obj={
-      user_name:"zhanghaibo1",
-      user_pwd:"Zhanghaibo123!",
-      identity_id:"学生"
-    }
-    this.getuserList(obj)
+      getuserList: 'usermenage/getuserList',
+      getadduserID: 'usermenage/getadduserID'
+    }),
+    
+    newClickFn(){
+      this.userID=""
+    },
+     open2() {
+        this.getadduserID({identity_text:this.userID})
+        this.userID=""
+        this.$message({
+          showClose: true,
+          message: '添加成功',
+          type: 'success'
+        });
+      },
+
   }
 }
 </script>
@@ -99,15 +111,18 @@ export default {
   width:100%;
   height:100%;
   background:#eee;
+  margin:0;
+  padding: 0;
 }
 .addUser .wrap{
   width:100%;
   height:80px;
   line-height: 80px;
-  margin-left:20px;
+
 }
-.addUser .wrap p{
+.addUser .wrap .p{
   font-size: 25px;
+  margin-left:20px;
 }
 .addUser .content{
     width:100%;
@@ -139,7 +154,6 @@ export default {
   font-size:13px;
   text-align: center;
   background:#fff;
-  
 }
 .addUser .content .addUpdatauser .wrapper{
   margin-left:10px;
@@ -170,7 +184,6 @@ export default {
 }
 .addUser .content .addcarId .wrap{
   margin-left:10px;
-
 }
 .addUser .content .addcarId .wrap input{
   width:85%;
@@ -186,5 +199,7 @@ export default {
 }
 .addUser .content .addcarId .butt .sure{
     width:100px;
+    background:rgb(0, 140, 255);
+    color:#fff;
 }
 </style>

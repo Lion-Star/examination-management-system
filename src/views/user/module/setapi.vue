@@ -3,56 +3,75 @@
     <div class="box">
       <p>给身份设置api接口权限</p>
     </div>
-    <el-select v-model="value" placeholder="请选择身份id" class="select">
+    <el-select v-model="value" placeholder="请选择身份id" class="select" @change="cardFn">
       <el-option
         v-for="item in peopleType"
         :key="item.identity_id"
         :label="item.identity_text"
-        :value="item.identity_text"
+        :value="item.identity_id"
       />
     </el-select>
     <p>
-      <el-select v-model="data" placeholder="请选api接口权限" class="select">
+      <el-select v-model="data" placeholder="请选api接口权限" class="select" @change="caredTokenIDFn">
         <el-option
           v-for="item in apiTokenList.data"
           :key="item.api_authority_id"
           :label="item.api_authority_text"
-          :value="item.api_authority_text"
+          :value="item.api_authority_id"
         />
       </el-select></p>
     <div class="butt">
       <el-row>
-        <el-button type="primary" class="sure">确定</el-button>
-        <el-button type="info" class="newkong">重置</el-button>
+        <el-button type="primary" class="sure" @click="sureClickFun">确定</el-button>
+        <el-button type="info" class="newkong" @click="newclickFun">重置</el-button>
       </el-row>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions,mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
   data() {
     return {
       value: '',
-      data: ''
+      data: '',
+      cardID:"",
+      apiTokenId:""
     }
   },
-  computed:{
+  computed: {
     ...mapState({
-      peopleType:state=>state.usermenage.peopleType,
-      apiTokenList:state=>state.usermenage.apiTokenList
+      peopleType: state => state.usermenage.peopleType.data,
+      apiTokenList: state => state.usermenage.apiTokenList,
+      cardApiIDkou: state => state.usermenage.cardApiIDkou
     })
-    
+
   },
-  methods:{
+  methods: {
     ...mapActions({
-      getpeopleType:"usermenage/getpeopleType",
-      getApiToken:"usermenage/getApiToken"
-    })
+      getpeopleType: 'usermenage/getpeopleType',
+      getApiToken: 'usermenage/getApiToken',
+      getcardApiIDkou:"usermenage/getcardApiIDkou"
+    }),
+    cardFn(item){
+      this.cardID=item
+    },
+    caredTokenIDFn(item){
+      this.apiTokenId=item
+    },
+    //确定
+    sureClickFun(){
+      this.getcardApiIDkou({identity_id:this.cardID,api_authority_id:this.apiTokenId})
+    },
+    //重置
+    newclickFun(){
+      this.value= '',
+      this.data= ''
+    },
   },
-  created(){
-    this.getpeopleType(),
+  created() {
+    this.getpeopleType()
     this.getApiToken()
   }
 }
