@@ -159,7 +159,7 @@ export default {
           this.loading = true
           try {
             await this.$store.dispatch('user/login', this.loginForm)
-            this.$router.push({ path: this.redirect || '/TestManagement/AddItem', query: this.otherQuery })
+            this.$router.push({ path:  '/TestManagement/AddItem', query: this.otherQuery })
           } catch (e) {}
           this.loading = false
         } else {
