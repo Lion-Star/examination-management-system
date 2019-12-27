@@ -172,9 +172,7 @@ export default {
 .box2-list1 p span:nth-child(1) {
   color: red;
 
-  position: absolute;
-  top: 110px;
-  left: 40px;
+
   font-size: 20px;
 }
 .box2-list1 p span:nth-child(2) {
@@ -193,9 +191,7 @@ export default {
 .box2-list2 p span:nth-child(1) {
   color: red;
 
-  position: absolute;
-  top: 250px;
-  left: 40px;
+ 
   font-size: 20px;
 }
 .box2-list2 p span:nth-child(2) {
@@ -213,9 +209,7 @@ export default {
 .box2-list3 p span:nth-child(1) {
   color: red;
 
-  position: absolute;
-  top: 388px;
-  left: 40px;
+ 
   font-size: 20px;
 }
 .box2-list3 p span:nth-child(2) {
@@ -233,9 +227,7 @@ export default {
 .box2-list4 p span:nth-child(1) {
   color: red;
 
-  position: absolute;
-  top: 530px;
-  left: 40px;
+  
   font-size: 20px;
 }
 .box2-list4 p span:nth-child(2) {
