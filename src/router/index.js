@@ -51,7 +51,15 @@ export const constantRoutes = [{
             name: 'Dashboard',
             meta: { title: 'dashboard', icon: 'dashboard', affix: true }
         }]
-    },
+    }
+]
+
+export const asyncRoutes = [
+
+    { path: '*', redirect: '/404', hidden: true }
+]
+
+export const authorityRoutes = [,
     {
         path: '/TestManagement',
         component: Layout,
@@ -67,7 +75,7 @@ export const constantRoutes = [{
                 component: () =>
                     import ('@/views/TestManagement/index'),
                 name: 'AddItem',
-                meta: { title: '添加试题' }
+                meta: { title: '添加试题', view_id: 'main-addQuestions' }
             },
             {
                 path: 'EditItem',
@@ -82,14 +90,14 @@ export const constantRoutes = [{
                 component: () =>
                     import ('@/views/TestManagement/TestClassification'),
                 name: 'TestClassification',
-                meta: { title: '试题分类' }
+                meta: { title: '试题分类', view_id: 'main-questionsType' }
             },
             {
                 path: 'CheckItem',
                 component: () =>
                     import ('@/views/TestManagement/CheckItem'),
                 name: 'CheckItem',
-                meta: { title: '查看试题' }
+                meta: { title: '查看试题', view_id: 'main-watchQuestions123131312' }
             },
             {
                 path: 'Detail',
@@ -105,21 +113,19 @@ export const constantRoutes = [{
     {
         path: '/addUser',
         component: Layout,
-        // redirect: '/adduser',
-        // hidden: true,
         meta: { title: '用户管理', icon: 'user', noCache: true },
         children: [{
             path: 'addUser',
             component: () =>
                 import ('@/views/user/addUser'),
             name: 'AddUser',
-            meta: { title: '添加用户', noCache: true } // 添加用户
+            meta: { title: '添加用户', view_id: "main-addUser" } // 添加用户
         }, {
             path: '/usershow',
             component: () =>
                 import ('@/views/user/usershow'),
             name: 'Usershow',
-            meta: { title: '用户展示', noCache: true } // 用户展示
+            meta: { title: '用户展示', view_id: "main-showUser" } // 用户展示
         }]
     },
     {
@@ -136,21 +142,21 @@ export const constantRoutes = [{
                 component: () =>
                     import ('@/views/class/class mengr/'),
                 name: 'Mengr',
-                meta: { title: '班级管理' }
+                meta: { title: '班级管理', view_id: "main-grade" }
             },
             {
                 path: 'classroom',
                 component: () =>
                     import ('@/views/class/classroom/'),
                 name: 'Classroom',
-                meta: { title: '教室管理' }
+                meta: { title: '教室管理', view_id: "main-room" }
             },
             {
                 path: 'student',
                 component: () =>
                     import ('@/views/class/student/'),
                 name: 'Student',
-                meta: { title: '学生管理' }
+                meta: { title: '学生管理', view_id: "main-student" }
             }
         ]
     },
@@ -169,14 +175,14 @@ export const constantRoutes = [{
                 component: () =>
                     import ('@/views/exam/addExam'),
                 name: '添加考试',
-                meta: { title: '添加考试', noCache: true }
+                meta: { title: '添加考试', view_id: "main-addExam" }
             },
             {
                 path: 'ListExam',
                 component: () =>
                     import ('@/views/exam/ListExam'),
                 name: '试卷列表',
-                meta: { title: '试卷列表', noCache: true }
+                meta: { title: '试卷列表', view_id: "main-examList" }
             },
             {
                 path: '/exam/createExam',
@@ -187,21 +193,16 @@ export const constantRoutes = [{
                 path: '/exam/detail',
                 component: () =>
                     import ('@/views/exam/detail'),
-
             }
         ]
     }
 ]
 
-export const asyncRoutes = [
 
-    { path: '*', redirect: '/404', hidden: true }
-]
 
 const createRouter = () => new Router({
     scrollBehavior: () => ({ y: 0 }),
     routes: constantRoutes
-
 })
 
 const router = createRouter()

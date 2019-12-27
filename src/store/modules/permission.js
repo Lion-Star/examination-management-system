@@ -1,69 +1,57 @@
-import { asyncRoutes, constantRoutes } from '@/router'
+import { asyncRoutes, constantRoutes, authorityRoutes } from '@/router'
 
-/**
- * Use meta.role to determine if the current user has permission
- * @param roles
- * @param route
- */
-function hasPermission(roles, route) {
-  if (route.meta && route.meta.roles) {
-    return roles.some(role => route.meta.roles.includes(role))
-  } else {
-    return true
-  }
-}
-
-/**
- * Filter asynchronous routing tables by recursion
- * @param routes asyncRoutes
- * @param roles
- */
-export function filterAsyncRoutes(routes, roles) {
-  const res = []
-
-  routes.forEach(route => {
-    const tmp = { ...route }
-    if (hasPermission(roles, tmp)) {
-      if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children, roles)
-      }
-      res.push(tmp)
-    }
-  })
-
-  return res
-}
 
 const state = {
-  routes: [],
-  addRoutes: []
+    routes: [],
+    addRoutes: []
 }
 
 const mutations = {
-  SET_ROUTES: (state, routes) => {
-    state.addRoutes = routes
-    state.routes = constantRoutes.concat(routes)
-  }
+    SET_ROUTES: (state, routes) => {
+        state.addRoutes = routes
+        state.routes = constantRoutes.concat(routes)
+    }
 }
 
 const actions = {
-  generateRoutes({ commit }, roles) {
-    return new Promise(resolve => {
-      let accessedRoutes
-      if (roles.includes('admin')) {
-        accessedRoutes = asyncRoutes || []
-      } else {
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-      }
-      commit('SET_ROUTES', accessedRoutes)
-      resolve(accessedRoutes)
-    })
-  }
+    async generateRoutes({ commit }, viewAuthority) {
+        console.log(viewAuthority);
+
+        let accessedRoutes = [];
+        //遍历需要权限展示的路由
+        authorityRoutes.forEach(item => {
+            let children = [],
+                unAuthorized = [];
+            item.children.forEach(val => {
+                //如果权限id对的上
+                console.log(val);
+
+                if (viewAuthority.findIndex(view => view.view_id === val.meta.view_id) !== -1) {
+                    children.push(val)
+                } else {
+                    unAuthorized.push(val)
+                }
+            });
+            // 把拥有的路由重置children
+            item.children = children
+            accessedRoutes.push(item);
+
+            //把不匹配的路由重定向到401
+            unAuthorized.forEach(value => {
+                accessedRoutes.push({
+                    redirect: '/401'
+                })
+            })
+        })
+        commit('SET_ROUTES', accessedRoutes);
+
+        return accessedRoutes;
+    }
 }
 
 export default {
-  namespaced: true,
-  state,
-  mutations,
-  actions
+    namespaced: true,
+    state,
+    mutations,
+    actions
 }
