@@ -9,7 +9,6 @@
           
           <div>
             {{item.questions_stem}}
-             
           </div>
          <p><button @click="detele" class="detele">删除</button></p>
       </div>

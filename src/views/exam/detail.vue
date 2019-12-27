@@ -14,8 +14,7 @@ import { mapActions, mapState } from "vuex";
 export default {
 computed: {
     ...mapState({
-      addDetail: state => state.addDetail.addDetail,
-      
+      addDetail: state => state.addDetail.addDetail
     })
   },
   methods: {
