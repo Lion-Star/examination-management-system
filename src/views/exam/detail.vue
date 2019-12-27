@@ -1,17 +1,22 @@
 <template>
-  <div>
+  <div class="big-box">
     <div class="box" v-for="(item,index) in addDetail.questions" :key="index">
-      <p>{{item.title}}</p>
-      <p>{{item.questions_stem}}</p>
-      <p>王琪</p>
+       <p class="num">{{index+1}} : {{item.title}}</p>
+      
+      <!-- <p>{{item.questions_stem}}</p> -->
+      <!-- <p>王琪</p> -->
+      <MarkdownEditor v-model="item.questions_stem" height="500px" />
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
-
+import MarkdownEditor from "@/components/MarkdownEditor"
 export default {
+ components:{
+   MarkdownEditor
+ },
 computed: {
     ...mapState({
       addDetail: state => state.addDetail.addDetail
@@ -30,6 +35,9 @@ computed: {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.big-box{
+  width: 1600px;
+  margin: auto;
+}
 </style>

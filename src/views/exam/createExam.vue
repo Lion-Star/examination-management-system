@@ -5,10 +5,11 @@
     </div> -->
     <h1 class="title">{{addList.title}}</h1>
       <div class="div" v-for="(item,index) in addList.questions" :key="index">
-          <p class="num">{{index+1}}  {{item.title}}</p>
+          <p class="num">{{index+1}} : {{item.title}}</p>
           
           <div>
-            {{item.questions_stem}}
+            <!-- {{item.questions_stem}} -->
+            <MarkdownEditor v-model="item.questions_stem" height="800px" width="800px" />
           </div>
          <p><button @click="detele" class="detele">删除</button></p>
       </div>
@@ -18,7 +19,11 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import MarkdownEditor from "@/components/MarkdownEditor"
 export default {
+  components:{
+     MarkdownEditor
+  },
    computed: {
     ...mapState({
       //获取考试列表
@@ -66,19 +71,22 @@ export default {
 .detele{
  
  position: absolute;
- top: 270px;
+ top: 500px;
  right: 100px;
 }
 .div{
   margin: auto;
-  border: 1px solid #000;
- margin-top: 30px;
-  width: 800px;
-  height: 300px;
-  padding: 40px 20px;
+  // border: 1px solid #000;
+//  margin: 150px 0;
+  width: 1600px;
+  // height: 500px;
+  // padding: 40px 20px;
   position: relative;
 }
 .title{
  margin-left: 650px;
+}
+.num{
+  margin-bottom: 10px;
 }
 </style>
