@@ -5,7 +5,7 @@
         <div class="classid">
             <b>课程类型：</b>
             <div class="noselect">
-                <span @click="clickAll" :class="{active:allShow}">All</span>
+                <span @click="clickAll" :class="{active:allShow}">All</span>+
                 <span v-for="(item,index) in ClassList" :key="index" :class="{active:item.show}" @click="changecur(item)">{{item.subject_text}}</span>
             </div>
         </div>
@@ -167,6 +167,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .TestClassification {
     height: 100%;
     padding: 0px 24px 24px;
@@ -220,7 +221,7 @@ h2 {
         }
 
         button {
-            margin-top: 32px;
+            margin-top: 12px;
         }
     }
 }
