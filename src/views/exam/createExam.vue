@@ -5,7 +5,7 @@
     </div> -->
     <h1 class="title">{{addList.title}}</h1>
       <div class="div" v-for="(item,index) in addList.questions" :key="index">
-          <p>{{index+1}}{{item.title}}</p>
+          <p class="num">{{index+1}}  {{item.title}}</p>
           
           <div>
             {{item.questions_stem}}
@@ -66,7 +66,7 @@ export default {
 .detele{
  
  position: absolute;
- top: 250px;
+ top: 270px;
  right: 100px;
 }
 .div{
@@ -75,6 +75,7 @@ export default {
  margin-top: 30px;
   width: 800px;
   height: 300px;
+  padding: 40px 20px;
   position: relative;
 }
 .title{

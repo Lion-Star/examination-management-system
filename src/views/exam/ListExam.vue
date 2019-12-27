@@ -149,7 +149,7 @@ export default {
   padding-top: 10px;
 }
 .box1-list3 p {
-  margin-top: 42px;
+  margin-top: 25px;
   margin-left: 80px;
 }
 .box2 {

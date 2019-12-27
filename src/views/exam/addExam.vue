@@ -168,10 +168,15 @@ export default {
 .box2-list1 p {
   padding-top: 40px;
   padding-left: 30px;
+  display: flex;
 }
 .box2-list1 p span:nth-child(1) {
   color: red;
   font-size: 20px;
+  padding-top: 13px;
+}
+.box2-list1 p span:nth-child(2){
+ margin-left: 10px;
 }
 .box2-list1 p span:nth-child(2) {
   margin-left: 10px;
@@ -185,10 +190,12 @@ export default {
 .box2-list2 p {
   padding-top: 40px;
   padding-left: 30px;
+  display: flex;
 }
 .box2-list2 p span:nth-child(1) {
   color: red;
   font-size: 20px;
+   padding-top: 13px;
 }
 .box2-list2 p span:nth-child(2) {
   margin-left: 10px;
@@ -201,10 +208,12 @@ export default {
 .box2-list3 p {
   padding-top: 40px;
   padding-left: 30px;
+  display: flex;
 }
 .box2-list3 p span:nth-child(1) {
   color: red;
   font-size: 20px;
+   padding-top: 13px;
 }
 .box2-list3 p span:nth-child(2) {
   margin-left: 10px;
@@ -217,10 +226,12 @@ export default {
 .box2-list4 p {
   padding-top: 40px;
   padding-left: 30px;
+  display: flex;
 }
 .box2-list4 p span:nth-child(1) {
   color: red;
   font-size: 20px;
+   padding-top: 13px;
 }
 .box2-list4 p span:nth-child(2) {
   margin-left: 10px;
@@ -237,11 +248,22 @@ export default {
 .block {
   margin-right: 30px;
 }
+.last{
+  margin-top: 20px;
+}
+.last p{
+  margin: 20px 10px;
+}
 .last p span {
   margin-left: 25px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .btn {
   margin-left: 20px;
+}
+.box2-list5{
+  margin: 15px 0;
 }
 .btn button {
   width: 130px;
