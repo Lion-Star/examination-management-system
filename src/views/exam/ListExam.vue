@@ -60,13 +60,14 @@
             <el-table-column prop="end_time" label="结束时间" width="230"></el-table-column>
 
             <el-table-column label="操作" width="120">
-              <template>
-                <el-button
-                  @click="message"
-                  type="text"
-                  size="small" 
-                >详情</el-button>
-              </template>
+              <template slot-scope="scope">
+              <el-button
+          @click.native.prevent="message(scope.$index, List)"
+          type="text"
+          size="small">
+          详情
+        </el-button>
+        </template>
             </el-table-column>
           </el-table>
         </div>
@@ -98,8 +99,9 @@ export default {
        getType: "addType/getType",
        getClass: "addClass/getClass"
     }),
-   message(){
-     this.$router.push('./detail')
+   message(index,row){
+     this.$router.push(`./detail?id=${row[0].exam_exam_id}`)
+    // console.log(row[0].exam_exam_id)
    }
   },
   created() {
@@ -108,6 +110,9 @@ export default {
     this.getClass();
   }
 };
+
+
+
 </script>
 
 <style lang="scss" scoped>
