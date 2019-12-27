@@ -14,7 +14,7 @@
     <!-- 确定、重置按钮 -->
     <div class="butt">
       <el-row>
-        <el-button type="primary" class="sure" @click="sureClickFn">确定</el-button>
+         <el-button :plain="true" @click="open2" class="sure">确定</el-button>
         <el-button type="info" class="newkong" @click="newvalueFn">重置</el-button>
       </el-row>
     </div>
@@ -46,7 +46,7 @@ export default {
       getuserList: 'usermenage/getuserList'
     }),
     // 确定
-    sureClickFn() {
+    open2() {
       const obj = {
         user_name: this.username,
         user_pwd: this.password,
@@ -56,7 +56,13 @@ export default {
       this.value='',
       this.username='',
       this.password=''
-    },
+        this.$message({
+          showClose: true,
+          message: '添加成功',
+          type: 'success'
+        });
+      },
+
     // 密码
     passwordFn(e) {
       const dat = /^[A-za-z0-9]{6,18}!$/
@@ -103,5 +109,7 @@ export default {
 }
 .add .butt .sure{
     width:100px;
+     background:rgb(0, 140, 255);
+    color:#fff;
 }
 </style>

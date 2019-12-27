@@ -10,7 +10,8 @@
     </div>
     <div class="butt">
       <el-row>
-        <el-button type="primary" class="sure" @click="sureClickFun">确定</el-button>
+        <!-- <el-button type="primary" class="sure" @click="sureClickFun">确定</el-button> -->
+         <el-button :plain="true" @click="open2" class="sure">确定</el-button>
         <el-button type="info" class="newkong" @click="newClickFun">重置</el-button>
       </el-row>
     </div>
@@ -49,17 +50,22 @@ export default {
       this.apiMeans=e.target.value
     },
     //确定
-    sureClickFun(){
-      let obj={
-        api_authority_text:this.apiName,
-        api_authority_url:this.apiUrl,
-        api_authority_method:this.apiMeans
-      }
-      this.getAddApiLists(obj)
-      this.apiName='',
-      this.apiUrl='',
-      this.apiMeans=''
-    },
+     open2() {
+        let obj={
+            api_authority_text:this.apiName,
+            api_authority_url:this.apiUrl,
+            api_authority_method:this.apiMeans
+          }
+          this.getAddApiLists(obj)
+          this.apiName='',
+          this.apiUrl='',
+          this.apiMeans=''
+        this.$message({
+          showClose: true,
+          message: '添加成功',
+          type: 'success'
+        });
+      },
     // 重置
     newClickFun(){
        this.apiName='',
@@ -112,5 +118,7 @@ export default {
 }
 .addapi .butt .sure{
     width:100px;
+    background:rgb(0, 140, 255);
+    color:#fff;
 }
 </style>

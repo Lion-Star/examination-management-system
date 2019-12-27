@@ -25,7 +25,7 @@
         </div>
         <div class="butt">
           <el-row>
-            <el-button type="primary" class="sure" @click="sureClickFn">确定</el-button>
+                <el-button :plain="true" @click="open2" class="sure">确定</el-button>
             <el-button type="info" class="newkong" @click="newClickFn">重置</el-button>
           </el-row>
         </div>
@@ -88,13 +88,20 @@ export default {
       getuserList: 'usermenage/getuserList',
       getadduserID: 'usermenage/getadduserID'
     }),
-    sureClickFn(){
-      this.getadduserID({identity_text:this.userID})
-      this.userID=""
-    },
+    
     newClickFn(){
       this.userID=""
-    }
+    },
+     open2() {
+        this.getadduserID({identity_text:this.userID})
+        this.userID=""
+        this.$message({
+          showClose: true,
+          message: '添加成功',
+          type: 'success'
+        });
+      },
+
   }
 }
 </script>
@@ -192,5 +199,7 @@ export default {
 }
 .addUser .content .addcarId .butt .sure{
     width:100px;
+    background:rgb(0, 140, 255);
+    color:#fff;
 }
 </style>
