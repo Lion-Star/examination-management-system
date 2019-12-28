@@ -78,7 +78,7 @@ export default {
   margin: auto;
   // border: 1px solid #000;
 //  margin: 150px 0;
-  width: 1600px;
+  width: 1400px;
   // height: 500px;
   // padding: 40px 20px;
   position: relative;

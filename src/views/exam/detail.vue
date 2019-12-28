@@ -37,7 +37,7 @@ computed: {
 
 <style lang="scss" scoped>
 .big-box{
-  width: 1600px;
+  width: 1400px;
   margin: auto;
 }
 </style>
