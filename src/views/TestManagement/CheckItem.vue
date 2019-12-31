@@ -220,7 +220,7 @@ h2 {
         }
 
         button {
-            margin-top: 32px;
+            margin-top: 12px;
         }
     }
 }

@@ -62,7 +62,17 @@ export default {
     clipboardDemo: 'Clipboard',
     i18n: '国际化',
     externalLink: '外链',
-    profile: '个人中心'
+    profile: '个人中心',
+    user:{
+      title:"用户管理",
+      addUser:"添加用户",
+      usershow:"展示用户"
+    },
+    student:{
+      title:"学生",
+      student:"学生",
+      manege:"信息"
+    }
   },
   navbar: {
     dashboard: '首页',

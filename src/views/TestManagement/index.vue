@@ -179,6 +179,9 @@ h2 {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
 }
+p{
+    margin-bottom: 20px;
+}
 
 h3 {
     font-weight: normal;
