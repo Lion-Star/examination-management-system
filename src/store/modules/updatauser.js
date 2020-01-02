@@ -22,7 +22,7 @@ const actions = {
   // 当前用户信息
   async getuserInfoList({ commit }, payload) {
     const res = await getuserInfoList()
-    console.log(res)
+    // console.log(res)
     commit('setuserInfoList', res.data)
   }
 }

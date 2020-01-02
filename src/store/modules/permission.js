@@ -41,7 +41,7 @@ const actions = {
         })
 
         commit('SET_ROUTES', accessedRoutes);
-        console.log('accessedRoutes...', accessedRoutes);
+        // console.log('accessedRoutes...', accessedRoutes);
         return accessedRoutes;
     }
 }

@@ -4,7 +4,7 @@ const state={
 }
 const mutations={
     seList(state,payload){
-        console.log(payload)
+        // console.log(payload)
         state.List=payload
     }
 }

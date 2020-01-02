@@ -12,7 +12,7 @@ const actions={
      
 
       let res=await getExam(payload);
-      console.log('res...',res)
+    //   console.log('res...',res)
       commit('setExam',res.data)
   }
 }

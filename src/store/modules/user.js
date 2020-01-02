@@ -48,14 +48,14 @@ const actions = {
     async getInfo({ commit, state }) {
         // 1. 获取个人信息
         let userInfo = await getInfo();
-        console.log('userInfo...', userInfo);
+        // console.log('userInfo...', userInfo);
         commit("SET_USERID",userInfo.data.user_id)
         commit('SET_NAME', userInfo.data.user_name)
         commit('SET_AVATAR', userInfo.data.avatar || 'https://jasonandjay.com/favicon.ico')
 
         // 2. 获取用户视图权限信息
         let viewAuthority = await getViewAuthority();
-        console.log('viewAuthority...', viewAuthority);
+        // console.log('viewAuthority...', viewAuthority);
         commit('SET_VIEWAUTHORITY', viewAuthority.data);
         return viewAuthority.data;
         // const roles = ['admin']

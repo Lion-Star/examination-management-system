@@ -76,7 +76,6 @@ export default {
       reader.onload = (e)=>{
         var data = new Uint8Array(e.target.result);
         var workbook = XLSX.read(data, {type: 'array'});
-        console.log('workbook...', workbook);
 
         var worksheet = workbook.Sheets[workbook.SheetNames[0]];
         var json = XLSX.utils.sheet_to_json(worksheet);
@@ -84,8 +83,6 @@ export default {
 
         var container = document.getElementById('table');
         container.innerHTML = XLSX.utils.sheet_to_html(worksheet);
-
-        console.log('json...', json);
         this.data = json;
         /* DO SOMETHING WITH workbook HERE */
       };
@@ -95,10 +92,10 @@ export default {
 
     exportEXcel(){
  var wb = XLSX.utils.book_new();;
-      console.log(this.data, 'keys...', Object.keys(this.data[0]))
+      // console.log(this.data, 'keys...', Object.keys(this.data[0]))
       // 创建worksheet
       var ws = XLSX.utils.json_to_sheet(this.data, {header: Object.keys(this.data[0])});
-      console.log('ws...', ws);
+      // console.log('ws...', ws);
       // 通过worksheet生成workbooks
       XLSX.utils.book_append_sheet(wb, ws, 'student1')
       XLSX.utils.book_append_sheet(wb, ws, 'student2')

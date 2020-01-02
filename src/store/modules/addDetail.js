@@ -12,7 +12,7 @@ const actions={
      
 
       let res=await getDetail(payload);
-      console.log('res...',res)
+    //   console.log('res...',res)
       commit('setDetail',res.data)
   }
 }

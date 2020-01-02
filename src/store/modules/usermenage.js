@@ -114,13 +114,11 @@ const actions = {
 //给身份设定api接口权限
 async getcardApiIDkou({commit},payload){
   let res=await getcardApiIDkou(payload)
-  console.log(res)
   commit("setcardApiIDkou",res)
 },
 //给身份设定视图权限setAddViewTokenKou
 async getAddViewTokenKou({commit},payload){
   let res=await getAddViewTokenKou(payload)
-  console.log(res)
   commit("setAddViewTokenKou",res)
 }
 }

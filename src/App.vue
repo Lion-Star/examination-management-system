@@ -3,8 +3,6 @@
     <router-view />
   </div>
 </template>
-<<<<<<< HEAD
-=======
 
 <script>
 export default {
@@ -19,4 +17,3 @@ export default {
   // overflow: hidden;
 }
 </style>
->>>>>>> wq
