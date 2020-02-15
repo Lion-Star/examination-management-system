@@ -29,6 +29,9 @@ const mutations = {
     },
     SET_VIEWAUTHORITY: (state, viewAuthority) => {
         state.viewAuthority = viewAuthority;
+    },
+    SET_USERID(state, id) {
+        state.userid = id
     }
 }
 
@@ -47,50 +50,15 @@ const actions = {
         let userInfo = await getInfo();
         console.log('userInfo...', userInfo);
         commit('SET_NAME', userInfo.data.user_name)
+        commit("SET_USERID", userInfo.data.user_id)
         commit('SET_AVATAR', userInfo.data.avatar || 'https://jasonandjay.com/favicon.ico')
 
         // 2. 获取用户视图权限信息
         let viewAuthority = await getViewAuthority();
         console.log('viewAuthority...', viewAuthority);
         commit('SET_VIEWAUTHORITY', viewAuthority.data);
-
         return viewAuthority.data;
-        // const roles = ['admin']
-        // commit('SET_ROLES', roles)
-        // commit('SET_NAME', name)
-        // commit('SET_AVATAR', avatar)
-        // commit('SET_INTRODUCTION', introduction)
-        // resolve(data)
-        // return {roles};
-        // return new Promise((resolve, reject) => {
-        //   // getInfo(state.token).then(response => {
-        //   //   const { data } = response
 
-        //   //   if (!data) {
-        //   //     reject('Verification failed, please Login again.')
-        //   //   }
-
-        //   //   const { roles, name, avatar, introduction } = data
-
-        //   //   // roles must be a non-empty array
-        //   //   if (!roles || roles.length <= 0) {
-        //   //     reject('getInfo: roles must be a non-null array!')
-        //   //   }
-
-
-
-
-        //   const roles = ['admin']
-        //   commit('SET_ROLES', roles)
-        //   // commit('SET_NAME', name)
-        //   // commit('SET_AVATAR', avatar)
-        //   // commit('SET_INTRODUCTION', introduction)
-        //   // resolve(data)
-        //   resolve({roles});
-        //   // }).catch(error => {
-        //   // reject(error)
-        //   // })
-        // })
     },
 
     // user logout

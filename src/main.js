@@ -33,23 +33,23 @@ import * as filters from './filters' // global filters
 //挂在element-ui
 Vue.use(ElementUI)
 Vue.use(Element, {
-  size: Cookies.get('size') || 'medium', // set element-ui default size
-  i18n: (key, value) => i18n.t(key, value)
+    size: Cookies.get('size') || 'medium', // set element-ui default size
+    i18n: (key, value) => i18n.t(key, value)
 })
 
 // register global utility filters
 // 注册全局过滤器
 Object.keys(filters).forEach(key => {
-  Vue.filter(key, filters[key])
+    Vue.filter(key, filters[key])
 })
 
 // 去掉生成环境提示
 Vue.config.productionTip = false
 
 new Vue({
-  el: '#app',
-  router,
-  store,
-  i18n,
-  render: h => h(App)
+    el: '#app',
+    router,
+    store,
+    i18n,
+    render: h => h(App)
 })

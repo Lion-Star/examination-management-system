@@ -20,9 +20,11 @@ const actions = {
                 unAuthorized = [];
 
             item.children.forEach(value => {
+                //有权限展示得情况
                 if (viewAuthority.findIndex(view => view.view_id === value.meta.view_id) !== -1) {
                     children.push(value);
                 } else {
+                    //无权限
                     unAuthorized.push(value);
                 }
             })
@@ -41,7 +43,7 @@ const actions = {
         })
 
         commit('SET_ROUTES', accessedRoutes);
-        console.log('accessedRoutes...', accessedRoutes);
+
         return accessedRoutes;
     }
 }

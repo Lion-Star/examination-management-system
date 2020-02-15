@@ -50,7 +50,6 @@ export default {
     },
     created() {
         this.getExamType();
-        console.log(item.questions_stem);
     },
     methods: {
         ...mapActions({
@@ -148,6 +147,7 @@ h4 {
 .tag {
     margin-top: 20px;
     margin-bottom: 20px;
+    margin-right: 20px;
 }
 
 .content {

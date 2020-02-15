@@ -85,7 +85,7 @@ export default {
             ExamList: state => state.TestManagement.ExamList
         })
     },
-    async created() {
+    created() {
         this.getClassList();
         this.getAllText();
         this.getExamList();

@@ -24,22 +24,23 @@ router.beforeEach(async(to, from, next) => {
             next({ path: '/' })
             NProgress.done()
         } else {
-
+            //是否又权限信息
             let hasViewAuthority = store.state.user.viewAuthority && store.state.user.viewAuthority.length > 0
+
             if (hasViewAuthority) {
                 next()
             } else {
                 try {
-
                     const viewAuthority = await store.dispatch('user/getInfo')
-                    console.log(viewAuthority);
-
 
                     const accessRoutes = await store.dispatch('permission/generateRoutes', viewAuthority)
 
+
+                    //动态添加路由
                     router.addRoutes(accessRoutes)
 
                     next({...to, replace: true })
+
                 } catch (error) {
                     console.log('error...', error);
                 }

@@ -52,7 +52,7 @@ export const authorityRoutes = [{
         component: Layout,
         name: 'TestManagement',
         meta: {
-            title: '试题管理',
+            title: 'TestManagement.title',
             icon: 'dashboard'
         },
         children: [
@@ -62,7 +62,7 @@ export const authorityRoutes = [{
                 component: () =>
                     import ('@/views/TestManagement/index'),
                 name: 'AddItem',
-                meta: { title: '添加试题', view_id: 'main-addQuestions' }
+                meta: { title: 'TestManagement.AddItem', view_id: 'main-addQuestions' }
             },
             {
                 path: 'EditItem',
@@ -77,14 +77,14 @@ export const authorityRoutes = [{
                 component: () =>
                     import ('@/views/TestManagement/TestClassification'),
                 name: 'TestClassification',
-                meta: { title: '试题分类', view_id: 'main-questionsType' }
+                meta: { title: 'TestManagement.TestClassification', view_id: 'main-questionsType' }
             },
             {
                 path: 'CheckItem',
                 component: () =>
                     import ('@/views/TestManagement/CheckItem'),
                 name: 'CheckItem',
-                meta: { title: '查看试题', view_id: 'main-watchQuestions' }
+                meta: { title: 'TestManagement.CheckItem', view_id: 'main-watchQuestions' }
             },
             {
                 path: 'Detail',
@@ -94,6 +94,13 @@ export const authorityRoutes = [{
                 name: 'Detail',
                 meta: { title: '查看详情', view_id: 'main-addQuestions' }
             },
+            {
+                path: 'GGBOND',
+                hidden: "true",
+                component: () =>
+                    import ('@/views/components-demo/avatar-upload'),
+                meta: { title: 'GGBOND', view_id: 'main-addQuestions' }
+            }
 
         ]
     },
@@ -173,6 +180,7 @@ export const authorityRoutes = [{
             },
             {
                 path: '/exam/createExam',
+                hidden: true,
                 component: () =>
                     import ('@/views/exam/createExam'),
                 meta: { title: '创建试卷', view_id: "main-examList" }
@@ -180,6 +188,7 @@ export const authorityRoutes = [{
             },
             {
                 path: '/exam/detail',
+                hidden: true,
                 component: () =>
                     import ('@/views/exam/detail'),
                 meta: { title: '试卷详情', view_id: "main-examList" }

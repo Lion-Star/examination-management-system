@@ -166,6 +166,7 @@ export default {
     margin: 0px 0px 20px;
     border-radius: 10px;
     min-height: calc(100vh - 84px);
+
 }
 
 h2 {
@@ -179,8 +180,9 @@ h2 {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
 }
-p{
-    margin-bottom: 20px;
+
+p {
+    margin: 20px 0;
 }
 
 h3 {
