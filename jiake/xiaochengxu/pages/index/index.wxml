@@ -1,0 +1,19 @@
+<!--index.wxml-->
+<view class="container">
+  <view class='header'>
+      <view class='h3'><text>中国现阶段人均寿命 900 个月</text></view>
+      <view class='h1'><text>{{year}}年{{month}}月至今{{distance}}个月</text></view>
+      <view class='btn'>
+        <picker mode="date" fields="month" end="{{end}}" bindchange="changeBirthday">
+          <button>换一个日期</button>
+        </picker>
+        <button>清除记录</button>
+      </view>
+  </view>
+  <view class='box'>
+    <progress percent="{{percent}}" color="pink" stroke-width="10" show-info/>
+  </view>
+  <!-- <view class='nav'>
+    <text wx:for="{{navlist}}">{{item}}</text>
+  </view> -->
+</view>

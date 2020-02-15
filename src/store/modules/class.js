@@ -68,7 +68,6 @@ const mutations={
     //姓名搜索
     setSearched(state,payload){
         if (!Array.isArray(state.studentList) && payload !== '') return
-
             state.setStudentList = state.studentList.filter(item=>{
                  if (item.student_name.indexOf(payload)!== -1) return item
             })

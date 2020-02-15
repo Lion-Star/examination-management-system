@@ -1,6 +1,10 @@
 export default {
   route: {
     dashboard: '首页',
+    class:'班级管理',
+    classroom:'教室管理',
+    student:'学生管理',
+    uploading:'上传文件',
     documentation: '文档',
     guide: '引导页',
     permission: '权限测试页',

@@ -57,7 +57,7 @@ export const constantRoutes = [
     redirect: '/class/list',
     name: 'Class',
     meta: {
-      title: '班级管理',
+      title: 'class',
       icon: 'list'
     },
     children: [
@@ -65,19 +65,25 @@ export const constantRoutes = [
         path: 'mengr',
         component: () => import('@/views/class/class mengr/'),
         name: 'Mengr',
-        meta: { title: '班级管理'}
+        meta: { title: 'class'}
       },
       {
         path: 'classroom',
         component: () => import('@/views/class/classroom/'),
         name: 'Classroom',
-        meta: { title: '教室管理'}
+        meta: { title: 'classroom'}
       },
       {
         path: 'student',
         component: () => import('@/views/class/student/'),
         name: 'Student',
-        meta: { title: '学生管理'}
+        meta: { title: 'student'}
+      },
+      {
+        path: 'uploading',
+        component: () => import('@/views/class/upLoading'),
+        name: 'Uploading',
+        meta: { title: 'uploading'}
       }
     ]
   }
@@ -86,6 +92,30 @@ export const constantRoutes = [
 export const asyncRoutes = [
   
   { path: '*', redirect: '/404', hidden: true }
+]
+
+export const authorityRoutes = [
+  {
+    path: '/exam',
+    component: Layout,
+    meta: { title: '试题管理', icon: 'example'},
+    children: [{
+      path: 'add',
+      component: ()=>import('@/views/exam/index'),
+      name: 'Exam',
+      meta: {title: '添加试题', icon: 'dashboard', view_id: 'main-addQuestions'}
+    },{
+      path: 'classify',
+      component: ()=>import('@/views/exam/index'),
+      name: 'Exam',
+      meta: {title: '试题分类', icon: 'dashboard', view_id: 'main-questionsType'}
+    },{
+      path: 'view',
+      component: ()=>import('@/views/exam/index'),
+      name: 'Exam',
+      meta: {title: '查看试题', icon: 'dashboard', view_id: 'main-watchQuestions123131312'}
+    }]
+  }
 ]
 
 const createRouter = () => new Router({
