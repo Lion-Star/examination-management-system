@@ -159,24 +159,24 @@ export const constantRoutes = [{
         path: '/exam',
         component: Layout,
         redirect: 'noRedirect',
-        name: '考试管理',
+        name: 'exam',
         meta: {
-            title: '考试管理',
+            title: 'exam',
             icon: 'user'
         },
         children: [{
                 path: 'addExam',
                 component: () =>
                     import ('@/views/exam/addExam'),
-                name: '添加考试',
-                meta: { title: '添加考试', noCache: true }
+                name: 'addExam',
+                meta: { title: 'addExam', noCache: true }
             },
             {
                 path: 'ListExam',
                 component: () =>
                     import ('@/views/exam/ListExam'),
-                name: '试卷列表',
-                meta: { title: '试卷列表', noCache: true }
+                name: 'ListExam',
+                meta: { title: 'ListExam', noCache: true }
             },
             {
                 path: '/exam/createExam',
@@ -188,7 +188,21 @@ export const constantRoutes = [{
                 component: () =>
                     import ('@/views/exam/detail'),
 
-            }
+            },
+            {
+                path: 'upload',
+                component: () =>
+                    import ('@/views/exam/upload'),
+                name: 'upload',
+                meta: { title: 'upload', noCache: true }
+            },
+            {
+                path: 'manerger',
+                component: () =>
+                    import ('@/views/exam/manerger'),
+                name: 'manerger',
+                meta: { title: 'manerger', noCache: true }
+            },
         ]
     }
 ]
