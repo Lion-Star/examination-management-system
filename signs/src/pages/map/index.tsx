@@ -29,18 +29,18 @@ class MapCom extends Component {
     
   }
 
-  componentDidHide () {
-    // btnclick=()=>{
-    //   console.log("myClickFn")
-    // }
-   }
-
+  componentDidHide () {}
+   addMianFn=()=>{
+    Taro.navigateTo({
+      url:'/pages/login/index'
+    })
+  }
   render () {
-    const {longitude, latitude,location} = this.state.location;
+    const {longitude, latitude} = this.state.location;
     return (
       <View className='wrap'>
-        <Map longitude={longitude} latitude={latitude} show-location={location}></Map>
-        <Button>添加面试</Button>
+        <Map longitude={longitude} latitude={latitude} show-location></Map>
+        <Button onClick={this.addMianFn}>添加面试</Button>
         <View className='box'>
           <Text className='dibiao iconfont'>&#xe650;</Text>
           <Text className='people iconfont'>&#xe735;</Text>
