@@ -1,8 +1,7 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Map, Button, Text } from '@tarojs/components';
+import { View, Map, Button  } from '@tarojs/components'
 import './index.scss'
-import "../../icon图标淘宝/font_5rhyeqzz879/iconfont.css"
 
 class MapCom extends Component {
   config: Config = {
@@ -12,8 +11,7 @@ class MapCom extends Component {
   state={
     location: {
       longitude: 0,
-      latitude: 0,
-      location:true
+      latitude: 0
     }
   }
 
@@ -26,25 +24,22 @@ class MapCom extends Component {
         })
       }
     })
-    
   }
 
-  componentDidHide () {}
-   addMianFn=()=>{
-    Taro.navigateTo({
-      url:'/pages/login/index'
+  componentDidHide () { }
+
+  addSign(){
+    wx.navigateTo({
+      url: '/pages/sign/add/index'
     })
   }
+
   render () {
-    const {longitude, latitude} = this.state.location;
+    let {longitude, latitude} = this.state.location;
     return (
       <View className='wrap'>
-        <Map longitude={longitude} latitude={latitude} show-location></Map>
-        <Button onClick={this.addMianFn}>添加面试</Button>
-        <View className='box'>
-          <Text className='dibiao iconfont'>&#xe650;</Text>
-          <Text className='people iconfont'>&#xe735;</Text>
-        </View>
+        <Map longitude={longitude} latitude={latitude} show-location/>
+        <Button onClick={()=>this.addSign()}>添加面试</Button>
       </View>
     )
   }
