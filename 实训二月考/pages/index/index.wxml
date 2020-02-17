@@ -1,0 +1,10 @@
+<view class="container">
+<text>多彩周末体验计划</text>
+</view>
+<view class="div">
+<navigator url='/pages/list/index'>清单</navigator>
+<navigator url='/pages/square/index'>广场</navigator>
+<navigator url='/pages/notice/index'>通知</navigator>
+<navigator url='/pages/my/index'>我的</navigator>
+
+</view>

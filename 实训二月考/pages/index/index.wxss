@@ -1,0 +1,11 @@
+.div{
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+}
+.div navigator{
+  margin-right: 100rpx;
+  margin-left: 10rpx;
+}

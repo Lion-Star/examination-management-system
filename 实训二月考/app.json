@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/data/index",
+    "pages/write/index",
+    "pages/list/index",
+    "pages/square/index",
+    "pages/notice/index",
+    "pages/my/index"
+   
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "有爱清单",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "tabBar":{
+    "color":"gray",
+    "selectedColor": "gray",
+    "position":"top",
+    "list":[
+      {
+        "pagePath":"pages/index/index",
+        "text":"目标"
+      },
+       {
+        "pagePath":"pages/data/index",
+        "text":"习惯"
+      },
+       {
+        "pagePath":"pages/write/index",
+        "text":"手记"
+      }
+    ]
+  }
+}
