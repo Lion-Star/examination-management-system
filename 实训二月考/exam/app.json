@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/my/index",
+    "pages/info/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "有爱清单",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "清单"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "广场"
+      },
+      {
+        "pagePath": "pages/info/index",
+        "text": "通知"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "text": "我"
+      }
+    ]
+  },"networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true,
+  "navigateToMiniProgramAppIdList": [
+    "wxe5f52902cf4de896"
+  ]
+
+
+
+}
