@@ -1,11 +1,22 @@
-.wrap view{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.wrap {
+    width: 100%;
 }
-text:first-child{
-  width: 300rpx;
+
+.wrap view {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-text:last-child{
-  flex: 1;
+
+text:first-child {
+    width: 300rpx;
+}
+
+text:last-child {
+    flex: 1;
+}
+
+.address {
+    width: 100%;
+    display: flex;
 }

@@ -102,11 +102,11 @@ class LocationSign extends Component<{}, {keyword: string, list: TipType[]}> {
   render () {
     return (
       <View className='wrap'>
-        <Form>
+        <Form className='address'>
           <Text>北京</Text>
-          <Input value={this.state.keyword} onInput={(e)=>this.changeKeyWord(e)}></Input>
+          <Input value={this.state.keyword} onInput={(e)=>this.changeKeyWord(e)} placeholder='详细地址'></Input>
         </Form>{
-          this.state.list.map((item:any, index)=>{
+          this.state.list.map((item: any, index)=>{
             return <View key={index} onClick={this.selectAddress.bind(this, item)}>
               <Icon type='info'></Icon>
               <View>

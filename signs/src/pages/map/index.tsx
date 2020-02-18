@@ -1,8 +1,8 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Map, Button  } from '@tarojs/components'
+import { View, Map, Button,Text  } from '@tarojs/components'
 import './index.scss'
-
+import "../../icon图标淘宝/font_5rhyeqzz879/iconfont.css"
 class MapCom extends Component {
   config: Config = {
     navigationBarTitleText: '一面而就'
@@ -40,6 +40,10 @@ class MapCom extends Component {
       <View className='wrap'>
         <Map longitude={longitude} latitude={latitude} show-location/>
         <Button onClick={()=>this.addSign()}>添加面试</Button>
+        <View className='wrapper'>
+          <Text className='iconfont'>&#xe832;</Text>
+          <Text className='iconfont'>&#xe735;</Text>
+        </View>
       </View>
     )
   }
