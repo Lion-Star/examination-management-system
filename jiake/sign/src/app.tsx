@@ -30,6 +30,7 @@ class App extends Component {
       'pages/index/index',
       'pages/map/index',
       'pages/sign/add/index',
+      'pages/sign/list/index',
       'pages/sign/location/index'
     ],
     window: {
@@ -42,7 +43,7 @@ class App extends Component {
 
   componentDidMount () {
     // 发起请求
-    console.log('小程序挂载的生命周期')
+    // console.log('小程序挂载的生命周期')
     wx.login({
       async success (res) {
         if (res.code) {

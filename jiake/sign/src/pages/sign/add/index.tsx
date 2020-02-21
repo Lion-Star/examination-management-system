@@ -48,13 +48,13 @@ const mapDispatchToProps = dispatch=>{
   }
 }
 
-const mergeProps = (stateProps, dispatchProps, ownProps)=>{
-  return Object.assign({}, ownProps, stateProps, dispatchProps)
-}
+// const mergeProps = (stateProps, dispatchProps, ownProps)=>{
+//   return Object.assign({}, ownProps, stateProps, dispatchProps)
+// }
 
-const options = {
-  pure: true  // 默认为true，会对组件执行shouldComonentUpdate的对比
-}
+// const options = {
+//   pure: true  // 默认为true，会对组件执行shouldComonentUpdate的对比
+// }
 
 @connect(mapStateToProps, mapDispatchToProps)
 class AddSign extends Component<PageState> {
