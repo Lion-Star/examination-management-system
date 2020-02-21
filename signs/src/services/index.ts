@@ -9,3 +9,9 @@ export function login(code): Promise<any>{
 export function addSign(params){
   return flyio.post('/sign', params);
 }
+
+
+//获取面试列表
+export function getSingList(params){
+  return flyio.get('/sign',params)
+}

@@ -30,7 +30,8 @@ class App extends Component {
       'pages/index/index',
       'pages/map/index',
       'pages/sign/add/index',
-      'pages/sign/location/index'
+      'pages/sign/location/index',
+      'pages/sign/list/index'
     ],
     window: {
       backgroundTextStyle: 'light',

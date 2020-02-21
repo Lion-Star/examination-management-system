@@ -101,6 +101,12 @@ class AddSign extends Component<PageState> {
     })
   }
 
+  xiangClickFn(){
+    wx.navigateTo({
+      url: '/pages/sign/list/index'
+    })
+  }
+
   goLocation() {
     wx.navigateTo({
       url: '/pages/sign/location/index'
@@ -151,7 +157,7 @@ class AddSign extends Component<PageState> {
             <Input placeholder="备注" value={this.state.info} onInput={e=>this.setState({info:e.detail.value})}></Input>
           </View>
           <View className='butt'>
-            <Button form-type="submit">确认</Button>
+            <Button form-type="submit" onClick={this.xiangClickFn.bind(this)}>确认</Button>
             <Button form-type="reset">重置</Button>
           </View>
 
