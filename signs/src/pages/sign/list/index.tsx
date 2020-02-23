@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text, Input, Button, Form, Icon } from '@tarojs/components'
+import { View, Text} from '@tarojs/components'
 import './index.scss'
 import { connect } from '@tarojs/redux'
 import { getSignListAction } from '../../../actions/sign'
@@ -83,9 +83,27 @@ class SignList extends Component<{}, PageState> {
     tabClickFn(v) {
         this.setState({ currentIndex: v })
     }
+    setTime = (time): string => {
 
+        const data = new Date(time)
+    //    console.log(data)
+
+        //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        
+            let y = data.getFullYear();
+            let m = data.getMonth() + 1;
+            m = m < 10 ? ('0' + m) : m;
+            let d =data.getDate();
+            d = d < 10 ? ('0' + d) : d;
+            let h = data.getHours();
+            h = h < 10 ? ('0' + h) : h;
+            let minute = data.getMinutes();
+            minute = minute < 10 ? ('0' + minute) : minute;
+            return y + '/' + m + '/' + d + ' ' + h + ':' + minute;
+       
+    }
     render() {
-        console.log(this.props.list&&this.props.list,"000000000")
+        console.log(this.props.list && this.props.list, "000000000")
         return (
             <View className='wrap'>
                 <View className='tab'>
@@ -95,16 +113,16 @@ class SignList extends Component<{}, PageState> {
                 </View>
 
                 <View className='context'>
-                   
-                {
-                    this.props.list&& this.props.list.map((ite, i) => {
-                        return  <View className='content'>
-                        <View className='text_title'><Text className='title'>{ite.company}</Text><Text className='text_start'>未开始</Text></View>
-                        <View className='text_address'><Text>{ite.address}</Text></View>
-                        <View className='text_time'><Text className='time'>面试时间：</Text><Text className='text_sleep'>未提醒</Text></View>
-                    </View>
-                    })
-                }
+
+                    {
+                        this.props.list && this.props.list.map((ite, i) => {
+                            return <View className='content' key={i}>
+                                <View className='text_title'><Text className='title'>{ite.company}</Text><Text className='text_start'>未开始</Text></View>
+                                <View className='text_address'><Text>{ite.address.title}</Text></View>
+                                <View className='text_time'><Text className='time'>面试时间：{this.setTime(ite.create_time)}</Text><Text className='text_sleep'>未提醒</Text></View>
+                            </View>
+                        })
+                    }
                 </View>
             </View>
         )

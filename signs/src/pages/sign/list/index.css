@@ -22,3 +22,39 @@
 .wrap .context {
   width: 100%;
 }
+
+.wrap .context .content {
+  width: 100%;
+  height: 200rpx;
+}
+
+.wrap .context .content .text_title {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrap .context .content .text_title .text_start {
+  padding: 2rpx 5rpx;
+  background: #ccc;
+  color: #fff;
+}
+
+.wrap .context .content .text_address {
+  width: 100%;
+}
+
+.wrap .context .content .text_time {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrap .context .content .text_time .text_sleep {
+  width: 150rpx;
+  height: 80rpx;
+  background: #ccc;
+  color: #f00;
+  text-align: center;
+  line-height: 80rpx;
+}
