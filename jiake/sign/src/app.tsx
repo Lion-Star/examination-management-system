@@ -31,6 +31,7 @@ class App extends Component {
       'pages/map/index',
       'pages/sign/add/index',
       'pages/sign/list/index',
+      'pages/sign/detail/index',
       'pages/sign/location/index'
     ],
     window: {
