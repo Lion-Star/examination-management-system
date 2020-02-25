@@ -83,24 +83,27 @@ class SignList extends Component<{}, PageState> {
     tabClickFn(v) {
         this.setState({ currentIndex: v })
     }
-    setTime = (time): string => {
+    // setTime = (time): string => {
 
-        const data = new Date(time)
-    //    console.log(data)
+    //     const data = new Date(time)
+    // //    console.log(data)
 
-        //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    //     //时间戳为10位需*1000，时间戳为13位的话不需乘1000
         
-            let y = data.getFullYear();
-            let m = data.getMonth() + 1;
-            m = m < 10 ? ('0' + m) : m;
-            let d =data.getDate();
-            d = d < 10 ? ('0' + d) : d;
-            let h = data.getHours();
-            h = h < 10 ? ('0' + h) : h;
-            let minute = data.getMinutes();
-            minute = minute < 10 ? ('0' + minute) : minute;
-            return y + '/' + m + '/' + d + ' ' + h + ':' + minute;
+    //         let y = data.getFullYear();
+    //         let m = data.getMonth() + 1;
+    //         m = m < 10 ? ('0' + m) : m;
+    //         let d =data.getDate();
+    //         d = d < 10 ? ('0' + d) : d;
+    //         let h = data.getHours();
+    //         h = h < 10 ? ('0' + h) : h;
+    //         let minute = data.getMinutes();
+    //         minute = minute < 10 ? ('0' + minute) : minute;
+    //         return y + '/' + m + '/' + d + ' ' + h + ':' + minute;
        
+    // }
+    detailFn(i){
+        console.log(i)
     }
     render() {
         console.log(this.props.list && this.props.list, "000000000")
@@ -116,10 +119,10 @@ class SignList extends Component<{}, PageState> {
 
                     {
                         this.props.list && this.props.list.map((ite, i) => {
-                            return <View className='content' key={i}>
+                            return <View className='content' key={i} onClick={this.detailFn.bind(this,i)}>
                                 <View className='text_title'><Text className='title'>{ite.company}</Text><Text className='text_start'>未开始</Text></View>
-                                <View className='text_address'><Text>{ite.address.title}</Text></View>
-                                <View className='text_time'><Text className='time'>面试时间：{this.setTime(ite.create_time)}</Text><Text className='text_sleep'>未提醒</Text></View>
+                                <View className='text_address'><Text>{JSON.parse(ite.address).title}</Text></View>
+                                <View className='text_time'><Text className='time'>面试时间：{ite.create_time}</Text><Text className='text_sleep'>未提醒</Text></View>
                             </View>
                         })
                     }
